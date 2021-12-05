@@ -1,0 +1,132 @@
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+\chapter*{Introduction}
+\addcontentsline{toc}{chapter}{Introduction}
+\markboth{Introduction}{Introduction}
+
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+
+\iffalse
+\epigraph{\foreignlanguage{russian}{Господи, как мир волшебен,\\
+Как всё в мире хорошо.\\
+Я пою богам молебен,\\
+Я стираюсь в порошок\\
+Перед видом столь могучих,\\
+Столь таинственных вещей,\\
+Что проносятся на тучах\\
+В образе мешка свечей.\\
+Боже мой, всё в мире пышно,\\
+Благолепно и умно.\\
+Богу молятся неслышно\\
+Море, лось, кувшин, гумно,\\
+Свечка, всадник, человек...}}{\foreignlanguage{russian}{Александр Введенский, 1930-е}}
+\fi
+
+Let $X$ be an \term{arithmetic scheme}, i.e. separated and of finite type over
+$\Spec \ZZ$. The corresponding \term{zeta function} is defined by the infinite
+product
+$$\zeta (X,s) \dfn \prod_{x\in X_0} \frac{1}{1 - N (x)^{-s}},$$
+where $X_0$ denotes the set of closed points of $X$, and $N (x)$ denotes the
+cardinality of the residue field at $x\in X_0$. This infinite product converges
+for $\Re s > \dim X$, and conjecturally, it has a meromorphic continuation to
+the whole complex plane. I refer to \cite{Serre-65} for the basic results and
+conjectures.
+
+This thesis is concerned with studying the special values of $\zeta (X,s)$: the
+goal is to interpret in cohomological terms the vanishing orders and leading
+Taylor coefficients at $s = n \in \ZZ$. This is a part of the program that was
+envisioned by Stephen Lichtenbaum and initiated in
+\cite{Lichtenbaum-05,Lichtenbaum-09-Euler,Lichtenbaum-09-number-rings}, and the
+conjectural underlying cohomology theory is known as Weil-étale
+cohomology. Later on Matthias Flach and Baptiste Morin gave a construction of
+Weil-étale cohomology using Bloch cycle complexes $\ZZ (n)$ to study
+$\zeta (X, s)$ at $s = n \in \ZZ$, see \cite{Morin-14} and
+\cite{Flach-Morin-16}. Their work concerns proper regular arithmetic schemes,
+and the goal of this thesis is to relax these restrictions while studying the
+case $n < 0$.
+
+\vspace{1em}
+
+From now on $n$ denotes a strictly negative integer.
+
+\vspace{1em}
+
+In chapter \ref{chapter:preliminaries} I collect various definitions and results
+that are used in the constructions. Most of this material is quite
+standard. This chapter is lengthy, but it is needed to set up the stage.
+
+\vspace{1em}
+
+Chapter \ref{chapter:Weil-etale-complexes} is dedicated to a construction of
+Weil-étale complexes
+$$R\Gamma_\text{\it W,c} (X,\ZZ(n)).$$
+This will be done in two steps: first I construct complexes
+$R\Gamma_\text{\it fg} (X, \ZZ (n))$, which by definition give a cone of certain
+morphism
+\[ \alpha_{X,n}\colon \RHom (R\Gamma (X_\text{\it ét}, \ZZ^c (n)), \QQ [-2]) \to
+  R\Gamma_c (X_\text{\it ét}, \ZZ (n)) \]
+in the derived category of complexes of abelian groups:
+\begin{multline*}
+  \RHom (R\Gamma (X_\text{\it ét}, \ZZ^c (n)), \QQ [-2]) \xrightarrow{\alpha_{X,n}}
+  R\Gamma_c (X_\text{\it ét}, \ZZ (n)) \to
+  R\Gamma_\text{\it fg} (X, \ZZ (n)) \\
+  \to \RHom (R\Gamma (X_\text{\it ét}, \ZZ^c (n)), \QQ [-1])
+\end{multline*}
+Then I construct yet another morphism
+\[ i_\infty^*\colon R\Gamma_\text{\it fg} (X, \ZZ (n)) \to
+  R\Gamma_c (G_\RR, X (\CC), (2\pi i)^n\,\ZZ) \]
+in the derived category and declare its mapping fiber to be
+$R\Gamma_\text{\it W,c} (X,\ZZ(n))$:
+\begin{multline*}
+  R\Gamma_\text{\it W,c} (X,\ZZ(n)) \to
+  R\Gamma_\text{\it fg} (X, \ZZ (n)) \xrightarrow{i_\infty^*}
+  R\Gamma_c (G_\RR, X (\CC), (2\pi i)^n\,\ZZ) \\
+  \to R\Gamma_\text{\it W,c} (X,\ZZ(n)) [1]
+\end{multline*}
+
+\vspace{1em}
+
+Finally, in chapter \ref{chapter:regulator} I formulate the main conjecture.
+I use the regulator construction from \cite{Kerr-Lewis-Muller-Stach-2006}.
+After reviewing the necessary preliminaries about Deligne cohomology and
+homology in \S\ref{section:deligne-cohomology}, I define in
+\S\ref{section:regulator} a morphism
+\[ Reg^\vee\colon R\Gamma_c (G_\RR, X (\CC), (2\pi i)^n\,\RR) [-1] \to
+  \RHom (R\Gamma (X_\text{\it ét}, \ZZ^c (n)), \RR), \]
+under the assumption that $X_\CC$ is smooth and quasi-projective. Then
+$Reg^\vee$ is conjectured to be a quasi-isomorphism. This allows us to construct
+an ad hoc ``cup product''
+\[ \smile\theta\colon R\Gamma_\text{\it W,c} (X, \ZZ (n)) \otimes \RR \to
+  R\Gamma_\text{\it W,c} (X, \ZZ (n)) \otimes \RR [1] \]
+that gives a long exact sequence of Weil-étale cohomology groups with real
+coefficients
+\begin{multline*}
+  \cdots \to H_\text{\it W,c}^i (X, \ZZ (n)) \otimes \RR \xrightarrow{\smile\theta}
+  H_\text{\it W,c}^{i+1} (X, \ZZ (n)) \otimes \RR \\
+  \xrightarrow{\smile\theta} H_\text{\it W,c}^{i+2} (X, \ZZ (n)) \otimes \RR \to \cdots
+\end{multline*}
+Then the general theory of determinants of complexes of Knudsen and Mumford
+implies the existence of a canonical trivialization morphism
+\[ \lambda\colon \RR \xrightarrow{\isom}
+  (\det\nolimits_\ZZ R\Gamma_{W,c} (X,\ZZ (n))) \otimes_\ZZ \RR. \]
+Our main conjecture $\mathbf{C} (X, n)$, formulated in
+\S\ref{section:conjecture-C-X-n}, says that the leading Taylor coefficient of
+$\zeta (X,s)$ at $s = n$ is given by
+\[ \lambda (\zeta^* (X,n)^{-1})\cdot \ZZ =
+  \det\nolimits_\ZZ R\Gamma_\text{\it W,c} (X, \ZZ (n)), \]
+while the corresponding vanishing order is
+\[ \ord_{s=n} \zeta (X,s) =
+  \sum_{i\in\ZZ} (-1)^i \cdot i \cdot \rk_\ZZ H^i_\text{\it W,c} (X, \ZZ (n)). \]
+If $X$ is proper and regular, then this is equivalent to Conjecture~5.12 and
+Conjecture~5.13 from \cite{Flach-Morin-16}. In particular, it is showed in
+\cite[\S 5.6]{Flach-Morin-16} that if $X$ is projective and smooth over a number
+ring, then the special value conjecture is equivalent to the Tamagawa number
+conjecture.
+
+Finally, I verify in \S\ref{secion:stability-of-the-conjecture} that the
+conjecture is compatible with the operations of taking disjoint unions of
+schemes, gluing schemes from an open and closed part, and passing from $X$ to
+the affine space $\AA^r_X$. This means that taking as an input the schemes for
+which the conjecture $\mathbf{C} (X, n)$ is known, it is possible to construct
+new schemes, possibly singular, for which the conjecture $\mathbf{C} (X, n)$
+holds as well. This is the main unconditional outcome of the machinery developed
+in this thesis.

@@ -1,0 +1,268 @@
+\chapter*{Résumé étendu}
+\addcontentsline{toc}{chapter}{Résumé étendu}
+\markboth{Résumé étendu}{Résumé étendu}
+
+\begin{otherlanguage}{french} Soit $X$ un \term{schéma arithmétique},
+  c'est-à-dire un schéma séparé de type fini sur $\Spec \mathbb{Z}$.
+  La \term{fonction zêta} correspondante est définie par le produit
+  $$\zeta (X,s) \dfn \prod_{x\in X_0} \frac{1}{1 - N (x)^{-s}},$$
+  où $X_0$ est l'ensemble des points fermés de $X$ et $N (x)$ dénote la
+  cardinalité du corps résiduel dans $x\in X_0$. Le produit ci-dessus converge
+  pour $\Re s > \dim X$ et conjecturalement, $\zeta (X,s)$ admet un prolongement
+  méromorphe à tout le plan complexe, qui sera dénoté également par $\zeta (X,s)$.
+
+  Ce travail est dédié à l'étude cohomologique des \term{valeurs spéciales} de
+  $\zeta (X,s)$; à savoir, les ordres d'annulation et les coefficients principaux
+  de la série de Taylor aux entiers $s = n \in \ZZ$. C'est une partie du programme
+  envisagé et initié par Stephen Lichtenbaum en
+  \cite{Lichtenbaum-05,Lichtenbaum-09-Euler,Lichtenbaum-09-number-rings}, et la
+  théorie cohomologique sous-jacente s'appelle la
+  \term{cohomologie Weil-étale}. Plus tard, Baptiste Morin et Matthias Flach ont
+  donné une construction de la cohomologie Weil-étale en utilisant les
+  \term{complexes de cycles de Bloch} (voir \cite{Morin-14} et
+  \cite{Flach-Morin-16}), et ont énoncé une conjecture précise pour les valeurs
+  spéciales des schémas arithmétiques propres et réguliers, en tout entier
+  $s=n$. Le but de cette thèse est de généraliser ces résultats et ces
+  conjectures aux valeurs spéciales des schémas arithmétiques arbitraires
+  (éventuellement singuliers ou non-propres) lorsque l'on se restreint au cas
+  $n<0$. Donc, $n$ dénote désormais un entier fixé \emph{strictement négatif}.
+
+  \vspace{1em}
+
+  La thèse comprend trois chapitres. Dans le Chapitre 0 on collecte diverses
+  définitions et résultats utilisés dans les constructions. Une grande partie de
+  ce matériel est plutôt standard; ce chapitre est long, mais il est nécessaire
+  pour préparer le terrain.
+
+  \section*{La construction du complexe Weil-étale}
+
+  Le Chapitre 1 est dédié à la construction du complexe Weil-étale associé à $X$
+  et $n < 0$. On utilise les \term{complexes de cycles de Bloch dualisants}
+  $\ZZ^c (n)$, introduits par Thomas Geisser dans \cite{Geisser-10}. On dénote
+  par $\ZZ (n)$ le complexe
+  $$\bigoplus_p \dirlim_r  j_{p!} \mu_{p^r}^{\otimes n} [-1],$$
+  où pour chaque nombre premier $p$, l'application $j_p$ est l'immersion ouverte
+  canonique $X [1/p] \to X$ et $\mu_{p^r}$ est le faisceau étale des racines
+  $p^r$-ièmes de l'unité tordu par $n < 0$:
+  $$\mu_{p^r}^{\otimes n} \dfn \iHom_{X[1/p]} (\mu_{p^r}^{\otimes (-n)}, \ZZ/p^r).$$
+
+  On suppose depuis le début la suivante
+  \term{conjecture $\term{L}^c (X_\text{\it ét}, n)$}: \emph{les groupes
+    $H^i (X_\text{\it ét}, \ZZ^c (n))$ sont de type fini pour tout $i\in \ZZ$}.
+
+  \subsection*{Le complexe $R\Gamma_\text{\it fg} (X, \ZZ (n))$}
+
+  À partir des resultats de Geisser de \cite{Geisser-10}, on démontre dans \S 1.3
+  une espèce de <<dualité à la Artin--Verdier>> qui prend la forme d'un
+  isomorphisme dans la catégorie dérivée des groupes abéliens
+  \[ R\widehat{\Gamma}_c (X_\text{\it ét}, \ZZ (n)) \xrightarrow{\isom}
+    \RHom (R\Gamma (X_\text{\it ét}, \ZZ^c (n)), \QQ/\ZZ [-2]). \]
+  Ici $R\widehat{\Gamma}_c (X_\text{\it ét}, -)$ dénote la
+  \term{cohomologie étale à support compact modifiée}, qui apparaît dans les
+  théorèmes de dualité arithmétique (voir par. ex. \cite{Milne-ADT}). Ensuite,
+  dans \S 1.5 on considère le morphisme $\alpha_{X,n}$ défini par la composition
+  \begin{multline*}
+    \RHom (R\Gamma (X_\text{\it ét}, \ZZ^c (n)), \QQ [-2]) \to
+    \RHom (R\Gamma (X_\text{\it ét}, \ZZ^c (n)), \QQ/\ZZ[-2]) \\
+    \xleftarrow{\isom} R\widehat{\Gamma}_c (X_\text{\it ét}, \ZZ (n)) \to
+    R\Gamma_c (X_\text{\it ét}, \ZZ (n))
+  \end{multline*}
+  où la première flèche est induite par la projection $\QQ \to \QQ/\ZZ$,
+  la deuxième flèche est l'isomorphisme de dualité ci-dessus et
+  \[ R\widehat{\Gamma}_c (X_\text{\it ét}, \ZZ (n)) \to
+    R\Gamma_c (X_\text{\it ét}, \ZZ (n)) \]
+  est la projection canonique de la cohomologie modifiée à la cohomologie
+  habituelle.
+
+  Maintenant, par définition, le complexe $R\Gamma_\text{\it fg} (X, \ZZ (n))$
+  est un cône du $\alpha_{X,n}$ dans la catégorie dérivée; c'est-à-dire il y a
+  un triangle distingué
+  \begin{multline*}
+    \RHom (R\Gamma (X_\text{\it ét}, \ZZ^c (n)), \QQ [-2])
+    \xrightarrow{\alpha_{X,n}} R\Gamma_c (X_\text{\it ét}, \ZZ (n)) \to
+    R\Gamma_\text{\it fg} (X, \ZZ (n)) \\
+    \to \RHom (R\Gamma (X_\text{\it ét}, \ZZ^c (n)), \QQ [-1])
+  \end{multline*}
+  En fait, ceci définit à $R\Gamma_\text{\it fg} (X, \ZZ (n))$ à isomorphisme
+  unique près dans la catégorie dérivée. (Normalement les cônes ne sont pas
+  canoniques, mais ici il s'agit de d'une situation très particulière.)
+
+  \vspace{1em}
+
+  Il est utile de garder en tête le cas spécial quand
+  $X (\RR) = \emptyset$. Dans cette situation
+  $$R\widehat{\Gamma}_c (X_\text{\it ét}, \ZZ (n)) \isom R\Gamma_c (X_\text{\it ét}, \ZZ (n)),$$
+  et on a un isomorphisme des triangles distingués
+  \[ \begin{tikzcd}
+    \RHom (R\Gamma (X_\text{\it ét}, \ZZ^c (n)), \QQ [-2]) \ar{r}{\idid}\ar{d} & \RHom (R\Gamma (X_\text{\it ét}, \ZZ^c (n)), \QQ [-2])\ar{d} \\
+    \RHom (R\Gamma (X_\text{\it ét}, \ZZ^c (n)), \QQ/\ZZ [-2]) \ar{r}{\isom}\ar{d} & R\Gamma_c (X_\text{\it ét}, \ZZ (n))\ar{d} \\
+    \RHom (R\Gamma (X_\text{\it ét}, \ZZ^c (n)), \ZZ [-1]) \ar[dashed]{r}{\isom}\ar{d} & R\Gamma_\text{\it fg} (X, \ZZ (n))\ar{d} \\
+    \RHom (R\Gamma (X_\text{\it ét}, \ZZ^c (n)), \QQ [-1]) \ar{r}{\idid} & \RHom (R\Gamma (X_\text{\it ét}, \ZZ^c (n)), \QQ [-1])
+  \end{tikzcd} \]
+  où la première colonne est celle induite par le triangle distingué
+  $$\ZZ \to \QQ \to \QQ/\ZZ \to \ZZ [1]$$
+
+  \subsection*{Le complexe $R\Gamma_\text{\it W,c} (X, \ZZ (n))$}
+
+  Maintenant, la cohomologie étale à support compact du complexe $\ZZ (n)$ peut
+  être liée à la \term{cohomologie $G_\RR$-equivariante} à support compact du
+  faisceau constant $(2\pi i)^n\,\ZZ$ sur l'espace des points complexes $X (\CC)$
+  avec la topologie analytique habituelle. Cela nous donne un morphisme canonique
+  de complexes
+  \[ u_\infty^*\colon R\Gamma_c (X_\text{\it ét}, \ZZ (n)) \to
+    R\Gamma_c (G_\RR, X (\CC), (2\pi i)^n\,\ZZ). \]
+  On démontre dans \S 1.6 que la composition
+  \begin{multline*}
+    \RHom (R\Gamma (X, \ZZ^c (n)), \QQ [-2]) \xrightarrow{\alpha_{X,n}}
+    R\Gamma_c (X_\text{\it ét}, \ZZ (n)) \\
+    \xrightarrow{u_\infty^*} R\Gamma_c (G_\RR, X (\CC), (2\pi i)^n\,\ZZ)
+  \end{multline*}
+  est nulle, ce qui nous permet de définir le morphisme
+  \[ i_\infty^*\colon R\Gamma_\text{\it fg} (X, \ZZ (n)) \to
+    R\Gamma_c (G_\RR, X (\CC), (2\pi i)^n\,\ZZ) \]
+  par le morphisme des triangles distingués
+  \[ \begin{tikzcd}
+      \RHom (R\Gamma (X, \ZZ^c (n)), \QQ [-2]) \ar{d}[swap]{\alpha_{X,n}}\ar{r} & 0\ar{d} \\
+      R\Gamma_c (X_\text{\it ét}, \ZZ (n)) \ar{r}{u_\infty^*}\ar{d} & R\Gamma_c (G_\RR, X (\CC), (2\pi i)^n\,\ZZ) \ar{d}{\idid} \\
+      R\Gamma_\text{\it fg} (X, \ZZ (n)) \ar[dashed]{r}{\exists i_\infty^*}\ar{d} & R\Gamma_c (G_\RR, X (\CC), (2\pi i)^n\,\ZZ) \ar{d} \\
+      \RHom (R\Gamma (X, \ZZ^c (n)), \QQ [-1])\ar{r} & 0 \\
+    \end{tikzcd} \]
+  En fait, le diagramme ci-dessus définit $i_\infty^*$ de manière unique. Armé
+  de ce morphisme, on définit le complexe de la
+  \term{cohomologie Weil-étale à support compact} comme sa fibre:
+  \begin{multline*}
+    R\Gamma_\text{\it W,c} (X,\ZZ(n)) \to
+    R\Gamma_\text{\it fg} (X, \ZZ (n)) \xrightarrow{i_\infty^*}
+    R\Gamma_c (G_\RR, X (\CC), (2\pi i)^n\,\ZZ) \\
+    \to R\Gamma_\text{\it W,c} (X,\ZZ(n)) [1]
+  \end{multline*}
+  Cela nous donne le complexe $R\Gamma_\text{\it W,c} (X,\ZZ(n))$ seulement à
+  isomorphisme \emph{non unique} près, mais c'est suffisant pour nos
+  besoins. Les propriétés clés du complexe $R\Gamma_\text{\it W,c} (X,\ZZ(n))$
+  sont les suivantes:
+
+  \begin{itemize}
+  \item le complexe est partait: les groupes de cohomologie
+    $H^i_\text{\it W,c} (X,\ZZ(n))$ sont de type fini et presque tous nuls;
+
+  \item il y a un décomposition (non-canonique)
+    \begin{multline*}
+      R\Gamma_\text{\it W,c} (X,\ZZ (n))\otimes_\ZZ \RR \isom \\
+      \RHom (R\Gamma (X_\text{\it ét}, \ZZ^c (n)), \RR) [-1]
+      \oplus
+      R\Gamma_c (G_\RR, X (\CC), (2\pi i)^n\,\RR) [-1]
+    \end{multline*}
+    (voir \S 1.7).
+  \end{itemize}
+
+  \section*{Le régulateur et la conjecture principale}
+
+  Le Chapitre 2 énonce une relation conjecturale de la cohomologie Wéil-étale
+  aux valeurs spéciales de $\zeta (X,s)$. Pour ça on a besoin du
+  \term{régulateur} et on utilise la construction de Kerr, Lewis, et
+  M\"uller-Stach de \cite{Kerr-Lewis-Muller-Stach-2006}, qui nous permet de
+  travailler au niveau des complexes. Dans le cas particulier $n < 0$,
+  la construction nous donne un morphisme dans la catégorie dérivée
+  \[ Reg\colon R\Gamma (X_\text{\it ét}, \ZZ^c (n)) \to
+    R\Gamma_{BM} (G_\RR, X (\CC), (2\pi i)^n\,\RR) [1], \]
+  où $R\Gamma_{BM} (G_\RR, X (\CC), -)$ dénote la
+  \term{cohomologie equivariante de Borel--Moore}. La construction est valable
+  lorsque $X_\CC$ est quasi-projective lisse. Le morphisme $\RR$-dual
+  correspondant est
+  \[ Reg^\vee\colon R\Gamma_c (G_\RR, X (\CC), (2\pi i)^n\,\RR) [-1] \to
+    \RHom (R\Gamma (X_\text{\it ét}, \ZZ^c (n)), \RR). \]
+  Ensuite, la \term{conjecture du régulateur $\mathbf{B} (X,n)$} affirme que
+  \emph{$Reg^\vee$ es un isomorphisme dans la catégorie dérivée}. Sous cette
+  hypothèse, on peut définir les morphismes
+  \[ \smile\theta\colon R\Gamma_\text{\it W,c} (X, \ZZ (n)) \otimes \RR \to
+    R\Gamma_\text{\it W,c} (X, \ZZ (n)) \otimes \RR [1] \]
+  par
+  \[ \begin{tikzcd}
+      R\Gamma_\text{\it W,c} (X, \ZZ (n)) \otimes \RR \ar{d}{\isom} \\
+      \RHom (R\Gamma (X_\text{\it ét}, \ZZ^c (n)), \RR) [-1] ~\oplus~ R\Gamma_c (G_\RR, X (\CC), (2\pi i)^n\,\RR) [-1] \ar[twoheadrightarrow]{d}{\text{proj. can.}} \\
+      R\Gamma_c (G_\RR, X (\CC), (2\pi i)^n\,\RR) [-1] \ar{d}{Reg^\vee} \\
+      \RHom (R\Gamma (X_\text{\it ét}, \ZZ^c (n)), \RR) \ar[rightarrowtail]{d}{\text{incl. can.}} \\
+      \RHom (R\Gamma (X_\text{\it ét}, \ZZ^c (n)), \RR) ~\oplus~ R\Gamma_c (G_\RR, X (\CC), (2\pi i)^n\,\RR) \ar{d}{\isom} \\
+      R\Gamma_\text{\it W,c} (X, \ZZ (n)) \otimes \RR [1]
+    \end{tikzcd} \]
+
+  Étant donné que $Reg^\vee$ est un quasi-isomorphisme de complexes,
+  $\smile\theta$ induit une suite exacte d'espaces vectoriels de dimension finie
+  \begin{multline*}
+    \cdots \to H_\text{\it W,c}^i (X, \ZZ (n)) \otimes \RR \xrightarrow{\smile\theta}
+    H_\text{\it W,c}^{i+1} (X, \ZZ (n)) \otimes \RR \\
+    \xrightarrow{\smile\theta} H_\text{\it W,c}^{i+2} (X, \ZZ (n)) \otimes \RR \to \cdots
+  \end{multline*}
+
+  La théorie des \term{déterminants des complexes} de Knudsen et Mumford
+  \cite{Knudsen-Mumford-76} implique l'existence d'un
+  \term{isomorphisme de trivialisation} canonique
+  $$\lambda\colon \RR \xrightarrow{\isom} (\det\nolimits_\ZZ R\Gamma_\text{\it W,c} (X, \ZZ (n))) \otimes \RR$$
+  qui réalise $\det\nolimits_\ZZ R\Gamma_\text{\it W,c} (X, \ZZ (n))$ comme une
+  réseau dans $\RR$. En fait, même si le complexe Weil-étale est défini à
+  isomorphisme non unique près, son déterminant
+  $\det\nolimits_\ZZ R\Gamma_\text{\it W,c} (X, \ZZ (n))$ est canonique.
+
+  Alors, la relation conjecturale avec les valeurs spéciales de $\zeta (X,n)$
+  est la suivante.
+
+  \vspace{1em}
+
+  \noindent La \term{conjecture $\mathbf{C} (X,n)$}. {\it
+
+    \begin{enumerate}
+    \item[a)] Supposons la conjecture $\mathbf{L}^c (X_\text{\it ét}, n)$ pour
+      construire le complexe Weil-étale $R\Gamma_\text{\it W,c} (X, \ZZ (n))$;
+
+    \item[b)] supposons que $X_\CC$ est quasi-projective lisse pour construire
+      le régulateur; supposons la conjecture $\mathbf{B} (X,n)$;
+
+    \item[c)] supposons que $\zeta (X,s)$ admet un prolongement méromorphe en
+      $s=n$.
+    \end{enumerate} \term{Alors}
+    \begin{enumerate}
+    \item[1)] le coefficient principal de la série de Taylor en $s = n$ est
+      donné à signe près par
+      \[ \lambda (\zeta^* (X,n)^{-1})\cdot \ZZ =
+        \det\nolimits_\ZZ R\Gamma_\text{\it W,c} (X, \ZZ (n)); \]
+
+    \item[2)] l'ordre d'annulation de $\zeta (X,n)$ dans $s = n$ est donné par
+      la \term{caractéristique d'Euler modifiée}
+      \[ \ord_{s=n} \zeta (X,s) =
+        \sum_{i\in\ZZ} (-1)^i \cdot i \cdot \rk_\ZZ H^i_\text{\it W,c} (X, \ZZ (n)). \]
+    \end{enumerate} }
+
+  \vspace{1em}
+
+  Si $X$ est propre et régulier, la conjecture $\mathbf{C} (X,n)$ est
+  equivalente aux conjectures de \cite{Flach-Morin-16}. En outre, il est
+  démontré dans \cite[\S 5.6]{Flach-Morin-16} que si $X$ est projectif et lisse
+  sur l'anneaux d'entiers d'un corps de nombres, la conjecture sur la valeur
+  spéciale est équivalente à la \term{conjecture des nombres de Tamagawa}.
+
+  Enfin, on démontre dans \S 2.4 la compatibilité de la conjecture
+  $\mathbf{C} (X,n)$ avec les \term{unions disjointes},
+  \term{décompositions fermées-ouvertes} et \term{espaces affines relatifs};
+
+  \begin{itemize}
+  \item si $X = \coprod_{0 \le i \le r} X_i$, donc les conjectures
+    $\mathbf{C} (X_i, n)$ pour tout $i = 0,\ldots,r$ impliquent
+    $\mathbf{C} (X, n)$;
+
+  \item si $U \hookrightarrow X \hookleftarrow Z$ est une décomposition de $X$
+    dans un subschema fermé $Z$ et son complément ouvert $U = X\setminus Z$,
+    donc tous deux conjectures sur $\mathbf{C} (U, n)$, $\mathbf{C} (Z, n)$,
+    $\mathbf{C} (X, n)$ impliquent la troisième;
+
+  \item pour tout $r\geq 0$ la conjecture $\mathbf{C} (\AA^r_X,n)$ est
+    équivalente à $\mathbf{C} (X,n-r)$.
+  \end{itemize}
+
+  \vspace{1em}
+
+  Il suit que, en partant des schémas pour lesquels la conjecture est connue, on
+  peut construire de nouveaux schémas, éventuellement singuliers ou non-propres,
+  pour lesquels la conjecture est également vraie. C'est le principal résultat
+  inconditionnel issu de la machinerie développée dans cette thèse.
+
+\end{otherlanguage}

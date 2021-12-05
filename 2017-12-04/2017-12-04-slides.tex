@@ -1,0 +1,693 @@
+\ifdefined\ishandout
+  \documentclass[handout]{beamer}
+\else
+  \documentclass{beamer}
+\fi
+
+\usetheme{boxes}
+\definecolor{beamer@structure@color}{rgb}{0,0,0}
+
+\usecolortheme{structure}
+
+\setbeamertemplate{footline}[frame number]
+\setbeamertemplate{frametitle}{\color{black}
+\def\myhrulefill{\leavevmode\leaders\hrule height 1pt\hfill\kern 0pt}
+\headingfont\insertframetitle\par\vskip-8pt\myhrulefill}
+
+\newcommand{\personality}[1]{{\bf #1}}
+\usepackage{cancel}
+
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\FF}{\mathbb{F}}
+\renewcommand{\AA}{\mathbb{A}}
+\newcommand{\isom}{\cong}
+\renewcommand{\O}{\mathcal{O}}
+\newcommand{\dfn}{\mathrel{\mathop:}=}
+\DeclareMathOperator{\ord}{ord}
+\DeclareMathOperator{\rk}{rk}
+\DeclareMathOperator{\Spec}{Spec}
+\renewcommand{\Re}{\mathop{\mathrm{Re}}}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\Gal}{Gal}
+\newcommand{\RHom}{R\!\Hom}
+\newcommand{\categ}[1]{\text{\bf #1}}
+\newcommand{\quiso}{\simeq}
+
+\setbeamertemplate{navigation symbols}{}
+
+\usepackage{array}
+\newcolumntype{x}[1]{>{\centering\hspace{0pt}}p{#1}}
+\definecolor{shadecolor}{rgb}{0.89,0.89,0.89}
+\usepackage{colortbl}
+
+\newcommand{\term}{\textbf}
+
+\usepackage{mathspec}
+\setsansfont[BoldFont={PT Sans Bold}, ItalicFont={PT Sans Italic}]{PT Sans}
+\setmathrm[BoldFont={PT Sans Bold}, ItalicFont={PT Sans Italic}]{PT Sans}
+\newfontfamily\headingfont[]{PT Sans Bold}
+
+\usepackage[all]{xy}
+
+\usepackage{tikz-cd}
+\usetikzlibrary{arrows}
+\usetikzlibrary{calc}
+
+\begin{document}
+
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+
+\begin{frame}[noframenumbering]
+  \headingfont
+  \begin{center}
+    {\huge Zeta-values of arithmetic schemes at negative integers and Weil-étale
+      cohomology
+
+    }
+
+    \vspace{2em}
+
+    {\large Alexey Beshenov}
+
+    \vspace{0.20em}
+
+    Universit\'e de Bordeaux / Universiteit Leiden
+
+    \vspace{1em}
+
+    {\large Advised by Baptiste Morin and Bas Edixhoven}
+
+    \vspace{1em}
+
+    {\tiny 4 December 2017, Leiden}
+
+    \vspace{5em}
+
+    \raisebox{+0.125cm}{\includegraphics[width=2.5cm]{../u-bordeaux.pdf}}\hspace{0.9cm}
+    \raisebox{+0.12cm}{\includegraphics[width=2.25cm]{../leiden.pdf}}\hspace{0.9cm}
+    \includegraphics[width=2.5cm]{../algant.mps}
+  \end{center}
+\end{frame}
+
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+
+\begin{frame}
+  \frametitle{Outline}
+
+  \begin{itemize}
+  \item<2-> Motivation
+
+  \item<3-> Motivic cohomology
+
+  \item<4-> Weil-étale complexes
+
+  \item<5-> Regulator
+
+  \item<6-> Main conjecture
+
+  \item<7-> Stability properties
+
+  \item[*]<8-> Definition of Weil-étale complexes
+  \end{itemize}
+
+\end{frame}
+
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+
+\begin{frame}[plain]
+  \headingfont
+
+  \vspace{\fill}
+
+  \begin{center}
+    {\huge Motivation}
+  \end{center}
+
+  \vspace{\fill}
+\end{frame}
+
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+
+\begin{frame}
+  \frametitle{Motivation: zeta values}
+
+  \begin{itemize}
+  \item<2-> \term{Zeta function} of an \term{arithmetic scheme}:
+
+    \[ \begin{tikzcd}
+        X \ar{d}[swap]{\begin{array}{r}\text{separated}\\\text{of finite type}\end{array}} \\
+        \Spec \ZZ
+      \end{tikzcd}
+      \!\!\!\!\!\!\! \leadsto ~
+      \zeta (X, s) \dfn \prod_{x\in X_0} \frac{1}{1 - N (x)^{-s}}
+      \quad (\Re s > \dim X) \]
+
+  \item<3-> \textbf{Conjecture}: meromorphic continuation to $\CC$.
+
+  \item<4-> Two quantities for each $n\in \ZZ$:
+
+    \onslide<5->{$d_n \dfn \ord_{s = n} \zeta (X,s) \dfn$
+      \term{vanishing order} at $s=n$,}
+
+    \onslide<6->{\term{special value}
+      $\zeta^* (X,n) \dfn \lim\limits_{s\to n} (s-n)^{-d_n} \, \zeta (X,s)$.}
+  \end{itemize}
+\end{frame}
+
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+
+\begin{frame}
+  \frametitle{Motivation:\\
+    cohomological interpretation of zeta values}
+
+  \begin{itemize}
+  \item<2-> May be traced to \personality{Dirichlet} (1839):
+    $$\zeta_F^* (0) = \zeta^* (\Spec \O_F, 0) = -\frac{h_F}{\#\mu_F}\,R_F.$$
+
+  \item<3-> Actually,
+    $$\cdots = -\frac{\# H^0 (\Spec \O_F, \ZZ^c (0))}{\# H^{-1} (\Spec \O_F, \ZZ^c (0))_\text{\it tors}}\,R_F,$$
+    where $\ZZ^c (0) \isom \mathbb{G}_m [1]$ (to be explained in a moment).
+
+  \item<4->[*] First results about finite generation of motivic cohomology are
+    from the XIX century :--)
+
+    $H^0 (\Spec \O_F, \ZZ^c (0))$ is finite;\\
+    $H^{-1} (\Spec \O_F, \ZZ^c (0))$ is of rank $r_1 + r_2 - 1.$
+  \end{itemize}
+\end{frame}
+
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+
+\begin{frame}
+  \frametitle{Motivation:\\
+    Weil-étale cohomology (very brief history)}
+
+  \begin{itemize}
+  \item<2-> \personality{Lichtenbaum}: $d_n$ and $\zeta^* (X,n)$ conjecturally
+    come from ``\term{Weil-étale cohomology}''.
+
+  \item<3-> \personality{Lichtenbaum}, 2005: first studies for $X_{/\FF_q}$.
+
+  \item<4-> \personality{Geisser}, 2004: further results for $X_{/\FF_q}$.
+
+  \item<5-> \personality{Lichtenbaum}, 2009: $X = \Spec \O_F$, $n = 0$.
+
+  \item<6-> \personality{Morin}, 2014: $X_{/\ZZ}$ proper, regular, $n = 0$.
+
+  \item<7-> \personality{Flach} and \personality{Morin}, 2016: $X_{/\ZZ}$
+    proper, regular, $n \in \ZZ$.
+  \end{itemize}
+\end{frame}
+
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+
+\begin{frame}
+  \frametitle{Motivation: my thesis}
+
+  \begin{itemize}
+  \item<2-> \textbf{Goal}: construct Weil-étale cohomology following\\
+    Flach and Morin...
+
+  \item<3-> For \emph{any} arithmetic scheme $X$ (harder).
+
+  \item<4-> For $n < 0$ (easier).
+  \end{itemize}
+
+  \begin{center}\onslide<5->
+    {\large From now on, $n$ is strictly negative!}
+  \end{center}
+
+\end{frame}
+
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+
+\begin{frame}[plain]
+  \headingfont
+
+  \vspace{\fill}
+
+  \begin{center}
+    {\huge Motivic cohomology}
+  \end{center}
+
+  \vspace{\fill}
+\end{frame}
+
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+
+\begin{frame}
+  \frametitle{Motivic cohomology}
+
+  \begin{itemize}
+  \item<2-> \term{Bloch}, 1986: \term{cycle complexes} $\ZZ (n)$,\\
+    \term{higher Chow groups} $CH^i (X,p) = H^{2i - p} (X, \ZZ (i))$.
+
+  \item<3-> \term{Geisser}, 2010: \term{dualizing complexes}.
+    $$(X,n) \rightsquigarrow \ZZ^c (n) \text{, complex of sheaves on }X_\text{\it ét}.$$
+
+  \item<4-> $\ZZ^c (n) = \ZZ (d-n) [2d], \quad d = \dim X$.
+
+  \item<5->[*] For $X_{/k}$ smooth, RHS $\isom$ Voevodsky's motivic complex\\
+    (not our case).
+  \end{itemize}
+\end{frame}
+
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+
+\begin{frame}
+  \frametitle{Motivic cohomology:\\
+    Borel--Moore behavior of $\ZZ^c (n)$}
+
+  \begin{itemize}
+  \item<2-> \term{Borel--Moore homology} for locally compact spaces.
+
+  \item<3-> \term{Localization triangles} for $U \hookrightarrow X \leftarrow Z$:
+    $$R\Gamma_{BM} (Z, \ZZ) \to
+    R\Gamma_{BM} (X, \ZZ) \to
+    R\Gamma_{BM} (U, \ZZ) \to \cdots [1]$$
+
+  \item<4-> \term{Verdier}:
+    $R\Gamma_{BM} (X,\ZZ) = R\Gamma (X, p^! \underline{\ZZ}) \isom
+    \RHom (R\Gamma_c (X,\ZZ), \ZZ)$, where $p\colon X\to \ast$.
+
+  \item<5-> Dual to cohomology with compact support:
+    $$R\Gamma_c (U,\ZZ) \to R\Gamma_c (X,\ZZ) \to R\Gamma_c (Z,\ZZ) \to \cdots [1]$$
+
+  \item<6-> \term{Geisser}, 2010: for schemes,
+    $$R\Gamma (Z_\text{\it ét}, \ZZ^c (n)) \to
+    R\Gamma (X_\text{\it ét}, \ZZ^c (n)) \to
+    R\Gamma (U_\text{\it ét}, \ZZ^c (n)) \to \cdots [1]$$
+  \end{itemize}
+\end{frame}
+
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+
+\begin{frame}
+  \frametitle{Motivic cohomology:\\
+    assumption on finite generation}
+
+  \begin{itemize}
+  \item<2-> \term{Conjecture} $\mathbf{L}^c (X_\text{\it ét}, n)$:
+
+    \emph{$H^i (X_\text{\it ét}, \ZZ^c (n))$
+      are finitely generated for all $i\in\ZZ$}.
+
+  \item<3->[*] As always here, $n < 0$.
+  \end{itemize}
+\end{frame}
+
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+
+\begin{frame}[plain]
+  \headingfont
+
+  \vspace{\fill}
+
+  \begin{center}
+    {\huge Weil-étale complexes}
+  \end{center}
+
+  \vspace{\fill}
+\end{frame}
+
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+
+\begin{frame}
+  \frametitle{Weil-étale complexes}
+
+  \onslide<2->{\textbf{Theorem}.}
+
+  \begin{itemize}
+  \item<3-> For an arithmetic scheme $X$ and $n < 0$, assume
+    $\mathbf{L}^c (X_\text{\it ét}, n)$.
+
+  \item<4-> We may construct a perfect complex of abelian groups
+    $$R\Gamma_\text{\it W,c} (X, \ZZ (n))$$
+    (well-defined up to an iso in $\categ{D} (\ZZ)$).
+
+  \item<5-> \term{perfect} = $H^i_\text{\it W,c} (X, \ZZ (n))$ are finitely generated;\\
+    zero for almost all $i$.
+  \end{itemize}
+\end{frame}
+
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+
+\begin{frame}
+  \frametitle{Weil-étale complexes: splitting}
+
+  \begin{itemize}
+  \item<2-> $R\Gamma_\text{\it W,c} (X,\ZZ(n)) \otimes \RR \isom
+    \RHom (R\Gamma (X_\text{\it ét}, \ZZ^c (n)), \RR) [-1] \oplus
+    R\Gamma_c (G_\RR, X (\CC), (2\pi i)^n\,\RR) [-1]$.
+
+  \item<3-> $G_\RR \dfn \Gal (\CC/\RR)$ acts on
+    $R\Gamma_c (X (\CC), (2\pi i)^n\,A)$ $\Rightarrow$ $G_\RR$-equivariant
+    cohomology with compact support:
+    $$R\Gamma_c (G_\RR, X (\CC), (2\pi i)^n\,A) \dfn
+    R\Gamma (G_\RR, R\Gamma_c (X (\CC), (2\pi i)^n\,A)).$$
+
+  \item<4-> Grothendieck spectral sequence:
+    $$E_2^{pq} = H^p (G_\RR, H^q_c (X (\CC), (2\pi i)^n\,A)) \Longrightarrow
+    H^{p+q}_c (G_\RR, X (\CC), (2\pi i)^n\,A).$$
+
+  \item<5-> Note:
+    $$H_c^i (G_\RR, X (\CC), (2\pi i)^n\,\RR) \isom H_c^i (X (\CC), (2\pi i)^n\,\RR)^{G_\RR}$$
+    ($H^{>0} (G_\RR, \ldots)$ is always $2$-torsion!)
+  \end{itemize}
+\end{frame}
+
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+
+\begin{frame}[plain]
+  \headingfont
+
+  \vspace{\fill}
+
+  \begin{center}
+    {\huge Regulator}
+  \end{center}
+
+  \vspace{\fill}
+\end{frame}
+
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+
+\begin{frame}
+  \frametitle{Regulator}
+
+  \begin{itemize}
+  \item<2-> A nice construction due to\\
+    \personality{Kerr, Lewis, and Müller-Stach} (2006).
+
+  \item<3-> Usually:
+    $$\begin{array}{c}
+        \text{motivic cohomology}\\
+        \text{(higher Chow groups)}
+      \end{array}\text{of }X \xrightarrow{Reg} \text{Deligne (co)homology of }X(\CC).$$
+
+  \item<4-> In our case $n < 0$: a morphism in $\categ{D} (\ZZ)$
+    $$Reg\colon R\Gamma(X_\text{\it ét},\ZZ^c (n)) \to
+    R\Gamma_\text{\it BM} (G_\RR,X(\CC),(2\pi i)^n\,\RR)[1].$$
+
+  \item<5-> \textbf{Drawback}: need to assume that $X_\CC$ is smooth,
+    quasi-projective.
+
+  \item<6-> \textbf{Conjecture} $\mathbf{B}(X, n)$: the $\RR$-dual is a
+    quasi-isomorphism
+    $$Reg^\vee\colon R\Gamma_c (G_\RR, X(\CC), (2\pi i)^n\,\RR)[-1] \xrightarrow{\quiso}
+    \RHom(R\Gamma(X_\text{\it ét}, \ZZ^c (n)), \RR)$$
+  \end{itemize}
+\end{frame}
+
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+
+\begin{frame}
+  \frametitle{Morphism $\smile\theta$}
+
+  \begin{itemize}
+  \item<2-> Define
+    $$R\Gamma_\text{\it W,c} (X, \ZZ(n)) \otimes \RR \xrightarrow{\smile\theta}
+    R\Gamma_\text{\it W,c} (X, \ZZ(n)) \otimes \RR [1]$$
+
+    \[ \begin{tikzcd}[row sep=small]
+        R\Gamma_\text{\it W,c} (X, \ZZ (n)) \otimes \RR \ar{d}{\isom}[swap]{\text{splitting}} \\
+        \RHom (R\Gamma (X_\text{\it ét}, \ZZ^c (n)), \RR) [-1] ~\oplus~ R\Gamma_c (G_\RR, X (\CC), (2\pi i)^n\,\RR) [-1] \ar[twoheadrightarrow]{d} \\
+        R\Gamma_c (G_\RR, X (\CC), (2\pi i)^n\,\RR) [-1] \ar{d}{Reg^\vee}[swap]{\text{conjecturally }\isom}\\
+        \RHom (R\Gamma (X_\text{\it ét}, \ZZ^c (n)), \RR) \ar[rightarrowtail]{d} \\
+        \RHom (R\Gamma (X_\text{\it ét}, \ZZ^c (n)), \RR) ~\oplus~ R\Gamma_c (G_\RR, X (\CC), (2\pi i)^n\,\RR) \ar{d}{\isom}[swap]{\text{splitting}} \\
+        R\Gamma_\text{\it W,c} (X, \ZZ (n)) \otimes \RR [1]
+      \end{tikzcd} \]
+  \end{itemize}
+\end{frame}
+
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+
+\begin{frame}
+  \frametitle{Trivialization map $\lambda$}
+
+  \begin{itemize}
+  \item<2-> Assume $\mathbf{L}^c (X_\text{\it ét},n)$ and
+    $\mathbf{B} (X,n)$. Then
+
+    \[ \tag{*} \cdots \to H_\text{\it W,c}^i (X, \ZZ(n)) \otimes \RR
+      \xrightarrow{\smile\theta}
+      H_\text{\it W,c}^{i+1} (X, \ZZ(n)) \otimes \RR \to \cdots \]
+
+    is an acyclic complex of finite dimensional vector spaces.
+
+  \item<3-> \personality{Knudsen, Mumford}, 1976: determinants of complexes.
+    $$C^\bullet \text{, perfect object in }\categ{D} (\ZZ) \leadsto
+    \det\nolimits_\ZZ C^\bullet\text{, }\ZZ\text{-module of rank }1.$$
+
+  \item<4-> \textbf{Properties of determinants} $\Rightarrow$ (*)
+    induces a \emph{canonical} iso
+    $$\lambda\colon \RR \xrightarrow{\isom}
+    (\det\nolimits_\ZZ R\Gamma_\text{\it W,c} (X,\ZZ(n)) \otimes \RR.$$
+
+  \item<5-> $R\Gamma_\text{\it W,c} (X,\ZZ(n))$ is constructed up to iso in
+    $\categ{D} (\ZZ)$, but $\det\nolimits_\ZZ R\Gamma_\text{\it W,c} (X,\ZZ(n))$
+    is \emph{canonically} defined and \emph{canonically} seen as a lattice in
+    $\RR$.
+  \end{itemize}
+\end{frame}
+
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+
+\begin{frame}[plain]
+  \headingfont
+
+  \vspace{\fill}
+
+  \begin{center}
+    {\huge Main conjecture}
+  \end{center}
+
+  \vspace{\fill}
+\end{frame}
+
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+
+\begin{frame}
+  \frametitle{Conjecture $\mathbf{C} (X,n)$}
+
+  \onslide<2->{For an arithmetic scheme $X$ and $n < 0$}
+
+  \begin{enumerate}
+  \item[a)]<3-> assume $\mathbf{L}^c (X_\text{\it ét}, n)$;
+
+  \item[b)]<4-> assume that $X_\CC$ is smooth, quasi-projective;\\
+    assume $\mathbf{B}(X, n)$;
+
+  \item[c)]<5-> assume meromorphic continuation near $s = n$ for $\zeta (X, s)$.
+  \end{enumerate}
+
+  \onslide<6->{Then}
+
+  \begin{enumerate}
+  \item[1)]<7-> the vanishing order is given by
+    \[ \ord_{s=n} \zeta (X,s) =
+      \sum_{i\in\ZZ} (-1)^i \cdot i\cdot \rk_\ZZ H^i_\text{\it W,c} (X, \ZZ(n)). \]
+
+  \item[2)]<8-> the special value is given up to sign by
+    \[ \lambda (\zeta^* (X, n)^{-1}) \cdot \ZZ =
+      \det\nolimits_\ZZ R\Gamma_\text{\it W,c} (X, \ZZ(n)). \]
+  \end{enumerate}
+\end{frame}
+
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+
+\begin{frame}
+  \frametitle{Main conjecture:\\
+    relation to other statements}
+
+  \begin{itemize}
+  \item<2-> For $X$ regular, proper,
+    $\mathbf{C} (X,n) \iff \text{conjectures of \personality{Flach} and \personality{Morin} (2016)}$.
+
+  \item<3-> \personality{Flach} and \personality{Morin} (2016):\\
+    their special value conjecture $\iff$\\
+    \term{Tamagawa number conjecture}\\
+    (\personality{Bloch, Kato, Fontaine, Perrin-Riou}).
+  \end{itemize}
+\end{frame}
+
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+
+\begin{frame}
+  \frametitle{Main conjecture:\\
+    meaning of the vanishing order}
+
+  \begin{itemize}
+  \item<2-> What is that sum
+    $\sum_{i\in\ZZ} (-1)^i \cdot i\cdot \rk_\ZZ H^i_\text{\it W,c} (X, \ZZ(n))$?
+
+  \item<3-> Under the assumptions a), b),
+
+    \begin{multline*}
+      \ord_{s=n} \zeta (X,s) \stackrel{?}{=}
+      \sum_{i\in\ZZ} (-1)^i \cdot i\cdot \rk_\ZZ H^i_\text{\it W,c} (X, \ZZ(n)) \\
+      = \sum_{i\in\ZZ} (-1)^i \, \dim_\RR H^i_c (X (\CC), (2\pi i)^n\,\RR)^{G_\RR} \\
+      = \chi (R\Gamma_c (G_\RR, X(\CC), (2\pi i)^n\,\RR)).
+    \end{multline*}
+  \end{itemize}
+\end{frame}
+
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+
+\begin{frame}
+  \frametitle{Toy example: number rings}
+
+  \begin{itemize}
+  \item<2-> Let $X = \Spec \O_F$, $[F : \QQ] = r_1 + 2 r_2$. The $G_\RR$-space
+    $X (\CC)$:
+
+    \[ \xymatrix@R=0.75em@C=0.5em{
+        & & & & & \bullet\ar@/^0.5em/[dd] & \bullet\ar@/^0.5em/[dd] & \cdots & \bullet\ar@/^0.5em/[dd] \\
+        \bullet\ar@(ul,ur) & \bullet\ar@(ul,ur) & \cdots & \bullet\ar@(ul,ur) \\
+        & & & & & \bullet\ar@/^0.5em/[uu] & \bullet\ar@/^0.5em/[uu] & \cdots & \bullet\ar@/^0.5em/[uu] \\
+        \ar@{}[rrr]|{r_1\text{ points}} & & & & & \ar@{}[rrr]|{2\,r_2\text{ points}} & & & \\
+      } \]
+
+  \item<3-> $R\Gamma_c (X(\CC), (2\pi i)^n\,\RR)$: a single $\RR$-vector space
+    $$V \dfn ((2\pi i)^n\,\RR)^{\oplus r_1} \oplus ((2\pi i)^n\,\RR \oplus (2\pi i)^n\,\RR)^{\oplus r_2}.$$
+
+  \item<4-> $G_\RR$-actions: $z \mapsto \overline{z}$ and
+    $(z_1,z_2) \mapsto (\overline{z_2}, \overline{z_1})$.
+
+  \item<5->
+    $$\chi (R\Gamma_c (G_\RR, X (\CC), (2\pi i)^n\,\RR)) =
+    \dim_\RR V^{G_\RR} = \begin{cases}
+      r_2, & n \text{ odd},\\
+      r_1 + r_2, & n \text{ even}.
+    \end{cases}$$
+  \end{itemize}
+\end{frame}
+
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+
+\begin{frame}
+  \frametitle{Dull example: varieties over finite fields}
+
+  \begin{itemize}
+  \item<2-> For $X_{/\FF_q}$ we have $X (\CC) = \emptyset$.
+
+  \item<3-> \term{Weil's zeta function}:
+    $$\zeta (X,s) = \exp \left(\sum_{k\ge 1} \frac{\# X (\FF_{q^k})}{k}\,q^{-ks}\right).$$
+
+  \item<4-> For $n < 0$
+    $$\ord_{s=n} \zeta (X,s) = \chi (R\Gamma_c (G_\RR, X (\CC), (2\pi i)^n\,\RR)) = 0.$$
+  \end{itemize}
+\end{frame}
+
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+
+\begin{frame}[plain]
+  \headingfont
+
+  \vspace{\fill}
+
+  \begin{center}
+    {\huge Okay, so how can we obtain new results?}
+  \end{center}
+
+  \vspace{\fill}
+\end{frame}
+
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+
+\begin{frame}
+  \frametitle{Stability properties}
+
+  \begin{itemize}
+  \item<2-> For the zeta function:
+
+    \begin{align*}
+      U  \hookrightarrow X \leftarrow Z & \leadsto \zeta (X, s) = \zeta (U, s) \cdot \zeta (Z, s),\\
+      \AA^r_X \dfn \AA_\ZZ^r \times X & \leadsto \zeta (\AA^r_X, s) = \zeta (X, s - r).
+    \end{align*}
+
+  \item<3-> \textbf{Theorem}. For the conjecture:
+
+    \begin{align*}
+      U  \hookrightarrow X \leftarrow Z & \leadsto \text{two out of three } \mathbf{C} (U, n), \, \mathbf{C} (X, n), \, \mathbf{C} (Z, n) \\
+                                        & \quad\quad\quad\Longrightarrow \text{the other one},\\
+      \AA^r_X \dfn \AA_\ZZ^r \times X & \leadsto \mathbf{C} (\AA^r_X, n) \iff \mathbf{C} (X, n - r).
+    \end{align*}
+
+  \end{itemize}
+\end{frame}
+
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+
+\begin{frame}
+  \frametitle{Stability properties: proof idea}
+
+  \begin{itemize}
+  \item<2-> \textbf{Vanishing orders and localization}:\\
+    additivity of $\chi$ for the triangle
+
+    \vspace{-2em}
+
+    \begin{multline*}
+      R\Gamma_c (G_\RR, U(\CC), (2\pi i)^n\,\RR) \to
+      R\Gamma_c (G_\RR, X(\CC), (2\pi i)^n\,\RR) \\
+      \to R\Gamma_c (G_\RR, Z(\CC), (2\pi i)^n\,\RR) \to \cdots [1]
+    \end{multline*}
+
+  \item<3-> \textbf{Vanishing orders and affine space}:\\
+    $G_\RR$-equivariant quasi-isomorphism
+    $$R\Gamma_c (\CC^r \times X(\CC), (2\pi i)^n\,\RR) \quiso
+    R\Gamma_c (X(\CC), (2\pi i)^{n-r}\,\RR) [-2r].$$
+
+  \item<4-> \textbf{Special value and localization}:\\
+    look also at the dual to the Borel--Moore triangle for $\ZZ^c (n)$:
+
+    \vspace{-2em}
+
+    \begin{multline*}
+      \RHom(R\Gamma(U_\text{\it ét}, \ZZ^c (n)), \RR) \to
+      \RHom(R\Gamma(X_\text{\it ét}, \ZZ^c (n)), \RR) \to\\
+      \RHom(R\Gamma(Z_\text{\it ét}, \ZZ^c (n)), \RR) \to \cdots [1]
+    \end{multline*}
+
+  \item<5-> \textbf{Special value and affine space}:
+
+    \vspace{-2em}
+
+    \begin{multline*}
+      p\colon \AA^r_X \to X \Longrightarrow R p_* \ZZ^c (n) \quiso \ZZ^c (n - r) [2r] \\
+      \Longrightarrow R\Gamma (\AA^r_{X,\text{\it ét}}, \ZZ^c (n)) \quiso
+      R\Gamma (X_\text{\it ét}, \ZZ^c (n - r)) [2r].
+    \end{multline*}
+
+  \end{itemize}
+\end{frame}
+
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+
+\begin{frame}[plain]
+  \headingfont
+
+  \vspace{\fill}
+
+\end{frame}
+
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+
+\begin{frame}[plain]
+  \headingfont
+
+  \vspace{\fill}
+
+  \begin{center}
+    {\huge Thank you!}
+  \end{center}
+
+  \vspace{\fill}
+\end{frame}
+
+\end{document}

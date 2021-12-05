@@ -1,0 +1,1398 @@
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+\chapter{Conjecture about zeta-values}
+\label{chapter:regulator}
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+
+The regulator morphism is introduced in \S\ref{section:regulator}, using the
+constructions from \cite{Kerr-Lewis-Muller-Stach-2006}. It is more naturally
+defined with its target in Deligne homology, and all the necessary preliminaries
+about it are included in \S\ref{section:deligne-cohomology}.
+Then in \label{section:conjecture-C-X-n} everything is put together to formulate
+the conjectural relation of Weil-étale complexes
+$R\Gamma_\text{\it W,c} (X, \ZZ (n))$ to the special values $\zeta_X^*
+(n)$. Finally, it is verified in \S\ref{secion:stability-of-the-conjecture} that
+the conjecture is compatible with disjoint unions, open-closed decompositions
+and taking the affine bundle $\AA^r_X \to X$.
+
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % 
+
+\section{Deligne cohomology and homology}
+\label{section:deligne-cohomology}
+
+Now we are going review the definitions of Deligne cohomology and
+homology. These were introduced in Be\u{\i}linson's seminal paper
+\cite{Beilinson-1984}, so they are also known in the literature as
+``Deligne--Be\u{\i}linson (co)homology'', but I will use the term ``Deligne
+(co)homology'' for brevity. For the technical details, the reader may consult
+\cite{Esnault-Viehweg} and \cite{Jannsen-Homology}.
+
+\vspace{1em}
+
+For this section, $\mathcal{X}$ denotes a smooth complex algebraic variety over
+$\CC$, and $\ZZ \subset A \subseteq \RR$ denotes a subring of the ring of real
+numbers (eventually we will be interested in $A = \ZZ$ and $\RR$). For a
+parameter $k\in\ZZ$ one can define (co)homology groups
+\[ H^i_\mathcal{D} (\mathcal{X}, A (k)), \quad
+  H_i^\mathcal{D} (\mathcal{X}, A (k)). \]
+Here $k$ is a ``twist'' that may be any integer. In fact, for certain values of
+$k$ the above groups have simpler description, and it will be our case.
+
+\vspace{1em}
+
+We are going to assume that $\mathcal{X}$ is connected, of dimension $d_\CC$.
+A \term{good compactification} of $\mathcal{X}$ is given by
+\begin{equation}
+  \label{eqn:good-compactification}
+  \begin{tikzcd} \mathcal{X} \ar[hookrightarrow]{r}{j} & \overline{\mathcal{X}} & D\ar[left hook->,swap]{l}
+  \end{tikzcd}
+\end{equation}
+
+\noindent where $j\colon \mathcal{X} \hookrightarrow \overline{\mathcal{X}}$ is
+an embedding into a proper smooth algebraic variety $\overline{\mathcal{X}}$,
+and the complement $D \dfn \overline{\mathcal{X}} \setminus \mathcal{X}$ is
+a normal crossing divisor (meaning that locally in the analytic topology, $D$
+has smooth components intersecting transversally). Such a good compactification
+always exists (this follows from Hironaka's resolution of singularities), and we
+fix one.
+
+\subsection*{Deligne cohomology}
+
+We denote by $\Omega_{\mathcal{X} (\CC)}^\bullet$ the de Rham complex of
+holomorphic differential forms on $\mathcal{X} (\CC)$:
+\[ 0 \to \O_{\mathcal{X} (\CC)} \to
+  \Omega^1_{\mathcal{X} (\CC)} \to
+  \Omega^2_{\mathcal{X} (\CC)} \to
+  \cdots \to
+  \Omega^{d_\CC}_{\mathcal{X} (\CC)} \to 0 \]
+Further, let $\Omega_{\overline{\mathcal{X}} (\CC)}^\bullet (\log D)$ be the de
+Rham complex of meromorphic differential forms on
+$\overline{\mathcal{X}} (\CC)$, holomorphic on $\mathcal{X} (\CC)$, with at most
+logarithmic poles along $D (\CC)$. We consider the descending filtration of
+$\Omega_{\overline{\mathcal{X}} (\CC)}^\bullet (\log D)$ by subcomplexes
+\begin{multline*}
+  \Omega_{\overline{\mathcal{X}} (\CC)}^{\geqslant k} (\log D)\colon\quad
+  0 \to \cdots \to 0 \to
+  \Omega_{\overline{\mathcal{X}} (\CC)}^k (\log D) \to
+  \Omega_{\overline{\mathcal{X}} (\CC)}^{k+1} (\log D) \\
+  \to \cdots \to \Omega_{\overline{\mathcal{X}} (\CC)}^{d_\CC} (\log D) \to 0
+\end{multline*}
+
+Let us fix some conventions related to the cones of complexes.
+If $u\colon A^\bullet \to B^\bullet$ is a morphism of complexes, the
+corresponding cone complex is given by
+$$\Cone (u) \dfn A^\bullet [1] \oplus B^\bullet,$$
+together with the differentials
+\begin{align*}
+  d^i\colon A^{i+1}\oplus B^i & \to A^{i+2}\oplus B^{i+1},\\
+  (a,b) & \mapsto (-d^{i+1}_A (a), u (a) + d^i_B (b)).
+\end{align*}
+
+This gives us a short exact sequence of complexes
+$$B^\bullet \mono \Cone (u) \epi A^\bullet [1]$$
+and the corresponding distinguished triangle in the derived category
+$$A^\bullet \to B^\bullet \to \Cone (u) \to A^\bullet [1]$$
+
+\begin{definition}
+  \label{dfn:deligne-cohomology} Let $A$ be a subring of $\RR$. For $k \in \ZZ$
+  we denote
+  $$A (k) \dfn (2\pi i)^k\,A \subset \CC.$$
+  This is a $G_\RR$-module, and we will also denote by $A (k)$ the corresponding
+  ($G_\RR$-equivariant) sheaf on $\mathcal{X} (\CC)$. For a fixed good
+  compactification \eqnref{eqn:good-compactification}, the corresponding
+  \term{Deligne--Be\u{\i}linson complex} is the complex of sheaves on
+  $\overline{\mathcal{X}} (\CC)$ given by
+  \[ A (k)_{\DB,(\overline{\mathcal{X}},\mathcal{X})} \dfn
+    \Cone \left(
+      R j_* A (k)
+      \oplus
+      \Omega_{\overline{\mathcal{X}} (\CC)}^{\geqslant k} (\log D)
+      \xrightarrow{\epsilon-\iota}
+      R j_* \Omega_{\mathcal{X} (\CC)}^\bullet
+    \right) [-1], \]
+  where
+  $$\epsilon\colon R j_* A (k) \to R j_* \Omega_{\mathcal{X} (\CC)}^\bullet$$
+  is induced by the canonical morphism of sheaves
+  $A (k) \to \O_{\mathcal{X} (\CC)}$ and
+  \[ \iota\colon \Omega_{\overline{\mathcal{X}} (\CC)}^{\geqslant k} (\log D)\to
+    R j_* \Omega_{\mathcal{X} (\CC)}^\bullet \]
+  is induced by a natural inclusion
+  \[ \Omega_{\overline{\mathcal{X}} (\CC)}^\bullet (\log D)
+    \xrightarrow{\quiso}
+    j_* \Omega_{\mathcal{X} (\CC)}^\bullet =
+    R j_* \Omega_{\mathcal{X} (\CC)}^\bullet, \]
+  which is a quasi-isomorphism of filtered complexes
+  (see \cite[\S 3.1]{Deligne-Hodge-II}). The corresponding
+  \term{Deligne cohomology} groups are given by the hypercohomology of
+  $A (k)_{\DB,(\overline{\mathcal{X}},\mathcal{X})}$:
+  \[ H^i_\mathcal{D} (\mathcal{X}, A (k)) \dfn
+    H^i (R\Gamma (\overline{\mathcal{X}} (\CC), A (k)_{\DB,(\overline{\mathcal{X}},\mathcal{X})})). \]
+\end{definition}
+
+\vspace{1em}
+
+The distinguished triangle of sheaves on $\overline{\mathcal{X}} (\CC)$
+\[ A (k)_{\DB,(\overline{\mathcal{X}},\mathcal{X})} \to
+  R j_* A (k)
+  \oplus
+  \Omega_{\overline{\mathcal{X}} (\CC)}^{\geqslant k} (\log D)
+  \xrightarrow{\epsilon-\iota}
+  R j_* \Omega_{\mathcal{X} (\CC)}^\bullet \to
+  A (k)_{\DB,(\overline{\mathcal{X}},\mathcal{X})} [1] \]
+induces the (hyper)cohomology long exact sequence
+\begin{multline}
+  \label{eqn:deligne-cohomology-les}
+  \cdots \to H^i_\mathcal{D} (\mathcal{X}, A (k)) \to
+  H^i (\mathcal{X} (\CC), A (k)) \oplus F^k H^i_{dR} (\mathcal{X} (\CC))
+  \xrightarrow{\epsilon-\iota} H^i_{dR} (\mathcal{X} (\CC)) \\
+  \to H^{i+1}_\mathcal{D} (\mathcal{X}, A (k)) \to \cdots
+\end{multline}
+where
+\begin{multline*}
+  F^k H^i_{dR} (\mathcal{X} (\CC)) \dfn \\
+  \im \left(
+    \HH^i (\overline{\mathcal{X}} (\CC), \Omega_{\overline{\mathcal{X}} (\CC)}^{\geqslant k} (\log D))
+    \hookrightarrow
+    \HH^i (\overline{\mathcal{X}} (\CC), \Omega_{\overline{\mathcal{X}} (\CC)}^\bullet (\log D))
+    \isom H^i_{dR} (\mathcal{X} (\CC))
+  \right)
+\end{multline*}
+denotes the Hodge filtration on the de Rham cohomology of $\mathcal{X} (\CC)$
+(for details about this, see \cite{Deligne-Hodge-II} and
+\cite[Chapter 8]{Voisin-Hodge-I}). Using the above distinguished triangle / long
+exact sequence, one may show that the groups
+$H^i_\mathcal{D} (\mathcal{X}, A (k))$ in fact do not depend on the choice of a
+good compactification
+$j\colon \mathcal{X} \hookrightarrow \overline{\mathcal{X}}$
+(see \cite[Lemma 2.8]{Esnault-Viehweg}). For this we will write simply
+``$A (k)_\DB$'' instead of
+``$A (k)_{\DB,(\overline{\mathcal{X}},\mathcal{X})}$'' if $\mathcal{X}$ is clear
+from the context and a specific good compactification does not matter.
+
+Eventually we will be interested in a very special case when Deligne cohomology
+is particularly easy to describe.
+
+\begin{lemma}
+  \label{lemma:special-case-of-Deligne-cohomology}
+  For $k > d_\CC$ and $A = \RR$ we have a quasi-isomorphism of complexes
+  \[ R\Gamma (\overline{\mathcal{X}} (\CC), \RR (k)_\DB) \quiso
+    R\Gamma (\mathcal{X} (\CC), (2\pi i)^{k-1}\,\RR) [-1]. \]
+
+  \begin{proof}
+    We have $\Omega_{\overline{\mathcal{X}} (\CC)}^{\geqslant k} (\log D) = 0$
+    for $k > d_\CC$, so that in this case
+    \[ A (k)_\DB =
+      \Cone (R j_* A (k) \xrightarrow{\epsilon} R j_* \Omega_{\mathcal{X} (\CC)}^\bullet) [-1] \isom
+      R j_* \Cone (A (k) \xrightarrow{\epsilon} \Omega_{\mathcal{X} (\CC)}^\bullet) [-1], \]
+    and we easily see that the complex of sheaves
+    $\Cone (A (k) \xrightarrow{\epsilon} \Omega_{\mathcal{X} (\CC)}^\bullet) [-1]$
+    on $\mathcal{X} (\CC)$ is given by
+    \begin{multline*}
+      [A (k) \to \Omega^\bullet_{\mathcal{X} (\CC)} [-1]] \dfn \\
+      \left[
+        0 \to \mathop{A (k)}_0 \to
+        \mathop{\O_{\mathcal{X} (\CC)}}_1 \to
+        \mathop{\Omega^1_{\mathcal{X} (\CC)}}_2 \to
+        \mathop{\Omega^2_{\mathcal{X} (\CC)}}_3 \to
+        \cdots \to
+        \mathop{\Omega_{\mathcal{X} (\CC)}^{d_\CC}}_{d_\CC+1} \to 0
+      \right]
+    \end{multline*}
+    ---that is, we have the constant sheaf $A (k) \dfn (2\pi i)^k\,A$ in degree
+    $0$, followed by the whole holomorphic de Rham complex on
+    $\mathcal{X} (\CC)$, shifted by one position. By the Poincaré lemma, we have
+    a quasi-isomorphism of complexes of sheaves on $\mathcal{X} (\CC)$
+    \begin{equation}
+      \label{eqn:poincare-lemma}
+      \CC \xrightarrow{\quiso} \Omega_{\mathcal{X} (\CC)}^\bullet,
+    \end{equation}
+    and we also have a short exact sequence of $G_\RR$-modules
+    \begin{equation}
+      \label{eqn:ses-of-GR-modules-R(k)-C}
+      (2\pi i)^k\,\RR \mono \CC \epi (2\pi i)^{k-1}\,\RR.
+    \end{equation}
+
+    % \noindent (to see this, write
+    % $\CC \isom (2\pi i)^k\,\RR \oplus (2\pi i)^{k-1}\,\RR$).
+
+    Now \eqnref{eqn:poincare-lemma} and \eqnref{eqn:ses-of-GR-modules-R(k)-C}
+    give us a quasi-isomorphism of complexes of sheaves on $\mathcal{X} (\CC)$
+    \[ [\RR (k) \to \Omega_{\mathcal{X} (\CC)}^\bullet [-1]] \quiso
+      (2\pi i)^{k-1}\,\RR [-1]. \]
+    Putting all this together, we have
+    \begin{align*}
+      R\Gamma (\overline{\mathcal{X}} (\CC), \RR (k)_\DB) & \quiso R\Gamma (\overline{\mathcal{X}} (\CC), Rj_* [(2\pi i)^k \, \RR \to \Omega^\bullet_{\mathcal{X} (\CC)} [-1]]) \\
+                                                          & \quiso R\Gamma (\overline{\mathcal{X}} (\CC), Rj_* (2\pi i)^{k-1} \, \RR) [-1] \\
+                                                          & \quiso R\Gamma (\mathcal{X} (\CC), (2\pi i)^{k-1} \, \RR) [-1].
+    \end{align*}
+  \end{proof}
+\end{lemma}
+
+\subsection*{Deligne homology}
+
+Deligne homology $H^\mathcal{D}_\bullet (\mathcal{X}, A (k))$ is constructed in
+such a way that there is an isomorphism with Deligne cohomology
+\[ H_\mathcal{D}^i (\mathcal{X}, A (k)) \xrightarrow{\isom}
+  H_{2d_\CC - i}^\mathcal{D} (\mathcal{X}, A (d_\CC - k)). \]
+To do this, Jannsen in his article \cite{Jannsen-Homology} replaces the singular
+cohomology $H^\bullet (\mathcal{X} (\CC), A (k))$ with Borel--Moore homology
+$H^{BM}_\bullet (\mathcal{X} (\CC), A (k))$, and de Rham cohomology
+$H^\bullet_{dR} (\mathcal{X} (\CC))$ with the corresponding object, which he
+calls ``de Rham homology''. It would be probably more correct to call
+$H^\mathcal{D}_\bullet (\mathcal{X}, A (k))$ ``Deligne--Borel--Moore homology''.
+
+We would like to compare homological and cohomological complexes, and for this
+the following convention will be used. To pass from a homological complex
+$C_\bullet$ to a cohomological complex ${}' C^\bullet$, we set
+$${}' C^i \dfn C_{-i},$$
+and the differentials are given by
+\[ ({}' C^i \xrightarrow{d^i} {}' C^{i+1}) \dfn
+  (C_{-i} \xrightarrow{(-1)^{i+1} \, d} C_{-i-1}) \]
+(note the alternating signs).
+
+As before, we fix a good compactification
+\eqnref{eqn:good-compactification}. Here are the ingredients for the definition
+of Deligne homology (we refer to \cite{Jannsen-Homology} for details).
+
+\begin{enumerate}
+\item We consider the quotient complex
+  \[ {}' C^\bullet (\overline{\mathcal{X}}, D, A (k)) \dfn
+    {}' C^\bullet (\overline{\mathcal{X}} (\CC), A (k)) /
+    {}' C^\bullet_D (\overline{\mathcal{X}} (\CC), A (k)), \]
+  where $C_\bullet (\overline{\mathcal{X}} (\CC), A (k))$ denotes the complex of
+  singular $C^\infty$-chains on $\overline{\mathcal{X}} (\CC)$ with coefficients
+  in $A (k) \dfn (2\pi i)^k\,A$, and
+  $C_\bullet^D (\overline{\mathcal{X}} (\CC), A (k))$ is the subcomplex of
+  chains with support on $D (\CC)$. We put ${}' C^\bullet$ instead of
+  $C_\bullet$ to pass to cohomological complexes.
+
+\item We denote by $\Omega^{p,q}_{\mathcal{X} (\CC)^\infty}$ the sheaf of
+  $C^\infty$-$(p,q)$-forms on $\mathcal{X} (\CC)$ (sometimes also denoted by
+  $\mathcal{A}^{p,q}_{\mathcal{X} (\CC)}$).
+
+\item We denote by ${}' \Omega^{p,q}_{\mathcal{X} (\CC)^\infty}$ the sheaf of
+  distributions over $\Omega^{-p,-q}_{\mathcal{X} (\CC)^\infty}$. That is, for
+  an open subset $U \subseteq X$ we have
+  \[ {}' \Omega^{p,q}_{\mathcal{X} (\CC)^\infty} (U) \dfn
+    \{ \text{continuous linear functionals on }
+    \Gamma_c (U, \Omega^{-p,-q}_{\mathcal{X} (\CC)^\infty}) \}. \]
+
+\item Both $\Omega^{\bullet,\bullet}_{\mathcal{X} (\CC)^\infty}$ and
+  ${}' \Omega^{\bullet,\bullet}_{\mathcal{X} (\CC)^\infty}$ naturally form
+  double complexes. We denote by $\Omega^\bullet_{\mathcal{X} (\CC)^\infty}$ and
+  ${}' \Omega^\bullet_{\mathcal{X} (\CC)^\infty}$ the total complexes associated
+  to $\Omega^{\bullet,\bullet}_{\mathcal{X} (\CC)^\infty}$ and
+  ${}' \Omega^{\bullet,\bullet}_{\mathcal{X} (\CC)^\infty}$ respectively:
+  \[ \Omega^n_{\mathcal{X} (\CC)^\infty} \dfn
+    \bigoplus_{p+q=n} \Omega^{p,q}_{\mathcal{X} (\CC)^\infty},
+    \quad
+    {}' \Omega^n_{\mathcal{X} (\CC)^\infty} \dfn
+    \bigoplus_{p+q=n} {}' \Omega^{p,q}_{\mathcal{X} (\CC)^\infty}. \]
+
+\item As before, we consider the corresponding logarithmic de Rham complexes and
+  their filtrations:
+  \begin{align*}
+    \Omega^\bullet_{\overline{\mathcal{X}} (\CC)^\infty} (\log D) & \dfn
+                                                                    \Omega_{\overline{\mathcal{X}} (\CC)}^\bullet (\log D)
+                                                                    \otimes_{\Omega_{\overline{\mathcal{X}} (\CC)}^\bullet}
+                                                                    \Omega_{\overline{\mathcal{X}} (\CC)^\infty}^\bullet, \\
+    \Omega_{\overline{\mathcal{X}} (\CC)^\infty}^{\geqslant k} (\log D) & \dfn
+                                                                          \Omega_{\overline{\mathcal{X}} (\CC)}^{\geqslant k} (\log D)
+                                                                          \otimes_{\Omega_{\overline{\mathcal{X}} (\CC)}^\bullet}
+                                                                          \Omega_{\overline{\mathcal{X}} (\CC)^\infty}^\bullet,
+  \end{align*}
+  and similarly for ${}' \Omega$ instead of $\Omega$.
+\end{enumerate}
+
+\begin{definition}
+  \label{dfn:deligne-homology}
+  In the above setting, for a fixed good compactification
+  \eqnref{eqn:good-compactification}, consider the complex of abelian groups
+  \begin{multline*}
+    {}' C^\bullet_\mathcal{D} (\overline{\mathcal{X}}, D, A (k)) \dfn \\
+    \Cone \left(
+      \begin{array}{c}
+        {}' C^\bullet (\overline{\mathcal{X}}, D, A (k)) \\
+        \oplus\\
+        \Gamma (\overline{\mathcal{X}} (\CC), {}' \Omega_{\overline{\mathcal{X}} (\CC)^\infty}^{\geqslant k}(\log D))
+      \end{array}
+      \xrightarrow{\epsilon-\iota}
+      \Gamma (\overline{\mathcal{X}} (\CC), {}' \Omega_{\overline{\mathcal{X}} (\CC)^\infty}^\bullet (\log D))
+    \right) [-1],
+  \end{multline*}
+  where $\iota$ is induced by the inclusion
+  ${}' \Omega_{\overline{\mathcal{X}} (\CC)^\infty}^{\geqslant k} (\log D)
+  \subset {}' \Omega_{\overline{\mathcal{X}} (\CC)^\infty}^\bullet (\log D)$,
+  and $\epsilon$ is given by the integration over chains (see
+  \cite{Jannsen-Homology} for details). The corresponding \term{Deligne
+    homology} groups are given by
+  \[ {}' H_\mathcal{D}^i (\mathcal{X}, A (k)) \dfn
+    H^i ({}' C_\mathcal{D}^\bullet (\overline{\mathcal{X}}, D, A (k))). \]
+\end{definition}
+
+\vspace{1em}
+
+To understand the above definition, we should examine what each complex
+computes.
+
+\begin{enumerate}
+\item According to \cite[Lemma 1.11]{Jannsen-Homology}, the complex
+  ${}' C^\bullet (\overline{\mathcal{X}}, D, A (k))$ calculates Borel--Moore
+  homology of $\mathcal{X} (\CC)$ with coefficients in $A (k)$: there are
+  canonical isomorphisms
+  \[ H^i ({}' C^\bullet (\overline{\mathcal{X}}, D, A (k))) \isom
+    {}' H^i_{BM} (\mathcal{X} (\CC), A (k)) =
+    H_{-i}^{BM} (\mathcal{X} (\CC), A (-k)) \]
+  (see loc. cit. and \cite[\S 1]{Verdier-Classe} for details on Borel--Moore
+  homology).
+
+\item According to \cite[Corollary 1.13]{Jannsen-Homology}, there are
+  quasi-isomorphisms of fine sheaves
+  \begin{multline*}
+    R j_* \, {}' \Omega_{\mathcal{X} (\CC)^\infty}^\bullet =
+    j_* \, {}' \Omega_{\mathcal{X} (\CC)^\infty}^\bullet \xleftarrow{\quiso}
+    j_* \Omega_{\mathcal{X} (\CC)^\infty}^\bullet [2d_\CC] \xleftarrow{\quiso}
+    \Omega_{\overline{\mathcal{X}} (\CC)^\infty}^\bullet (\log D) [2d_\CC] \\
+    \xrightarrow{\quiso}
+    {}' \Omega_{\overline{\mathcal{X}} (\CC)^\infty}^\bullet (\log D)
+  \end{multline*}
+  and then Jannsen defines
+  \[ {}' H^i_{dR} (\mathcal{X} (\CC)) \dfn
+    H^i (\Gamma (\mathcal{X} (\CC), {}' \Omega_{\mathcal{X} (\CC)^\infty}^\bullet)) \isom
+    H^i (\Gamma (\overline{\mathcal{X}} (\CC), {}' \Omega_{\overline{\mathcal{X}} (\CC)^\infty}^\bullet (\log D))) \]
+  to be the \term{de Rham homology} of $\mathcal{X} (\CC)$ (this is by no means
+  standard terminology).
+
+\item De Rham homology carries a Hodge filtration defined by
+  \begin{multline*}
+    F^k \, {}' H^i_{dR} (\mathcal{X} (\CC)) \dfn \\
+    \im \Bigl(
+    H^i (\Gamma (\overline{\mathcal{X}} (\CC), {}' \Omega_{\overline{\mathcal{X}} (\CC)^\infty}^{\geqslant k} (\log D)))
+    \hookrightarrow
+    H^i (\Gamma (\overline{\mathcal{X}} (\CC), {}' \Omega_{\overline{\mathcal{X}} (\CC)^\infty}^\bullet (\log D))) \\
+    \isom {}' H^i_{dR} (\mathcal{X} (\CC))
+    \Bigr)
+  \end{multline*}
+  (the fact that this map is injective is in a sense dual to the corresponding
+  fact for the Hodge filtration on de Rham cohomology).
+\end{enumerate}
+
+The above considerations and the definition of Deligne homology give us the long
+exact sequence
+
+\begin{multline}
+  \label{eqn:deligne-homology-les}
+  \cdots \to {}' H_\mathcal{D}^i (\mathcal{X}, A (k)) \to
+  {}' H_{BM}^i (\mathcal{X} (\CC), A (k)) \oplus F^k \, {}' H^i_{dR} (\mathcal{X} (\CC)) \\
+  \xrightarrow{\epsilon-\iota} {}' H^i_{dR} (\mathcal{X} (\CC)) \to
+  {}' H_\mathcal{D}^{i+1} (\mathcal{X}, A (k)) \to \cdots
+\end{multline}
+
+\noindent from which one may see that the groups
+${}' H_\mathcal{D}^i (\mathcal{X}, A (k))$ do not depend on the choice of a good
+compactification $\mathcal{X} \hookrightarrow \overline{\mathcal{X}}$
+(again, see \cite[Corollary 1.13]{Jannsen-Homology}).
+
+\subsection*{Twisted Poincaré duality}
+
+According to \cite[Theorem 1.15]{Jannsen-Homology}, Deligne cohomology and
+homology are related through the ``twisted Poincaré duality''\footnote{The word
+  ``twisted'' means that the isomorphism takes into account the twist
+  $k\in\ZZ$. However, this duality is also twisted in the sense that, unlike the
+  usual Poincaré duality, it does not come from some nondegenerate pairing.}
+\begin{equation}
+  \label{eqn:poincare-duality-for-deligne-cohomology-on-H-prime}
+  H_\mathcal{D}^{2d_\CC + i} (\mathcal{X}, A (d_\CC + k))
+  \xrightarrow{\isom} {}' H_\mathcal{D}^i (\mathcal{X}, A (k)).
+\end{equation}
+
+In fact, Jannsen establishes a quasi-isomorphism of complexes of abelian groups
+\begin{equation}
+  \label{eqn:poincare-duality-for-deligne-cohomology-on-cplxs}
+  R\Gamma (\overline{\mathcal{X}} (\CC), A (k+d_\CC)_{\DB,(\overline{\mathcal{X}},\mathcal{X})} [2d_\CC])
+  \quiso
+  {}' C_\mathcal{D}^\bullet (\overline{\mathcal{X}}, D, A (k)),
+\end{equation}
+where the left hand side computes
+$H_\mathcal{D}^{2d_\CC + i} (\mathcal{X}, A (d_\CC + k))$
+(definition \ref{dfn:deligne-cohomology}) and the right hand side computes
+${}' H_\mathcal{D}^i (\mathcal{X}, A (k))$
+(definition \ref{dfn:deligne-homology}). The duality is best understood if we
+use the homological numbering
+\[ H_i^\mathcal{D} (\mathcal{X}, A (k)) \dfn
+  {}' H_\mathcal{D}^{-i} (\mathcal{X}, A (-k)) \]
+(sic! the sign of the twist gets flipped as well), and also look at the
+isomorphism of the long exact sequences \eqnref{eqn:deligne-cohomology-les} and
+\eqnref{eqn:deligne-homology-les}
+(see \cite[Remark 1.16 b)]{Jannsen-Homology}).
+The duality takes the familiar form
+\[ H_\mathcal{D}^i (\mathcal{X}, A (k)) \xrightarrow{\isom}
+  H_{2d_\CC - i}^\mathcal{D} (\mathcal{X}, A (d_\CC - k)). \]
+
+\[ \begin{tikzcd}[column sep=small,font=\small]
+    \vdots \ar{d} & \vdots \ar{d} \\
+    H^i_\mathcal{D} (\mathcal{X}, A (k)) \ar{d}\ar{r}{\isom} & H_{2d_\CC-i}^\mathcal{D} (\mathcal{X}, A (d_\CC-k)) \ar{d} \\
+    H^i (\mathcal{X} (\CC), A (k)) \oplus F^k H^i_{dR} (\mathcal{X} (\CC)) \ar{d}{\epsilon-\iota}\ar{r}{\isom} & H^{BM}_{2d_\CC-i} (\mathcal{X} (\CC), A (d_\CC-k)) \oplus F_{d_\CC-k} H_{2d_\CC-i}^{dR} (\mathcal{X} (\CC)) \ar{d}{\epsilon-\iota} \\
+    H^i_{dR} (\mathcal{X} (\CC)) \ar{d}\ar{r}{\isom} & H_{2d_\CC-i}^{dR} (\mathcal{X} (\CC)) \ar{d} \\
+    \vdots & \vdots
+  \end{tikzcd} \]
+
+As in \ref{lemma:special-case-of-Deligne-cohomology}, eventually we will be
+interested in a very special case where the Hodge filtration part does not
+enter.
+
+\begin{lemma}
+  \label{lemma:special-case-of-Deligne-homology}
+  For $k > 0$ and $A = \RR$ we have a quasi-isomorphism of complexes
+  \begin{multline*}
+    {}' C_\mathcal{D}^\bullet (\overline{\mathcal{X}}, D, A (k)) \quiso
+    \RHom (R\Gamma_c (\mathcal{X} (\CC), (2\pi i)^{1-k}\,\RR), \RR) [-1] \\
+    \rdfn R\Gamma_{BM} (\mathcal{X} (\CC), (2\pi i)^{1-k}\,\RR) [-1].
+  \end{multline*}
+
+  \begin{proof} The right hand side calculates Bore--Moore homology, which is by
+    definition dual to cohomology with compact support. In case $k > 0$ we have
+    ${}' \Omega^{\ge k}_{\overline{\mathcal{X}} (\CC)^\infty} (\log D) = 0$, and
+    the Deligne homology complex is defined by
+    \begin{multline*}
+      {}' C_\mathcal{D}^\bullet (\overline{\mathcal{X}}, D, \RR (k)) \\
+      \dfn \Cone \left(
+        {}' C^\bullet (\overline{\mathcal{X}}, D, (2\pi i)^k\,\RR)
+        \xrightarrow{\epsilon}
+        \Gamma (\overline{\mathcal{X}} (\CC), {}' \Omega^\bullet_{\overline{\mathcal{X}} (\CC)^\infty} (\log D))
+      \right) [-1]
+    \end{multline*}
+    Probably the correct way to obtain the result would be to analyze this
+    directly and argue as in
+    \ref{lemma:special-case-of-Deligne-cohomology}. There the map $\epsilon$ was
+    essentially the comparison between singular cohomology and de Rham
+    cohomology of $\mathcal{X} (\CC)$, and in the present situation there should
+    be a similar comparison between Borel--Moore homology and cohomology of
+    ${}' \Omega^\bullet$, which is dual to the de Rham cohomology with compact
+    support.
+
+    As a shortcut, let us assume that $\mathcal{X} (\CC)$ is connected of
+    dimension $2d_\CC$. The quasi-isomorphism
+    \eqnref{eqn:poincare-duality-for-deligne-cohomology-on-cplxs} together with
+    the quasi-isomorphism from \ref{lemma:special-case-of-Deligne-cohomology}
+    and the Poincaré duality (in the correct version that takes into account the
+    twists) give us
+    \begin{multline*}
+      {}' C_\mathcal{D}^\bullet (\overline{\mathcal{X}}, D, \RR (k))
+      \quiso R\Gamma (\mathcal{X} (\CC), (2\pi i)^{d_\CC - (1-k)}\,\RR) [2d_\CC - 1] \\
+      \quiso \RHom (R\Gamma_c (\mathcal{X} (\CC), (2\pi i)^{1-k}\,\RR), \RR) [-1].
+    \end{multline*}
+    If $X$ is not connected, the above may be done separately for the connected
+    components.
+  \end{proof}
+\end{lemma}
+
+I still note that the above argument does the trick and uses only the arguments
+from Jannsen's paper, but it is \emph{morally wrong}: Jannsen derives
+\eqnref{eqn:poincare-duality-for-deligne-cohomology-on-cplxs} from the Poincaré
+duality, and in the above proof we applied the duality again.
+
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+
+\section{The regulator morphism}
+\label{section:regulator}
+
+Now as always in this text, $X$ denotes a scheme over $\Spec \ZZ$; separated of
+finite type. At this point we also assume that $X_\CC$ is smooth,
+quasi-projective. Let us also assume for the moment that $X$ is of pure
+dimension $d$, so that
+$$d_\CC \dfn \dim_\CC X_\CC = d-1.$$
+However, later on we will see that this assumption is superficial. We fix a good
+compactification
+$$\begin{tikzcd}
+  X_\CC \ar[hookrightarrow]{r}{j} & \overline{X_\CC} & D\ar[left hook->,swap]{l}
+\end{tikzcd}$$
+
+\vspace{1em}
+
+The regulators for higher Chow groups $CH^n (X,p) \dfn H^{2n-p} (X_\text{\it
+  ét}, \ZZ (n))$ were introduced by Bloch in \cite{Bloch-1986-Lefschetz} as
+morphisms
+\[ H^\bullet (X_\text{\it ét}, \ZZ (n)) \to
+  H^\bullet (X_\CC, \ZZ (n)) \to
+  H^\bullet_\mathcal{D} (X_\CC, \RR (n)). \]
+Here we are going to use the construction from
+\cite{Kerr-Lewis-Muller-Stach-2006} which is given on the level of complexes,
+not merely separate cohomology groups. The reader is advised to review
+\S\ref{section:review-of-cycle-complexes} for the definitions of different cycle
+complexes
+$z_r (-, -\bullet)$, ~ $z^r (-, -\bullet)$, ~ $z^r_\square (-, -\bullet)$,
+which will all be used now.
+
+The construction from \cite[\S 5.9]{Kerr-Lewis-Muller-Stach-2006} gives us a
+morphism of complexes
+\[ z^r_{\square,\RR} (\overline{X_\CC}, -\bullet)/z_{\square,\RR}^{r-1} (D, -\bullet) \to
+  {}' C_\mathcal{D}^{2r - 2d_\CC + \bullet} (\overline{X_\CC}, X, \ZZ (r-d_\CC)). \]
+Here $z^r_{\square,\RR} (-, -\bullet)$ are certain subcomplexes of the cubical
+cycle complexes $z^r_\square (-, -\bullet)$; I refer to
+\cite[\S 5.4]{Kerr-Lewis-Muller-Stach-2006} for the precise
+definition. According to \cite[\S 5.9]{Kerr-Lewis-Muller-Stach-2006}, there are
+quasi-isomorphisms
+\[ z^r_{\square,\RR} (\overline{X_\CC}, -\bullet)/z_{\square,\RR}^{r-1} (D, -\bullet)
+  \xrightarrow{\quiso}
+  z^r_\square (\overline{X_\CC}, -\bullet)/z_\square^{r-1} (D, -\bullet)
+  \xrightarrow{\quiso} z^r_\square (X_\CC, -\bullet), \]
+and finally, we have an isomorphism in the derived category
+$$z^r_\square (X_\CC, -\bullet) \isom z^r (X_\CC, -\bullet).$$
+All this means that in the derived category, we may treat the morphism of Kerr,
+Lewis, and Müller-Stach as
+\begin{equation}
+  \label{eqn:KLMS-map}
+  z^r (X_\CC, -\bullet) \to
+  {}' C_\mathcal{D}^{2r - 2d_\CC + \bullet} (\overline{X_\CC}, D, \ZZ (r-d_\CC)).
+\end{equation}
+
+It gives a ``regulator'' in the following sense. Taking the corresponding
+$(-i)$-th cohomology groups and using the duality
+\eqnref{eqn:poincare-duality-for-deligne-cohomology-on-H-prime}, we obtain
+\[ AJ\colon CH^r (X_\CC, i) \to
+  {}' H_\mathcal{D}^{2r - 2d_\CC - i} (X_\CC, \ZZ (r-d_\CC))
+  \xleftarrow{\isom}
+  H_\mathcal{D}^{2r-i} (X_\CC, \ZZ (r)). \]
+According to \cite[\S 5.5]{Kerr-Lewis-Muller-Stach-2006}, if $X_\CC$ is
+projective, then the composition
+\[ CH^r (X_\CC, i) \xrightarrow{AJ}
+  H_\mathcal{D}^{2r-i} (X_\CC, \ZZ (r)) \xrightarrow{\pi_\RR}
+  H_\mathcal{D}^{2r-i} (X_\CC, \RR (r)) \]
+coincides with the regulator defined by Goncharov in \cite{Goncharov-1995}.
+
+\vspace{1em}
+
+We consider \eqnref{eqn:KLMS-map} for $r = d-n$, where $d$ is the dimension of
+$X$ and $n < 0$ as always denotes a strictly negative integer. We obtain
+\[ z^{d-n} (X_\CC, -\bullet) \to
+  {}' C_\mathcal{D}^{2-2n + \bullet} (\overline{X_\CC}, D, \ZZ (1-n)), \]
+which we may also write as
+\[ R\Gamma (X_{\CC,\text{\it Zar}}, \mathcal{Z}^{d-n}_{X_\CC}\,[2n]) \isom
+  z^{d-n} (X_\CC, -\bullet)\,[2n] \to
+  {}' C_\mathcal{D}^{2+\bullet} (\overline{X_\CC}, D, \ZZ (1-n)) \]
+(the first isomorphism is \ref{thm:cycle-cplxs-localization}). We consider now
+the composition
+\begin{multline*}
+  R\Gamma (X_\text{\it ét}, \ZZ^c (n)) =
+  R\Gamma (X_\text{\it ét}, \mathcal{Z}^{d-n}_X\,[2n]) \to
+  R\Gamma (X_\text{\it Zar}, \mathcal{Z}^{d-n}_X\,[2n]) \\
+  \to R\Gamma (X_{\CC,\text{\it Zar}}, \mathcal{Z}^{d-n}_{X_\CC}\,[2n])
+  \to {}' C_\mathcal{D}^{2+\bullet} (\overline{X_\CC}, D, \ZZ (1-n)) \\
+  \xrightarrow{\pi_\RR} {}' C_\mathcal{D}^{2+\bullet} (\overline{X_\CC}, D, \RR (1-n))
+\end{multline*}
+
+As $n < 0$, the target complex may be simplified thanks to
+\ref{lemma:special-case-of-Deligne-homology}:
+\[ {}' C_\mathcal{D}^{2 + \bullet} (\overline{X_\CC}, D, \ZZ (1-n)) \quiso
+  R\Gamma_{BM} (\mathcal{X} (\CC), (2\pi i)^n\,\RR) [1] \]
+
+Taking $G_\RR$-invariants (all the complexes involved in the definitions of
+Deligne (co)homology and all statements about them are $G_\RR$-equivariant) we
+obtain a morphism
+\begin{equation}
+  \label{eqn:regulator-morphism}
+  Reg\colon R\Gamma (X_\text{\it ét}, \ZZ^c (n)) \to
+  R\Gamma_{BM} (G_\RR, X (\CC), (2\pi i)^n\,\RR) [1].
+\end{equation}
+
+\begin{remark}
+  This suggests that in our situation $n < 0$ the regulator probably has en
+  easier definition which could work under weaker assumptions on $X_\CC$.
+\end{remark}
+
+In what follows, we are going to use the $\RR$-dual to
+\eqnref{eqn:regulator-morphism}:
+\begin{equation}
+  \label{eqn:dual-to-the-regulator}
+  Reg^\vee\colon R\Gamma_c (G_\RR, X (\CC), (2\pi i)^n\,\RR) [-1] \to
+  \RHom (R\Gamma (X_\text{\it ét}, \ZZ^c (n)), \RR).
+\end{equation}
+
+\subsection*{Compatibility of the regulator with basic operations on schemes}
+
+\begin{lemma}[Compatibility of the regulator with open-closed decompositions]
+  \label{lemma:Reg-compatible-with-open-closed-decompositions}
+  Suppose that we have an open-closed decomposition of arithmetic schemes
+  $U \hookrightarrow X \leftarrow Z$ such that $U_\CC$, $X_\CC$, $Z_\CC$ are
+  smooth, quasi-projective varieties. Then the corresponding regulator morphisms
+  yield a morphism of distinguished triangles
+  \[ \begin{tikzcd}
+      R\Gamma (Z_\text{\it ét}, \ZZ^c (n)) \ar{d} \ar{r}{Reg_Z} & R\Gamma_{BM} (G_\RR, Z (\CC), (2\pi i)^n\,\RR) [1] \ar{d} \\
+      R\Gamma (X_\text{\it ét}, \ZZ^c (n)) \ar{d} \ar{r}{Reg_X} & R\Gamma_{BM} (G_\RR, X (\CC), (2\pi i)^n\,\RR) [1] \ar{d} \\
+      R\Gamma (U_\text{\it ét}, \ZZ^c (n)) \ar{d} \ar{r}{Reg_U} & R\Gamma_{BM} (G_\RR, U (\CC), (2\pi i)^n\,\RR) [1] \ar{d} \\
+      R\Gamma (Z_\text{\it ét}, \ZZ^c (n)) [1] \ar{r}{Reg_Z [1]} & R\Gamma_{BM} (G_\RR, Z (\CC), (2\pi i)^n\,\RR) [2]
+    \end{tikzcd} \]
+
+  \begin{proof}
+    This follows from the functoriality of the construction of Kerr, Lewis, and
+    Müller-Stach with respect to proper and flat morphisms, as discussed in
+    \cite[\S 3]{Weissschuh-17}.
+  \end{proof}
+\end{lemma}
+
+\begin{lemma}[Compatibility of the regulator with affine bundles]
+  \label{lemma:Reg-compatible-with-affine-bundles}
+  For an arithmetic scheme $X$ such that $X_\CC$ is smooth and quasi-projective,
+  consider the affine space of dimension $r$ over $X$ and the corresponding set
+  of complex points:
+  \[ \begin{tikzpicture}
+      \matrix(m)[matrix of math nodes, row sep=2em, column sep=2em, text height=1.5ex,text depth=0.25ex]{
+        \AA^r_X & \AA^r & & \AA^r_X (\CC) & \AA^r (\CC) \\
+        X & \Spec\ZZ & & X (\CC) & \ast \\};
+
+      \path[->] (m-1-1) edge (m-1-2);
+      \path[->,font=\scriptsize] (m-1-1) edge node[left] {$p$} (m-2-1);
+      \path[->] (m-1-2) edge (m-2-2);
+      \path[->] (m-2-1) edge (m-2-2);
+      \path[->] (m-1-4) edge (m-1-5);
+      \path[->,font=\scriptsize] (m-1-4) edge node[left] {$p$} (m-2-4);
+      \path[->] (m-1-5) edge (m-2-5);
+      \path[->] (m-2-4) edge (m-2-5);
+      \begin{scope}[shift=($(m-1-1)!.4!(m-2-2)$)]
+        \draw +(-.2,0) -- +(0,0) -- +(0,.2);
+      \end{scope}
+      \begin{scope}[shift=($(m-1-4)!.4!(m-2-5)$)]
+        \draw +(-.2,0) -- +(0,0) -- +(0,.2);
+      \end{scope}
+    \end{tikzpicture} \]
+
+  There is a commutative diagram
+  \[ \begin{tikzcd}
+      R\Gamma_c (G_\RR, \AA^r_X (\CC), (2\pi i)^n\,\RR) [-1] \ar{r}{\isom}\ar{d}[swap]{Reg_{\AA^r_X,n}^\vee} & R\Gamma_c (G_\RR, X (\CC), (2\pi i)^{n-r}\,\RR) [-2r-1]\ar{d}{Reg_{X,n-r}^\vee [-2r]} \\
+      \RHom (R\Gamma (\AA^r_{X,\text{\it ét}}, \ZZ^c (n)), \RR) \ar{r}{\isom} & \RHom (R\Gamma (X_\text{\it ét}, \ZZ^c (n-r)), \RR) [-2r]
+    \end{tikzcd} \]
+
+  \begin{proof}
+    The diagram is the $\RR$-dual to
+    \[ \begin{tikzcd}
+        R\Gamma_{BM} (G_\RR, \AA^r_X (\CC), (2\pi i)^n\,\ZZ) [1] & R\Gamma_{BM} (G_\RR, X (\CC), (2\pi i)^{n-r}\,\ZZ) [2r+1] \ar{l}[swap]{\isom} \\
+        R\Gamma (\AA^r_{X,\text{\it ét}}, \ZZ^c (n)) \ar{u}{Reg_{\AA^r_X,n}} & R\Gamma (X_\text{\it ét}, \ZZ^c (n-r)) [2r] \ar{u}[swap]{Reg_{X,n-r} [2r]} \ar{l}[swap]{\isom}
+      \end{tikzcd} \]
+    so it will be enough to check that the latter tensored with $\RR$ commutes,
+    which amounts to the commutativity of the following diagrams of $\RR$-vector
+    spaces:
+    \[ \begin{tikzcd}
+        H_{BM}^{\bullet+1} (G_\RR, \AA^r_X (\CC), (2\pi i)^n\,\RR) & H_{BM}^{\bullet + 2r+1} (G_\RR, X (\CC), (2\pi i)^{n-r}\,\RR) \ar{l}[swap]{\isom} \\
+        H^\bullet (\AA^r_X, \RR^c (n)) \ar{u}{Reg_{\AA^r_X,n}} & H^{\bullet+2r} (X, \RR^c (n-r)) \ar{u}[swap]{Reg_{X,n-r} [2r]} \ar{l}[swap]{\isom}
+      \end{tikzcd} \]
+
+    Now on the level of separate cohomology groups, we may use Bloch's
+    construction from \cite{Bloch-1986-Lefschetz}. Namely, after unwinding our
+    definitions, everything amounts to checking that Bloch's regulator is
+    compatible with the ``homotopy isomorphisms'' for the cycle complex
+    cohomology and Deligne cohomology:
+    \[ \begin{tikzcd}
+        H_\mathcal{D}^\bullet (\AA^1 \times X_\CC, \RR (n)) & H_\mathcal{D}^\bullet (X_\CC, \RR (n)) \ar{l}[swap]{\isom} \\
+        H^\bullet (\AA^1 \times X_\CC, \RR (n)) \ar{u}{\text{Bloch's reg.}} & H^\bullet (X_\CC, \RR (n)) \ar{u}[swap]{\text{Bloch's reg.}} \ar{l}[swap]{\isom}
+      \end{tikzcd} \]
+  \end{proof}
+\end{lemma}
+
+\subsection*{The regulator conjecture}
+
+In order to relate the regulator to our machinery, we need make the following
+assumption.
+
+\begin{nameless}\textbf{Conjecture $\mathbf{B} (X,n)$.}
+  \label{conjecture:B(X,n)}
+  For an arithmetic scheme $X$ and $n < 0$, the morphism $Reg^\vee$
+  (the $\RR$-dual of the regulator) is an isomorphism in the derived category.
+\end{nameless}
+
+\begin{remark}
+  This is a standard but very strong assumption. For instance, if $X$ is defined
+  over a finite field, then $X (\CC) = \emptyset$, and the conjecture implies
+  that the cohomology groups $H^i (X_\text{\it ét}, \ZZ^c (n))$ are torsion.
+\end{remark}
+
+\begin{theorem}
+  \label{thm:smile-theta}
+  Let $X$ be an arithmetic scheme such that $X_\CC$ is a smooth quasi-projective
+  variety. Let $n < 0$ be a strictly negative integer for which the conjecture
+  $\mathbf{B} (X,n)$ holds. Then there exists a morphism
+  \[ \smile\theta\colon R\Gamma_\text{\it W,c} (X, \ZZ (n)) \otimes \RR \to R\Gamma_\text{\it W,c} (X, \ZZ (n)) \otimes \RR [1] \]
+  giving a long exact sequence
+  \begin{multline*}
+    \cdots \to H_\text{\it W,c}^i (X, \ZZ (n)) \otimes \RR
+    \xrightarrow{\smile\theta}
+    H_\text{\it W,c}^{i+1} (X, \ZZ (n)) \otimes \RR \\
+    \xrightarrow{\smile\theta}
+    H_\text{\it W,c}^{i+2} (X, \ZZ (n)) \otimes \RR \to \cdots
+  \end{multline*}
+  i.e. turning $H^\bullet_\text{\it W,c} (X, \ZZ (n))\otimes\RR$ into an acyclic
+  complex of finite dimensional vector spaces.
+
+  \begin{proof} Recall that according to
+    \ref{prop:RGammaWc-with-rational-coefficients}, we have isomorphisms
+    \begin{multline}
+      \label{eqn:RGammaWc-splitting}
+      R\Gamma_\text{\it W,c} (X,\ZZ (n))\otimes_\ZZ \RR \isom \\
+      \RHom (R\Gamma (X_\text{\it ét}, \ZZ^c (n)), \RR) [-1]
+      \oplus
+      R\Gamma_c (G_\RR, X (\CC), (2\pi i)^n\,\RR) [-1].
+    \end{multline}
+
+    Using this and the morphism $Reg^\vee$, we may define $\theta$ in the
+    obvious way:
+
+    \[ \begin{tikzcd}
+        R\Gamma_\text{\it W,c} (X, \ZZ (n)) \otimes \RR \ar{d}{\isom} \\
+        \RHom (R\Gamma (X_\text{\it ét}, \ZZ^c (n)), \RR) [-1] ~\oplus~ R\Gamma_c (G_\RR, X (\CC), (2\pi i)^n\,\RR) [-1] \ar[twoheadrightarrow]{d} \\
+        R\Gamma_c (G_\RR, X (\CC), (2\pi i)^n\,\RR) [-1] \ar{d}{Reg^\vee}\\
+        \RHom (R\Gamma (X_\text{\it ét}, \ZZ^c (n)), \RR) \ar[rightarrowtail]{d} \\
+        \RHom (R\Gamma (X_\text{\it ét}, \ZZ^c (n)), \RR) ~\oplus~ R\Gamma_c (G_\RR, X (\CC), (2\pi i)^n\,\RR) \ar{d}{\isom} \\
+        R\Gamma_\text{\it W,c} (X, \ZZ (n)) \otimes \RR [1]
+      \end{tikzcd} \]
+
+    On the level of cohomology, these morphisms give us
+    \[ \smile\theta\colon H_\text{\it W,c}^i (X, \ZZ (n)) \otimes \RR \to
+      H_\text{\it W,c}^{i+1} (X, \ZZ (n)) \otimes \RR. \]
+    If $Reg^\vee$ is a quasi-isomorphism, we obtain an exact sequence
+    \begin{multline*}
+      \cdots \to H_\text{\it W,c}^i (X, \ZZ (n)) \otimes \RR
+      \xrightarrow{\smile\theta}
+      H_\text{\it W,c}^{i+1} (X, \ZZ (n)) \otimes \RR \\
+      \xrightarrow{\smile\theta}
+      H_\text{\it W,c}^{i+2} (X, \ZZ (n)) \otimes \RR \to
+      \cdots
+    \end{multline*}
+    Indeed, let us denote for brevity
+    \begin{align*}
+      A^\bullet & \dfn \RHom (R\Gamma (X_\text{\it ét}, \ZZ^c (n)), \RR) [-1],\\
+      B^\bullet & \dfn R\Gamma_c (G_\RR, X (\CC), (2\pi i)^n\,\RR) [-1].
+    \end{align*}
+    Then $Reg^\vee$ conjecturally gives isomorphisms
+    $H^i (B^\bullet) \xrightarrow{\isom} H^{i+1} (A^\bullet)$, and the above
+    sequence looks like
+
+    \[ \begin{tikzcd}[row sep=0em]
+        & H^i (A^\bullet) & H^{i+1} (A^\bullet) & H^{i+2} (A^\bullet) \\
+        \cdots & \oplus & \oplus & \oplus & \cdots \\
+        & H^i (B^\bullet)\ar{uur}{\isom} & H^{i+1} (B^\bullet)\ar{uur}{\isom} & H^{i+2} (B^\bullet)
+      \end{tikzcd} \]
+
+    \noindent which is clearly exact.
+  \end{proof}
+\end{theorem}
+
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+
+\section{The conjecture $\mathbf{C} (X,n)$}
+\label{section:conjecture-C-X-n}
+
+In the previous section we built a morphism
+\[ \smile\theta\colon R\Gamma_\text{\it W,c} (X, \ZZ (n)) \otimes \RR \to
+  R\Gamma_\text{\it W,c} (X, \ZZ (n)) \otimes \RR [1] \]
+that produces an acyclic complex of finitely generated $\RR$-vector spaces
+$$H^\bullet_\text{\it W,c} (X, \ZZ (n)) \otimes \RR.$$
+This means that there is a canonical trivialization isomorphism
+\begin{multline}
+  \label{eqn:trivialization-morphism-lambda}
+  \lambda\colon \RR \xrightarrow{\isom}
+  \det\nolimits_\RR H^\bullet_\text{\it W,c} (X, \ZZ (n)) \otimes \RR
+  \xrightarrow{\isom}
+  \det\nolimits_\RR R\Gamma_\text{\it W,c} (X, \ZZ (n)) \otimes \RR \\
+  \xrightarrow{\isom}
+  (\det\nolimits_\ZZ R\Gamma_\text{\it W,c} (X, \ZZ (n))) \otimes \RR.
+\end{multline}
+
+Another way to get the same morphism is to go back to the definition of
+$\smile\theta$ and recall that it uses the splitting
+\begin{multline}
+  \label{eqn:splitting-of-RGammaWc-otimes-R}
+  \RHom (R\Gamma (X_\text{\it ét}, \ZZ^c (n)), \RR [-1])
+  \oplus
+  R\Gamma_c (G_\RR, X (\CC), (2\pi i)^n\,\RR) [-1] \\
+  \xrightarrow{\isom} R\Gamma_{W,c} (X,\ZZ (n)) \otimes \RR
+\end{multline}
+and the quasi-isomorphism
+\[ Reg^\vee\colon R\Gamma_c (G_\RR, X (\CC), (2\pi i)^n\,\RR) [-1]
+  \xrightarrow{\quiso}
+  \RHom (R\Gamma (X_\text{\it ét}, \ZZ^c (n)), \RR). \]
+These two give us an isomorphism
+\begin{equation}
+  \label{eqn:trivialization-of-RGammaWc-via-Reg-vee}
+  \begin{tikzcd}[column sep=5em,font=\small]
+    {\begin{array}{c} R\Gamma_c (G_\RR, X (\CC), (2\pi i)^n\,\RR) [-2] \\ \oplus \\ R\Gamma_c (G_\RR, X (\CC), (2\pi i)^n\,\RR) [-1] \end{array}} \ar{r}{Reg^\vee [-1]\oplus\idid}[swap]{\isom}\ar[dashed]{dr} & {\begin{array}{c} \RHom (R\Gamma (X_\text{\it ét}, \ZZ^c (n)), \RR [-1]) \\ \oplus \\ R\Gamma_c (G_\RR, X (\CC), (2\pi i)^n\,\RR) [-1] \end{array}} \ar{d}{\text{\eqnref{eqn:splitting-of-RGammaWc-otimes-R}}}[swap]{\isom} \\
+    & R\Gamma_{W,c} (X,\ZZ (n)) \otimes_\ZZ \RR
+  \end{tikzcd}
+\end{equation}
+which after taking the determinants gives us a canonical isomorphism
+
+\begin{multline}
+  \lambda\colon \RR \xrightarrow{\isom}
+  (\det\nolimits_\RR R\Gamma_c (G_\RR, X (\CC), (2\pi i)^n\,\RR))
+  \otimes_\RR
+  (\det\nolimits_\RR R\Gamma_c (G_\RR, X (\CC), (2\pi i)^n\,\RR))^{-1} \\
+  \xrightarrow{\isom}
+  (\det\nolimits_\ZZ R\Gamma_{W,c} (X,\ZZ (n))) \otimes_\ZZ \RR.
+\end{multline}
+
+Now in terms of the trivialization morphism $\lambda$, we are ready to formulate
+our main conjecture, which is similar to \cite[Conjecture 4.2]{Morin-14} and
+\cite[Conjecture 5.12, 5.13]{Flach-Morin-16}.
+
+\begin{nameless}\textbf{Conjecture $\mathbf{C} (X,n)$.}
+  \label{conjecture:C(X,n)}
+  For an arithmetic scheme $X$ and $n < 0$
+
+  \begin{enumerate}
+  \item[a)] assume that the conjecture $\mathbf{L}^c (X_\text{\it ét}, n)$
+    holds;
+
+  \item[b)] assume that $X_\CC$ is smooth, quasi-projective, so that the
+    regulator morphism $Reg^\vee$ exists; assume that the conjecture
+    $\mathbf{B} (X,n)$ holds;
+
+  \item[c)] assume that the zeta-function of $X$
+    $$\zeta (X,s) \dfn \prod_{x\in X_0} \frac{1}{1 - N (x)^{-s}}$$
+    has a meromorphic continuation near $s=n$.
+  \end{enumerate}
+
+  Then
+
+  \begin{enumerate}
+  \item[1)] the leading coefficient $\zeta^* (X,n)$ of the Taylor expansion of
+    $\zeta (X,s)$ at $s = n$ is given up to sign by
+    \[ \lambda (\zeta^* (X,n)^{-1})\cdot \ZZ =
+      \det\nolimits_\ZZ R\Gamma_\text{\it W,c} (X, \ZZ (n)), \]
+    where $\lambda$ is the trivialization morphism defined in
+    \eqnref{eqn:trivialization-morphism-lambda};
+
+  \item[2)] the vanishing order of $\zeta (X,n)$ at $s = n$ is given by the
+    weighted alternating sum of ranks of $H^i_\text{\it W,c} (X, \ZZ (n))$:
+    \begin{equation}
+      \label{eqn:formula-for-vanishing-order}
+      \ord_{s=n} \zeta (X,s) =
+      \sum_{i\in\ZZ} (-1)^i \cdot i \cdot \rk_\ZZ H^i_\text{\it W,c} (X, \ZZ (n)).
+    \end{equation}
+  \end{enumerate}
+\end{nameless}
+
+\begin{remark}
+  \label{remark:secondary-euler-characteristic}
+  The sum in \eqnref{eqn:formula-for-vanishing-order} is finite, because as we
+  saw in \ref{prop:RGammaWc-perfect}, the conjecture
+  $\mathbf{L}^c (X_\text{\it ét}, n)$ implies that the complex
+  $R\Gamma_\text{\it W,c} (X,\ZZ(n))$ is perfect.
+
+  Since the conjectures $\mathbf{L}^c (X_\text{\it ét}, n)$ and
+  $\mathbf{B} (X,n)$ imply that the groups
+  $$H^i_\text{\it W,c} (X, \ZZ (n)) \otimes \RR$$
+  form an acyclic complex, the usual Euler characteristic of
+  $R\Gamma_\text{W,c} (X, \ZZ (n))$ vanishes:
+  \begin{multline*}
+    \chi (R\Gamma_\text{W,c} (X, \ZZ (n))) =
+    \sum_{i\in\ZZ} (-1)^i \, \rk_\ZZ H^i_\text{\it W,c} (X, \ZZ (n)) \\
+    = \sum_{i\in\ZZ} (-1)^i \, \dim_\RR H^i_\text{\it W,c} (X, \ZZ (n))\otimes \RR = 0.
+  \end{multline*}
+
+  The sum in \eqnref{eqn:formula-for-vanishing-order} is known as the
+  \term{secondary Euler characteristic}:
+  \[ \chi' (C^\bullet) \dfn
+    \sum_{i\in\ZZ} (-1)^i\cdot i\cdot \rk H^i (C^\bullet). \]
+  For a distinguished triangle
+  $$A^\bullet \to B^\bullet \to C^\bullet \to A^\bullet [1]$$
+  usually
+  $$\chi' (B^\bullet) \ne \chi' (A^\bullet) + \chi' (C^\bullet),$$
+  unless the triangle is split, but the secondary Euler characteristic is still
+  a natural invariant for acyclic complexes and it arises in various natural
+  contexts; see \cite{Ramachandran-2016}.
+\end{remark}
+
+\begin{remark}
+  \label{rmk:my-conjecture-and-FM}
+  The parts 1) and 2) of the conjecture $\mathbf{C} (X,n)$ are equivalent to
+  Conjecture 5.12 and Conjecture 5.13 from \cite{Flach-Morin-16} if $X$ is
+  proper and regular. This is rather straightforward to see by going through the
+  constructions of Flach and Morin and comparing them to our constructions. Then
+  it is showed in \cite[\S 5.6]{Flach-Morin-16} that their conjecture 5.12 is
+  compatible with the Tamagawa number conjecture.
+\end{remark}
+
+\begin{proposition}
+  \label{prop:alternating-weighted-sum-as-euler-characteristic}
+  Assuming the conjectures $\mathbf{L}^c (X_\text{\it ét}, n)$ and
+  $\mathbf{B} (X,n)$, the weighted sum of ranks of
+  $H^i_\text{\it W,c} (X, \ZZ (n))$ equals the Euler characteristic of
+  $$R\Gamma_c (G_\RR, X (\CC), (2\pi i)^n\,\RR);$$
+  that is,
+  \begin{multline*}
+    \sum_{i\in\ZZ} (-1)^i \cdot i \cdot \rk_\ZZ H^i_\text{\it W,c} (X, \ZZ (n)) =
+    \sum_{i\in\ZZ} (-1)^i \dim_\RR H^i_c (G_\RR, X (\CC), (2\pi i)^n\,\RR) \\
+    \rdfn \chi (R\Gamma_c (G_\RR, X (\CC), (2\pi i)^n\,\RR)).
+  \end{multline*}
+
+  \begin{proof}
+    Thanks to the splitting
+    \begin{multline*}
+      R\Gamma_\text{\it W,c} (X,\ZZ (n))\otimes_\ZZ \RR \isom \\
+      \RHom (R\Gamma (X_\text{\it ét}, \ZZ^c (n)), \RR) [-1]
+      \oplus
+      R\Gamma_c (G_\RR, X (\CC), (2\pi i)^n\,\RR) [-1]
+    \end{multline*}
+    and the quasi-isomorphism
+    \[ Reg^\vee\colon R\Gamma_c (G_\RR, X (\CC), (2\pi i)^n\,\RR) [-1]
+      \xrightarrow{\isom}
+      \RHom (R\Gamma (X_\text{\it ét}, \ZZ^c (n)), \RR), \]
+    we have
+    \begin{multline*}
+      R\Gamma_\text{\it W,c} (X,\ZZ (n))\otimes \RR \isom \\
+      R\Gamma_c (G_\RR, X (\CC), (2\pi i)^n\,\RR) [-1]
+      \oplus
+      R\Gamma_c (G_\RR, X (\CC), (2\pi i)^n\,\RR) [-2],
+    \end{multline*}
+    so that
+    \[ H^i_\text{\it W,c} (X,\ZZ (n))\otimes \RR
+      \isom
+      H^{i-1}_c (G_\RR, X (\CC), (2\pi i)^n\,\RR)
+      \oplus
+      H^{i-2}_c (G_\RR, X (\CC), (2\pi i)^n\,\RR). \]
+    Now
+    \begin{multline*}
+      \sum_{i\in\ZZ} (-1)^i \cdot i \cdot \dim_\RR H^i_\text{\it W,c} (X, \ZZ (n))\otimes \RR \\
+      = \sum_{i\in\ZZ} (-1)^i \cdot i \cdot \dim_\RR (H^{i-1}_c (G_\RR, X (\CC), (2\pi i)^n\,\RR) \\
+      + \sum_{i\in\ZZ} (-1)^i \cdot i \cdot \dim_\RR (H^{i-2}_c (G_\RR, X (\CC), (2\pi i)^n\,\RR)
+    \end{multline*}
+    \begin{multline*}
+      = \sum_{i\in\ZZ} (-1)^i \cdot i \cdot \dim_\RR H^{i-1}_c (G_\RR, X (\CC), (2\pi i)^n\,\RR) \\
+      - \sum_{i\in\ZZ} (-1)^i \cdot (i+1) \cdot \dim_\RR H^{i-1}_c (G_\RR, X (\CC), (2\pi i)^n\,\RR) \\
+      = - \sum_{i\in\ZZ} (-1)^i \dim_\RR H^{i-1}_c (G_\RR, X (\CC), (2\pi i)^n\,\RR) \\
+      = \sum_{i\in\ZZ} (-1)^i \dim_\RR H^i_c (G_\RR, X (\CC), (2\pi i)^n\,\RR).
+    \end{multline*}
+  \end{proof}
+\end{proposition}
+
+\begin{nameless}\textbf{Elementary example.}
+  Here is one easy illustration for
+  \ref{prop:alternating-weighted-sum-as-euler-characteristic}.
+  If $X = \Spec \O_K$ is a number ring, then the space $X (\CC)$ consists of
+  $r_1 + 2\,r_2$ points, corresponding to the real places of $K$ and complex
+  places coming in conjugate pairs:
+
+  \[ \begin{tikzpicture}
+      \matrix(m)[matrix of math nodes, row sep=1em, column sep=1em, text height=1ex, text depth=0.2ex]{
+        ~ & ~ & ~ & ~ & ~ & \bullet & \bullet & \cdots & \bullet \\
+        \bullet & \bullet & \cdots & \bullet \\
+        ~ & ~ & ~ & ~ & ~ & \bullet & \bullet & \cdots & \bullet \\};
+
+      \draw[->] (m-2-1) edge[loop above,min distance=10mm] (m-2-1);
+
+      \draw[->] (m-2-2) edge[loop above,min distance=10mm] (m-2-2);
+      \draw[->] (m-2-4) edge[loop above,min distance=10mm] (m-2-4);
+
+      \draw[->] (m-1-6) edge[bend left] (m-3-6);
+      \draw[->] (m-1-7) edge[bend left] (m-3-7);
+      \draw[->] (m-1-9) edge[bend left] (m-3-9);
+
+      \draw[->] (m-3-6) edge[bend left] (m-1-6);
+      \draw[->] (m-3-7) edge[bend left] (m-1-7);
+      \draw[->] (m-3-9) edge[bend left] (m-1-9);
+
+      \draw ($(m-3-1)!.5!(m-3-4)$) node[yshift=-2em,anchor=base] {$r_1$ points};
+      \draw ($(m-3-6)!.5!(m-3-9)$) node[yshift=-2em,anchor=base] {$2\,r_2$ points};
+    \end{tikzpicture} \]
+
+  Now $R\Gamma_c (X (\CC), (2\pi i)^n\,\RR)$ in this case may be identified with
+  the complex having just a single $G_\RR$-module in degree $0$, namely
+  \[ ((2\pi i)^n\,\RR)^{\oplus r_1}
+    \oplus
+    ((2\pi i)^n\,\RR \oplus (2\pi i)^n\,\RR)^{\oplus r_2}, \]
+  where $G_\RR$ acts on $((2\pi i)^n\,\RR)^{\oplus r_1}$ by complex conjugation,
+  while the action on $((2\pi i)^n\,\RR \oplus (2\pi i)^n\,\RR)^{\oplus r_2}$ is
+  given by $(z_1,z_2) \mapsto (\overline{z_2}, \overline{z_1})$ on each summand
+  $(2\pi i)^n\,\RR \oplus (2\pi i)^n\,\RR$. If $n$ is odd, then the action of
+  $G_\RR$ on $((2\pi i)^n\,\RR)^{\oplus r_1}$ has no fixed points, and if $n$ is
+  even, this action is trivial. As for the other part
+  $((2\pi i)^n\,\RR \oplus (2\pi i)^n\,\RR)^{\oplus r_2}$, we see that the space
+  of $G_\RR$-fixed points has real dimension $r_2$, regardless of the parity of
+  $n$. Thus in this case
+  \[ H^i_c (G_\RR, X (\CC), (2\pi i)^n\,\RR) =
+    \begin{cases}
+      r_2, & n \text{ odd}, ~ i = 0;\\
+      r_1 + r_2, & n \text{ even}, ~ i = 0;\\
+      0 & i \ne 0.
+    \end{cases} \]
+  Therefore
+  \[ \chi (R\Gamma_c (G_\RR, X (\CC), (2\pi i)^n\,\RR)) =
+    \begin{cases}
+      r_2, & n \text{ odd}, \\
+      r_1 + r_2, & n \text{ even}.
+    \end{cases} \]
+  This agrees with the vanishing order of the Dedekind zeta function
+  $\zeta (\Spec \O_K, s)$ at strictly negative integers.
+\end{nameless}
+
+\begin{nameless}\textbf{Trivial example.}
+  If $X$ is a variety over $\FF_q$, then
+  $$\zeta (X,s) = Z (X, q^{-s}),$$
+  where
+  $$Z (X,t) \dfn \exp \left(\sum_{k\ge 1} \frac{\# X (\FF_{q^k})}{k}\,t^k\right)$$
+  is Weil zeta function. Now if $\zeta (X,s)$ has a zero or pole at $s$, we have
+  necessarily
+  $$\Re s = i/2, \quad 0 \le i \le 2\,\dim X$$
+  ---this may be seen from Weil's conjectures
+  (see e.g. \cite[p. 26--27]{Katz-Motives}). In particular, there are no zeros
+  nor poles for $s < 0$, and the identity
+  \eqnref{prop:alternating-weighted-sum-as-euler-characteristic} is trivially
+  correct in this case:
+  \[ \ord_{s=n} \zeta (X,s) = 0 =
+    \chi (R\Gamma_c (G_\RR, X (\CC), (2\pi i)^n\,\RR)). \]
+\end{nameless}
+
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+
+\section{Stability of the conjecture under some operations on schemes}
+\label{secion:stability-of-the-conjecture}
+
+The following properties are clear from the definition of the zeta function of
+an arithmetic scheme:
+
+\begin{enumerate}
+\item[1)] If $U \hookrightarrow X \hookleftarrow Z$ is an open-closed
+  decomposition, then
+  \begin{equation}
+    \label{eqn:zeta-function-for-an-open-closed-decomposition}
+    \zeta (X,s) = \zeta (U,s)\cdot \zeta (Z,s).
+  \end{equation}
+
+\item[2)] For $r \ge 0$, consider the affine space
+  $\AA^r_X \dfn \AA^r_\ZZ \times X$. Then
+  \begin{equation}
+    \label{eqn:zeta-function-for-the-affine-space}
+    \zeta (\AA^r_X,s) = \zeta (X,s-r).
+  \end{equation}
+\end{enumerate}
+
+This suggests that our conjecture $\mathbf{C} (X,n)$ should also be compatible
+with open-closed decompositions and considering the affine space over $X$.
+Our goal is to verify that. We need to establish several lemmas.
+
+\begin{lemma}
+  \label{lemma:lambda-compatible-with-open-closed-decompositions}
+  The morphism $\lambda$ is compatible with open-closed decompositions
+  $U \hookrightarrow X \hookleftarrow Z$. Such a decomposition gives a
+  commutative diagram
+
+  \[ \begin{tikzcd}
+      \RR \otimes_\RR\ar{d}{\isom}[swap]{\lambda_U\otimes\lambda_Z} \RR \ar{r}{x\otimes y\mapsto xy}[swap]{\isom} & \RR\ar{d}{\lambda_X}[swap]{\isom} \\
+      \begin{array}{c} (\det\nolimits_\ZZ R\Gamma_\text{\it W,c} (U, \ZZ (n)))\otimes_\ZZ \RR \\ \otimes_\RR \\ (\det\nolimits_\ZZ R\Gamma_\text{\it W,c} (Z, \ZZ (n)))\otimes_\ZZ \RR \end{array}\ar{r}{\isom} & (\det\nolimits_\ZZ R\Gamma_\text{\it W,c} (X, \ZZ (n)))\otimes_\ZZ \RR
+    \end{tikzcd} \]
+
+  Where the bottom row is induced by the canonical isomorphism from
+  \ref{prop:RGammaWc-determinant-iso-for-open-closed-decomposition}.
+
+  \begin{proof}
+    This follows from the compatibility of the regulator with open-closed
+    decompositions
+    (see \ref{lemma:Reg-compatible-with-open-closed-decompositions}) and the
+    ad-hoc isomorphism
+    \[ \det\nolimits_\ZZ R\Gamma_\text{\it W,c} (U, \ZZ (n))
+      \otimes_\ZZ
+      \det\nolimits_\ZZ R\Gamma_\text{\it W,c} (Z, \ZZ (n)) \isom
+      \det\nolimits_\ZZ R\Gamma_\text{\it W,c} (X, \ZZ (n)) \]
+    constructed in
+    \ref{prop:RGammaWc-determinant-iso-for-open-closed-decomposition}.
+  \end{proof}
+\end{lemma}
+
+\begin{lemma}
+  \label{lemma:lambda-compatible-with-affina-bundles}
+  The morphism $\lambda$ is compatible with affine bundles. We have a
+  commutative diagram
+
+  \[ \begin{tikzcd}
+      & \RR\ar{dl}[swap]{\lambda_{\AA^r_X}}\ar{dr}{\lambda_X} \\
+      (\det_\ZZ R\Gamma_\text{\it W,c} (\AA^r_X, \ZZ (n))\otimes\RR\ar{rr}{\isom} & & (\det_\ZZ R\Gamma_\text{\it W,c} (X, \ZZ (n-r))\otimes\RR
+    \end{tikzcd} \]
+
+  \begin{proof}
+    Follows from \ref{lemma:Reg-compatible-with-affine-bundles}.
+  \end{proof}
+\end{lemma}
+
+\begin{lemma}
+  There is a quasi-isomorphism
+  \[ R\Gamma_{BM} (G_\RR, \CC^r\times X (\CC), (2\pi i)^n\,\RR) \quiso
+    R\Gamma_{BM} (G_\RR, X (\CC), (2\pi i)^{n-r}\,\RR) [2r] \]
+  or dually,
+  \begin{equation}
+    \label{eqn:affine-space-over-X-quiso-of-RGammac}
+    R\Gamma_c (G_\RR, \CC^r \times X (\CC), (2\pi i)^n\,\RR) \quiso
+    R\Gamma_c (G_\RR, X (\CC), (2\pi i)^{n-r}\,\RR) [-2r].
+  \end{equation}
+
+  \begin{proof}
+    We already assumed that $X_\CC$ is smooth to formulate the
+    conjecture. Further, let us assume for simplicity that $X (\CC)$ is
+    connected of dimension $d_\CC$. Then Poincaré duality tells us that
+    \begin{multline*}
+      R\Gamma_c (G_\RR, \CC^r \times X (\CC), (2\pi i)^n\,\RR) \quiso \\
+      \RHom (R\Gamma (G_\RR, \CC^r\times X (\CC), (2\pi i)^{d_\CC+r-n}\,\RR), \RR [-2d_\CC - 2r])
+    \end{multline*}
+    and
+    \begin{multline*}
+      R\Gamma_c (G_\RR, X (\CC), (2\pi i)^{n-r}\,\RR) \\
+      \quiso \RHom (R\Gamma (G_\RR, \CC^r\times X (\CC), (2\pi i)^{d_\CC+r-n}\,\RR), \RR [-2d_\CC]) \\
+      \quiso \RHom (R\Gamma (G_\RR, X (\CC), (2\pi i)^{d_\CC+r-n}\,\RR), \RR [-2d_\CC]).
+    \end{multline*}
+
+    If $X (\CC)$ is not connected, we may apply the same argument to each
+    connected component separately. This gives us
+    \eqnref{eqn:affine-space-over-X-quiso-of-RGammac}.
+  \end{proof}
+\end{lemma}
+
+\begin{proposition} ~
+
+  \begin{enumerate}
+  \item[0)] If $X = \coprod_{0 \le i \le r} X_i$ is a finite disjoint union of
+    arithmetic schemes, then
+
+    \begin{enumerate}
+    \item[0a)] the conjecture $\mathbf{L}^c (X_\text{\it ét}, n)$ is equivalent
+      to the conjunction of conjectures $\mathbf{L}^c (X_{i,\text{\it ét}}, n)$
+      for $i = 0,\ldots,r$;
+
+    \item[0b)]the conjecture $\mathbf{B} (X, n)$ is equivalent to the
+      conjunction of conjectures $\mathbf{B} (X_i, n)$ for $i = 0,\ldots,r$.
+    \end{enumerate}
+
+  \item[1)] If $U \hookrightarrow X \hookleftarrow Z$ is an open-closed
+    decomposition, then
+
+    \begin{enumerate}
+    \item[1a)] if two out of three conjectures
+      $\mathbf{L}^c (U_\text{\it ét}, n)$,
+      $\mathbf{L}^c (Z_\text{\it ét}, n)$,
+      $\mathbf{L}^c (X_\text{\it ét}, n)$
+      hold, then the other one holds as well;
+
+    \item[1b)] if two out of three conjectures
+      $\mathbf{B} (U, n)$, $\mathbf{B} (Z, n)$, $\mathbf{B} (X, n)$
+      hold, then the other one holds as well.
+    \end{enumerate}
+
+  \item[2)] For $r \ge 0$, consider the affine space $\AA^r_X$:
+
+    \[ \begin{tikzpicture}
+        \matrix(m)[matrix of math nodes, row sep=2em, column sep=2em, text height=1.5ex, text depth=0.25ex]{
+          \AA^r_X & \AA^r_\ZZ \\
+          X & \Spec\ZZ\\};
+
+        \path[->] (m-1-1) edge (m-1-2);
+        \path[->,font=\scriptsize] (m-1-1) edge node[left] {$p$} (m-2-1);
+        \path[->] (m-1-2) edge (m-2-2);
+        \path[->] (m-2-1) edge (m-2-2);
+        \begin{scope}[shift=($(m-1-1)!.4!(m-2-2)$)]
+          \draw +(-.2,0) -- +(0,0) -- +(0,.2);
+        \end{scope}
+      \end{tikzpicture} \]
+
+    \begin{enumerate}
+    \item[2a)] the conjectures $\mathbf{L}^c (\AA^r_{X,\text{\it ét}}, n)$ and
+      $\mathbf{L}^c (X_\text{\it ét}, n-r)$ are equivalent;
+
+    \item[2b)] the conjectures $\mathbf{B} (\AA^r_X, n)$ and
+      $\mathbf{B} (X, n-r)$ are equivalent.
+    \end{enumerate}
+  \end{enumerate}
+
+  \begin{proof} Part 0) really deserved to be numbered by 0, because it is quite
+    obvious: for finite disjoint unions $X \dfn \coprod_{0 \le i \le r} X_i$ we
+    have
+    \[ R\Gamma (X_\text{\it ét}, \ZZ^c (n)) \isom
+      \bigoplus_{0 \le i \le r} R\Gamma (X_{i,\text{\it ét}}, \ZZ^c (n)), \]
+    which implies 0a). Similarly, for 0b), we note that the regulator morphism
+    and its dual decompose as
+    \[ Reg_X \isom \bigoplus_{0 \le i \le r} Reg_{X_i}
+      \quad \text{and} \quad
+      Reg_X^\vee \isom \bigoplus_{0 \le i \le r} Reg_{X_i}^\vee. \]
+
+    As for open-closed decompositions, recall that in this situation we have a
+    distinguished triangle (see \ref{fact:Zc-Borel-Moore})
+    \[ R\Gamma (Z_\text{\it ét}, \ZZ^c (n)) \to
+      R\Gamma (X_\text{\it ét}, \ZZ^c (n)) \to
+      R\Gamma (U_\text{\it ét}, \ZZ^c (n)) \to
+      R\Gamma (Z_\text{\it ét}, \ZZ^c (n)) [1] \]
+    The associated long exact sequence in cohomology
+    \begin{multline*}
+      \cdots \to H^i (Z_\text{\it ét}, \ZZ^c (n)) \to
+      H^i (X_\text{\it ét}, \ZZ^c (n)) \to
+      H^i (U_\text{\it ét}, \ZZ^c (n)) \\
+      \to H^{i+1} (Z_\text{\it ét}, \ZZ^c (n)) \to \cdots
+    \end{multline*}
+    implies 1a). For 1b), we apply $\RHom (-, \RR)$ to the morphism of triangles
+    from \ref{lemma:Reg-compatible-with-open-closed-decompositions}:
+    \[ \begin{tikzcd}
+        R\Gamma_c (G_\RR, U (\CC), (2\pi i)^n\,\RR) [-1]\ar{r}{Reg_U^\vee}\ar{d} & \RHom (R\Gamma (U_\text{\it ét}, \ZZ^c (n)), \RR)\ar{d} \\
+        R\Gamma_c (G_\RR, X (\CC), (2\pi i)^n\,\RR) [-1]\ar{r}{Reg_X^\vee}\ar{d} & \RHom (R\Gamma (X_\text{\it ét}, \ZZ^c (n)), \RR)\ar{d} \\
+        R\Gamma_c (G_\RR, Z (\CC), (2\pi i)^n\,\RR) [-1]\ar{r}{Reg_Z^\vee}\ar{d} & \RHom (R\Gamma (Z_\text{\it ét}, \ZZ^c (n)), \RR)\ar{d} \\
+        R\Gamma_c (G_\RR, U (\CC), (2\pi i)^n\,\RR) \ar{r}{Reg_U^\vee [1]} & \RHom (R\Gamma (U_\text{\it ét}, \ZZ^c (n)), \RR) [1]
+      \end{tikzcd} \]
+
+    Here if two of the arrows $Reg_U^\vee$, $Reg_X^\vee$, $Reg_Z^\vee$ is a
+    quasi-isomorphism, the third one is also a quasi-isomorphism by the
+    triangulated 5-lemma.
+
+    In 2), we have according to \cite[Lemma 5.11]{Morin-14} a quasi-isomorphism
+    of complexes of sheaves on $X_\text{\it ét}$
+    $$Rp_* \ZZ^c (n) \quiso \ZZ^c (n-r) [2r],$$
+    so that there is a quasi-isomorphism
+    \begin{equation}
+      \label{eqn:cohomology-of-Zc-on-ArX-and-X}
+      R\Gamma (\AA^r_{X,\text{\it ét}}, \ZZ^c (n))
+      \xrightarrow{\quiso}
+      R\Gamma (X_\text{\it ét}, \ZZ^c (n-r)) [2r].
+    \end{equation}
+
+    This establishes 2a). As for 2b), it follows from commutativity of the
+    diagram from \ref{lemma:Reg-compatible-with-affine-bundles}:
+    \[ \begin{tikzcd}
+        R\Gamma_c (G_\RR, \AA^r_X (\CC), (2\pi i)^n\,\RR) [-1] \ar{r}{\isom}\ar{d}[swap]{Reg_{\AA^r_X,n}^\vee} & R\Gamma_c (G_\RR, X (\CC), (2\pi i)^{n-r}\,\RR) [-2r-1]\ar{d}{Reg_{X,n-r}^\vee [-2r]} \\
+        \RHom (R\Gamma (\AA^r_{X,\text{\it ét}}, \ZZ^c (n)), \RR) \ar{r}{\isom} & \RHom (R\Gamma (X_\text{\it ét}, \ZZ^c (n-r)), \RR) [-2r]
+      \end{tikzcd} \]
+
+    Here the left vertical arrow is a quasi-isomorphism if and only if the right
+    vertical arrow is a quasi-isomorphism.
+  \end{proof}
+\end{proposition}
+
+\begin{theorem}
+  \label{thm:compatibility-for-conjecture-C} ~
+
+  \begin{enumerate}
+  \item[0)] If $X = \coprod_{0 \le i \le r} X_i$ is a disjoint union of
+    arithmetic schemes, then the conjectures $\mathbf{C} (X_i, n)$ for
+    $i = 0,\ldots,r$ together imply $\mathbf{C} (X, n)$.
+
+  \item[1)] If $U \hookrightarrow X \hookleftarrow Z$ is an open-closed
+    decomposition of an arithmetic scheme, then if two out of three conjectures
+    $\mathbf{C} (U, n)$, $\mathbf{C} (Z, n)$, $\mathbf{C} (X, n)$ hold, the
+    other one holds as well.
+
+  \item[2)] The conjecture $\mathbf{C} (\AA^r_X,n)$ is equivalent to
+    $\mathbf{C} (X,n-r)$.
+  \end{enumerate}
+
+  \begin{proof}
+    The conjecture $\mathbf{C} (X, n)$ has two different parts: one about the
+    special value $\zeta^* (X,n)$ and the other one about the vanishing order of
+    $\zeta (X,s)$ at $s = n$. For the special value part of the conjecture, the
+    claim holds thanks to
+    \ref{lemma:lambda-compatible-with-open-closed-decompositions} and
+    \ref{lemma:lambda-compatible-with-affina-bundles}. The vanishing order part
+    is actually easier, because it is just about counting ranks of cohomology
+    groups.
+
+    In the view of \eqnref{eqn:zeta-function-for-an-open-closed-decomposition}
+    and \eqnref{eqn:zeta-function-for-the-affine-space}, we have
+    $$\ord_{s=n} \zeta (X,s) = \ord_{s=n} \zeta (U,s) + \ord_{s=n} \zeta (Z,s)$$
+    and
+    $$\ord_{s=n} \zeta (\AA^r_X,s) = \ord_{s=n-r} \zeta (X,s).$$
+    This means that 0), 1), 2) would follow respectively from the identities
+
+    \begin{equation}
+      \label{eqn:vanishing-order-identity-for-disjoint-unions}
+      \sum_{j\in\ZZ} (-1)^j \cdot j \cdot \rk_\ZZ H^j_\text{\it W,c} (X, \ZZ (n))
+      \stackrel{?}{=}
+      \sum_{0 \le i \le r} \sum_{j\in\ZZ} (-1)^j \cdot j \cdot \rk_\ZZ H^j_\text{\it W,c} (X_i, \ZZ (n)),
+    \end{equation}
+
+    \begin{multline}
+      \label{eqn:vanishing-order-identity-for-open-closed-decompositions}
+      \sum_{i\in\ZZ} (-1)^i \cdot i \cdot \rk_\ZZ H^i_\text{\it W,c} (X, \ZZ (n)) \stackrel{?}{=} \\
+      \sum_{i\in\ZZ} (-1)^i \cdot i \cdot \rk_\ZZ H^i_\text{\it W,c} (U, \ZZ (n)) +
+      \sum_{i\in\ZZ} (-1)^i \cdot i \cdot \rk_\ZZ H^i_\text{\it W,c} (Z, \ZZ (n)),
+    \end{multline}
+
+    \begin{equation}
+      \label{eqn:vanishing-order-identity-for-affine-space}
+      \sum_{i\in\ZZ} (-1)^i \cdot i \cdot \rk_\ZZ H^i_\text{\it W,c} (\AA_X^r, \ZZ (n)) \stackrel{?}{=}
+      \sum_{i\in\ZZ} (-1)^i \cdot i \cdot \rk_\ZZ H^i_\text{\it W,c} (X, \ZZ (n-r)).
+    \end{equation}
+
+    As for \eqnref{eqn:vanishing-order-identity-for-disjoint-unions}, it is
+    enough to revise the construction of Weil-étale complexes and note that
+    \[ R\Gamma_\text{\it W,c} (\coprod_{0 \le i \le r} X_i, \ZZ (n)) \isom
+      \bigoplus_{0 \le i \le r} R\Gamma_\text{\it W,c} (X_i, \ZZ (n)). \]
+    Alternatively, thanks to
+    \ref{prop:alternating-weighted-sum-as-euler-characteristic}, we may rewrite
+    \eqnref{eqn:vanishing-order-identity-for-disjoint-unions} as
+    \[ \chi (R\Gamma_c (G_\RR, X (\CC), (2\pi i)^n\,\RR)) \stackrel{?}{=}
+      \sum_{0 \le i \le r} \chi (R\Gamma_c (G_\RR, X_i (\CC), (2\pi i)^n\,\RR)), \]
+    which is evident, as Euler characteristic is additive with respect to direct
+    sums of complexes:
+    \begin{multline*}
+      \chi (R\Gamma_c (G_\RR, X (\CC), (2\pi i)^n\,\RR)) =
+      \chi (R\Gamma_c (G_\RR, \coprod_{0 \le i \le r} X_i (\CC), (2\pi i)^n\,\RR)) \\
+      = \chi (\bigoplus_{0 \le i \le r} R\Gamma_c (G_\RR, X_i (\CC), (2\pi i)^n\,\RR)) \\
+      = \sum_{0 \le i \le r} \chi (R\Gamma_c (G_\RR, X_i (\CC), (2\pi i)^n\,\RR)).
+    \end{multline*}
+
+    Similarly,
+    \eqnref{eqn:vanishing-order-identity-for-open-closed-decompositions} is
+    equivalent to
+    \begin{multline*}
+      \chi (R\Gamma_c (G_\RR, X (\CC), (2\pi i)^n\,\RR)) \stackrel{?}{=} \\
+      \chi (R\Gamma_c (G_\RR, U (\CC), (2\pi i)^n\,\RR)) +
+      \chi (R\Gamma_c (G_\RR, Z (\CC), (2\pi i)^n\,\RR)),
+    \end{multline*}
+    which is now obviously true, being the additivity of the usual Euler
+    characteristic for the distinguished triangle
+    \begin{multline*}
+      R\Gamma_c (G_\RR, U (\CC), (2\pi i)^n\,\RR) \to
+      R\Gamma_c (G_\RR, X (\CC), (2\pi i)^n\,\RR) \\
+      \to R\Gamma_c (G_\RR, Z (\CC), (2\pi i)^n\,\RR) \to
+      R\Gamma_c (G_\RR, U (\CC), (2\pi i)^n\,\RR) [1]
+    \end{multline*}
+
+    Similarly, the identity
+    \eqnref{eqn:vanishing-order-identity-for-affine-space} is equivalent to
+    \[ \chi (R\Gamma_c (G_\RR, \CC^r \times X (\CC), (2\pi i)^n\,\RR))
+      \stackrel{?}{=}
+      \chi (R\Gamma_c (G_\RR, X (\CC), (2\pi i)^{n-r}\,\RR)). \]
+    The two complexes
+    \[ R\Gamma_c (G_\RR, \CC^r \times X (\CC), (2\pi i)^n\,\RR)
+      \quad\text{and}\quad
+      R\Gamma_c (G_\RR, X (\CC), (2\pi i)^{n-r}\,\RR) \]
+    are quasi-isomorphic according to
+    \eqnref{eqn:affine-space-over-X-quiso-of-RGammac}, modulo the shift by $2r$,
+    which is an even number, so it does not affect the Euler characteristic.
+  \end{proof}
+\end{theorem}
+
+Similarly to the relation \eqnref{eqn:zeta-function-for-the-affine-space},
+for projective spaces $\PP^r_X \dfn \PP^r_\ZZ \times X$ we have
+$$\zeta (\PP^r_X, s) = \prod_{0 \le i \le r} \zeta (X, s-i).$$
+Note that this follows by induction from
+\eqnref{eqn:zeta-function-for-an-open-closed-decomposition} and
+\eqnref{eqn:zeta-function-for-the-affine-space}. For $r = 0$, this is
+trivial. For the induction step, assume that the above formula holds for
+$\PP^{r-1}_X$. Then for $\PP^r_X$ we may consider the open-closed decomposition
+$$\AA^r_X \hookrightarrow \PP^r_X \hookleftarrow \PP^{r-1}_X$$
+and then
+\begin{multline*}
+  \zeta (\PP^r_X, s) = \zeta (\AA^r_X, s) \cdot \zeta (\PP^{r-1}_X, s) \\
+  = \zeta (X, s - r) \cdot \prod_{0 \le i \le r-1} \zeta (X, s-i) =
+  \prod_{0 \le i \le r} \zeta (X, s-i).
+\end{multline*}
+
+Applying the same inductive reasoning, we immediately deduce from
+\ref{thm:compatibility-for-conjecture-C} the compatibility of our main
+conjecture with taking the projective space.
+
+\begin{corollary}
+  For each arithmetic scheme $X$, assume $\mathbf{C} (X, n-i)$ holds for
+  $i = 0, \ldots, r$. Then $\mathbf{C} (\PP^r_X, n)$ holds.
+\end{corollary}
+
+\subsection*{Conclusion}
+
+The conjecture $\mathbf{C} (X, n)$ is known for some special cases, e.g. thanks
+to its equivalence to the Tamagawa number conjecture in case when $X$ is proper
+and regular (see the remark \ref{rmk:my-conjecture-and-FM}). It is now possible
+to take these cases as an input, and then formally deduce $\mathbf{C} (X, n)$
+for new schemes constructed using the operations of disjoint unions, open-closed
+gluing and affine bundles. Note that these operations allow us to obtain
+non-smooth schemes.

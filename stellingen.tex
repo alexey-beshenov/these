@@ -1,0 +1,188 @@
+\documentclass{article}
+
+\input{definitions.tex}
+
+\usepackage{fullpage}
+
+\begin{document}
+
+\begin{center}
+  \sf {\Large\noindent \textbf{Stellingen}
+
+  }
+
+  \vspace{0.5em}
+
+  \noindent behorende bij het proefschrift
+
+  \vspace{0.5em}
+
+  \noindent {\Large \textbf{Zeta-values of arithmetic schemes at negative
+      integers\\ and Weil-étale cohomology}
+
+  }
+
+  \vspace{0.5em}
+
+  \noindent van Alexey Beshenov
+\end{center}
+
+In everything what follows, $X$ is an arithmetic scheme (separated, of finite
+type over $\Spec \ZZ$) and $n$ is a \emph{strictly negative} integer.
+
+We denote by $\ZZ^c (n)$ the dualizing Bloch's cycle complex of sheaves on
+$X_\text{\it ét}$, and by $\ZZ (n)$ the complex of sheaves
+$\bigoplus_p \dirlim_r j_{p!} \mu_{p^r}^{\otimes n} [-1]$, where
+$j_p\colon X [1/p] \hookrightarrow X$ is the canonical open immersion for each
+prime $p$ and $\mu_{p^r}^{\otimes n}$ is the sheaf of $p^r$-th roots of unity on
+$X[1/p]_\text{\it ét}$ twisted by $n$.
+
+We denote by $R\Gamma_c (X_\text{\it ét}, \mathcal{F}^\bullet)$ the étale
+cohomology with compact support and by
+$R\widehat{\Gamma}_c (X_\text{\it ét}, \mathcal{F}^\bullet)$ the modified étale
+cohomology with compact support, as defined e.g. in Milne's book ``Arithmetic
+Duality theorems''.
+
+For brevity, we write $[A^\bullet, B^\bullet]$ instead of
+$\RHom (A^\bullet, B^\bullet)$.
+
+\vspace{1em}
+
+All the main constructions are done assuming the \term{conjecture}
+$\mathbf{L}^c (X_\text{\it ét}, n)$:
+\emph{the cohomology groups $H^i (X_\text{\it ét}, \ZZ^c (n))$ are finitely
+  generated for all $i \in \ZZ$}.
+
+\begin{enumerate}
+\item[I.] Assuming $\mathbf{L}^c (X_\text{\it ét}, n)$, there is a
+  quasi-isomorphism of complexes
+  $$R\widehat{\Gamma}_c (X_\text{\it ét}, \ZZ (n)) \xrightarrow{\isom}
+[R\Gamma (X_\text{\it ét}, \ZZ^c (n)), \QQ/\ZZ [-2]].$$
+
+\item[II.] Assume $\mathbf{L}^c (X_\text{\it ét}, n)$ and let $\alpha_{X,n}$ be
+  the composition of morphisms of complexes
+  \[
+    [R\Gamma (X_\text{\it ét}, \ZZ^c (n)), \QQ [-2]] \to
+    [R\Gamma (X_\text{\it ét}, \ZZ^c (n)), \QQ/\ZZ[-2]] \xleftarrow{\isom}
+    R\widehat{\Gamma}_c (X_\text{\it ét}, \ZZ (n)) \to
+    R\Gamma_c (X_\text{\it ét}, \ZZ (n))
+  \]
+  Let $R\Gamma_\text{\it fg} (X, \ZZ (n))$ be a cone of $\alpha_{X,n}$:
+  \[
+    [R\Gamma (X_\text{\it ét}, \ZZ^c (n)), \QQ [-2]] \xrightarrow{\alpha_{X,n}}
+    R\Gamma_c (X_\text{\it ét}, \ZZ (n)) \to
+    R\Gamma_\text{\it fg} (X, \ZZ (n)) \to
+    [R\Gamma (X_\text{\it ét}, \ZZ^c (n)), \QQ [-1]]
+  \]
+  Then the cohomology groups $H^i (R\Gamma_\text{\it fg} (X, \ZZ (n)))$ are
+  finitely generated, trivial for $i \ll 0$, and only have $2$-torsion for
+  $i \gg 0$.
+
+\item[III.] For any prime $\ell$ the group
+  $H^i_c (X_{\overline{\QQ},\text{\it ét}}, \QQ_\ell/\ZZ_\ell (n))^{G_\QQ}$
+  has no nontrivial divisible elements.
+
+\item[IV.] Assume $\mathbf{L}^c (X_\text{\it ét}, n)$ and let $\alpha_{X,n}$ be
+  as above. Let
+  \[ u_\infty^*\colon R\Gamma_c (X_\text{\it ét}, \ZZ (n)) \to
+    R\Gamma_c (G_\RR, X (\CC), (2\pi i)^n\,\ZZ) \]
+  be the canonical comparison morphism, discussed in \S\S 0.7--0.8 of the
+  thesis. Then $u_\infty^*\circ \alpha_{X,n} = 0$. Let $i_\infty^*$ be a morphism
+  of complexes defined via
+  \[ \begin{tikzcd}
+      {[R\Gamma (X, \ZZ^c (n)), \QQ [-2]]} \ar{r}{\alpha_{X,n}}\ar{d} & R\Gamma_c (X_\text{\it ét}, \ZZ (n)) \ar{d}{u_\infty^*}\ar{r} & R\Gamma_\text{\it fg} (X, \ZZ (n)) \ar[dashed]{d}{i_\infty^*}\ar{r} & \cdots\ar{d} \\
+      0\ar{r} & R\Gamma_c (G_\RR, X (\CC), (2\pi i)^n\,\ZZ) \ar{r}{\idid} & R\Gamma_c (G_\RR, X (\CC), (2\pi i)^n\,\ZZ) \ar{r} & 0
+    \end{tikzcd} \]
+  and let $R\Gamma_\text{\it W,c} (X,\ZZ(n))$ be a mapping fiber of
+  $i_\infty^*$:
+  \[
+    R\Gamma_\text{\it W,c} (X,\ZZ(n)) \to
+    R\Gamma_\text{\it fg} (X, \ZZ (n)) \xrightarrow{i_\infty^*}
+    R\Gamma_c (G_\RR, X (\CC), (2\pi i)^n\,\ZZ) \to
+    R\Gamma_\text{\it W,c} (X,\ZZ(n)) [1]
+  \]
+  Then $R\Gamma_\text{\it W,c} (X,\ZZ(n))$ is a perfect complex.
+\end{enumerate}
+
+\begin{center}
+  \noindent * ~ * ~ * ~ * ~ *
+\end{center}
+
+To formulate the next result, we denote by $\mathbf{C} (X,n)$ the following
+conjecture.
+
+{\it
+  \begin{enumerate}
+  \item[a)] assume that the conjecture $\mathbf{L}^c (X_\text{\it ét}, n)$ holds;
+
+  \item[b)] assume that $X_\CC$ is smooth, quasi-projective, so that the regulator
+    morphism
+    \[ Reg\colon R\Gamma (X_\text{\it ét}, \ZZ^c (n)) \to
+      R\Gamma_{BM} (G_\RR, X (\CC), (2\pi i)^n\,\RR) [1] \]
+    exists and assume the \term{regulator conjecture}: the $\RR$-dual is a
+    quasi-isomorphism
+    \[ Reg^\vee\colon R\Gamma_c (G_\RR, X (\CC), (2\pi i)^n\,\RR) [-1] \xrightarrow{\isom}
+      [R\Gamma (X_\text{\it ét}, \ZZ^c (n)), \RR]. \]
+
+  \item[c)] assume that the zeta-function $\zeta (X,s)$ has a meromorphic
+    continuation near $s=n$.
+  \end{enumerate}
+
+  \textbf{Then}
+
+  \begin{enumerate}
+  \item[1)] the leading coefficient $\zeta^* (X,n)$ of the Taylor expansion of
+    $\zeta (X,s)$ at $s = n$ is given up to sign by
+    \[ \lambda (\zeta^* (X,n)^{-1})\cdot \ZZ =
+      \det\nolimits_\ZZ R\Gamma_\text{\it W,c} (X, \ZZ (n)), \]
+    where $\lambda$ is the trivialization morphism defined using the regulator in
+    \S 2.3 of the thesis;
+
+  \item[2)] the vanishing order of $\zeta (X,n)$ at $s = n$ is given by the
+    weighted alternating sum of ranks of $H^i_\text{\it W,c} (X, \ZZ (n))$:
+    \[ \ord_{s=n} \zeta (X,s) =
+      \sum_{i\in\ZZ} (-1)^i \cdot i \cdot \rk_\ZZ H^i_\text{\it W,c} (X, \ZZ (n)). \]
+  \end{enumerate}}
+
+\begin{center}
+  \noindent * ~ * ~ * ~ * ~ *
+\end{center}
+
+\begin{enumerate}
+\item[V.] The conjecture $\mathbf{C} (X,n)$ is compatible with disjoint unions,
+  open-closed decompositions and taking affine bundles in the following sense.
+
+  \begin{itemize}
+  \item If $X = \coprod_{0 \le i \le r} X_i$ is a disjoint union of arithmetic
+    schemes, then the conjectures $\mathbf{C} (X_i, n)$ for $i = 0,\ldots,r$
+    together imply $\mathbf{C} (X, n)$.
+
+  \item If $U \hookrightarrow X \hookleftarrow Z$ is an open-closed decomposition
+    of an arithmetic scheme, then if two out of three conjectures
+    $\mathbf{C} (U, n)$, $\mathbf{C} (Z, n)$, $\mathbf{C} (X, n)$ hold, the
+    other one holds as well.
+
+  \item The conjecture $\mathbf{C} (\AA^r_X,n)$ is equivalent to
+    $\mathbf{C} (X,n-r)$.
+  \end{itemize}
+
+\item[VI.] Sometimes it is possible to talk about unique cones in the derived
+  category. For a distinguished triangle
+  $A^\bullet \xrightarrow{u} B^\bullet \xrightarrow{v} C^\bullet \xrightarrow{w} A^\bullet[1]$
+  assume that $A^\bullet$ is a complex such that $H^i (A^\bullet)$ are finite
+  dimensional $\QQ$-vector spaces and $C^\bullet$ is ``almost perfect'', meaning
+  that $H^i (C^\bullet)$ are finitely generated groups, zero for $i \ll 0$ and
+  have only $2$-torsion for $i \gg 0$. Then the cone of $u$ is unique up to a
+  unique isomorphism in the derived category.
+
+\item[VII.] If $A$ and $B$ are finitely generated abelian groups, then up to
+  equivalence, every extension of $\Hom (B,\QQ/\ZZ)$ by $\Hom (A,\QQ/\ZZ)$ is
+  $\QQ/\ZZ$-dual to an extension of $A$ by $B$.
+
+\item[VIII.] The order of zero of the Dedekind zeta function of a number field
+  $K$ at $n < 0$ may be interpreted via the equivariant cohomology of
+  $X = \Spec \O_K$ as
+  $\ord_{s = n} \zeta_K (s) = \dim_\RR H^0_c (G_\RR, X (\CC), (2\pi i)^n\,\RR)$.
+\end{enumerate}
+
+\end{document}

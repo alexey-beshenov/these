@@ -1,0 +1,306 @@
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+% CLEAN UP THIS MESS AT SOME POINT :-(
+
+\usepackage[leqno]{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+
+\usepackage{scrextend}
+\usepackage{epigraph}
+
+\renewcommand{\thefootnote}{\ifcase\value{footnote}\or*\or**\or***\or****\or($\infty$)\fi}
+\usepackage{perpage}
+\MakePerPage{footnote}
+
+\usepackage{array}
+\newcolumntype{x}[1]{>{\centering\hspace{0pt}}p{#1}}
+
+\DeclareMathOperator*{\colim}{co{\lim}}
+\newcommand{\dirlim}{\varinjlim}
+\newcommand{\invlim}{\varprojlim}
+
+\newcommand{\tikzpb}{\ar[phantom,pos=0.2]{dr}{\text{\large$\lrcorner$}}}
+\newcommand{\tikzpbur}{\ar[phantom,pos=0.2]{dl}{\text{\large$\llcorner$}}}
+
+\newcommand{\term}{\textbf}
+
+\usepackage[utf8]{inputenc}
+
+\usepackage{stmaryrd}
+
+\usepackage{cancel}
+
+\newcommand{\DB}{{\mathcal{D}\text{-\foreignlanguage{russian}{Б}}}}
+\newcommand{\open}{\underset{\mathrm{open}}{\hookrightarrow}}
+\newcommand{\closed}{\underset{\mathrm{closed}}{\hookrightarrow}}
+
+\newcommand{\tcol}[2]{{#1 \choose #2}}
+
+\newcommand{\homot}{\simeq}
+\newcommand{\isom}{\cong}
+% \newcommand{\cH}{\mathcal{H}}
+\renewcommand{\hom}{\mathrm{hom}}
+\renewcommand{\div}{\mathop{\mathrm{div}}}
+\renewcommand{\Im}{\mathop{\mathrm{Im}}}
+\renewcommand{\Re}{\mathop{\mathrm{Re}}}
+\newcommand{\id}[1]{\mathrm{id}_{#1}}
+\newcommand{\idid}{\mathrm{id}}
+
+\newcommand{\ZG}{{\ZZ G}}
+\newcommand{\ZH}{{\ZZ H}}
+
+% \newcommand{\quiso}{\stackrel{\mathrm{q.iso}}{\cong}}
+\newcommand{\quiso}{\simeq}
+
+\newcommand{\personality}[1]{{\sc #1}}
+
+\newcommand{\mono}{\rightarrowtail}
+\newcommand{\epi}{\twoheadrightarrow}
+
+\DeclareMathOperator{\Ann}{Ann}
+\DeclareMathOperator{\CH}{CH}
+\DeclareMathOperator{\Cl}{Cl}
+\DeclareMathOperator{\Cone}{Cone}
+\DeclareMathOperator{\Cop}{Cop}
+\DeclareMathOperator{\Der}{Der}
+\DeclareMathOperator{\Div}{Div}
+\DeclareMathOperator{\D}{D}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\Eq}{Eq}
+\DeclareMathOperator{\Ext}{Ext}
+\DeclareMathOperator{\Frac}{Frac}
+\DeclareMathOperator{\Frob}{Frob}
+\DeclareMathOperator{\Funct}{Funct}
+\DeclareMathOperator{\Fun}{Fun}
+\DeclareMathOperator{\GL}{GL}
+\DeclareMathOperator{\Gal}{Gal}
+\DeclareMathOperator{\Gr}{Gr}
+\DeclareMathOperator{\Hol}{Hol}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\Id}{Id}
+\DeclareMathOperator{\Inn}{Inn}
+\DeclareMathOperator{\Isom}{Isom}
+\DeclareMathOperator{\Lie}{Lie}
+\DeclareMathOperator{\Map}{Map}
+\DeclareMathOperator{\Mat}{Mat}
+\DeclareMathOperator{\Mor}{Mor}
+\DeclareMathOperator{\Nat}{Nat}
+\DeclareMathOperator{\Ob}{Ob}
+\DeclareMathOperator{\Pic}{Pic}
+\DeclareMathOperator{\Sing}{Sing}
+\DeclareMathOperator{\Spec}{Spec}
+\DeclareMathOperator{\Sp}{Sp}
+\DeclareMathOperator{\Stab}{Stab}
+\DeclareMathOperator{\Tot}{Tot}
+\DeclareMathOperator{\YExt}{YExt}
+\DeclareMathOperator{\ad}{ad}
+\DeclareMathOperator{\card}{card}
+\DeclareMathOperator{\codim}{codim}
+\DeclareMathOperator{\coeq}{coeq}
+\DeclareMathOperator{\coim}{coim}
+\DeclareMathOperator{\coker}{coker}
+\DeclareMathOperator{\cor}{cor}
+\DeclareMathOperator{\eq}{eq}
+\DeclareMathOperator{\ev}{ev}
+\DeclareMathOperator{\fchar}{char}
+\DeclareMathOperator{\gr}{gr}
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\mcd}{mcd}
+\DeclareMathOperator{\ord}{ord}
+\DeclareMathOperator{\pr}{pr}
+\DeclareMathOperator{\rel}{rel}
+\DeclareMathOperator{\res}{res}
+\DeclareMathOperator{\rk}{rk}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\trdeg}{trdeg}
+\DeclareMathOperator{\tr}{tr}
+\newcommand{\RHom}{R\!\Hom}
+\newcommand{\RiHom}{R\underline{\Hom}}
+\newcommand{\iHom}{\underline{\Hom}}
+
+\newcommand{\legendre}[2]{\left(\frac{#1}{#2}\right)}
+
+\newcommand{\dfn}{\mathrel{\mathop:}=}
+\newcommand{\rdfn}{=\mathrel{\mathop:}}
+
+\usepackage[rgb]{xcolor}
+% \definecolor{myurlcolor}{rgb}{1.0,0.0,0.4}
+% \definecolor{mylinkcolor}{rgb}{0.0,0.4,1.0}
+% \definecolor{mycitecolor}{rgb}{0.0,0.4,1.0}
+\definecolor{myurlcolor}{rgb}{0.0,0.0,0.0}
+\definecolor{mylinkcolor}{rgb}{0.0,0.0,0.0}
+\definecolor{mycitecolor}{rgb}{0.0,0.0,0.0}
+\definecolor{shadecolor}{rgb}{0.89,0.88,0.80}
+\definecolor{gray}{rgb}{0.7,0.7,0.7}
+\definecolor{lightgray}{rgb}{0.8,0.8,0.8}
+
+\newcommand{\refref}[2]{\hyperref[#2]{#1~\ref*{#2}}}
+\newcommand{\eqnref}[1]{\hyperref[#1]{(\ref*{#1})}}
+
+\newcommand{\tos}{\!\!\to\!\!}
+
+\makeatletter
+\newcommand{\dashfill}{%
+\leavevmode \cleaders \hb@xt@ .50em{\hss -\hss }\hfill \kern \z@
+% original \dotfill macro:
+% \leavevmode \cleaders \hb@xt@ .44em{\hss .\hss }\hfill \kern \z@
+}
+\makeatother
+
+\newcommand{\cequiv}{\simeq}
+
+\usepackage[sc]{mathpazo}
+\linespread{1.05}         % Palladio needs more leading (space between lines)
+\usepackage[T2A,T1]{fontenc}
+
+\usepackage{helvet}
+\usepackage{titlesec}
+\titleformat{name=\chapter}[display]
+  {\normalfont\sffamily\huge\bfseries}
+  {\chaptertitlename\ \thechapter}{20pt}{\Huge}
+\titleformat{\section}
+  {\normalfont\sffamily\Large\bfseries}
+  {\thesection}{1em}{}
+\titleformat{\subsection}
+  {\normalfont\sffamily\large\bfseries}
+  {\thesection}{1em}{}
+
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\FF}{\mathbb{F}}
+\newcommand{\HH}{\mathbb{H}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\PP}{\mathbb{P}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\renewcommand{\AA}{\mathbb{A}}
+
+\makeatletter
+\newcommand\xleftrightarrow[2][]{%
+  \ext@arrow 9999{\longleftrightarrowfill@}{#1}{#2}}
+\newcommand\longleftrightarrowfill@{%
+  \arrowfill@\leftarrow\relbar\rightarrow}
+\makeatother
+
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+
+\usepackage{amsthm}
+
+\newcommand{\examplesymbol}{$\blacktriangle$}
+\renewcommand{\qedsymbol}{$\blacksquare$}
+
+\newtheoremstyle{myplain}
+  {\topsep}   % ABOVESPACE
+  {\topsep}   % BELOWSPACE
+  {\itshape}  % BODYFONT
+  {0pt}       % INDENT (empty value is the same as 0pt)
+  {\bfseries} % HEADFONT
+  {.}         % HEADPUNCT
+  {5pt plus 1pt minus 1pt} % HEADSPACE
+  {\thmnumber{#2}. \thmname{#1}\thmnote{ (#3)}}   % CUSTOM-HEAD-SPEC 
+
+\newtheoremstyle{myplainnameless}
+  {\topsep}   % ABOVESPACE
+  {\topsep}   % BELOWSPACE
+  {\normalfont}  % BODYFONT
+  {0pt}       % INDENT (empty value is the same as 0pt)
+  {\bfseries} % HEADFONT
+  {.}         % HEADPUNCT
+  {5pt plus 1pt minus 1pt} % HEADSPACE
+  {\thmnumber{#2}}   % CUSTOM-HEAD-SPEC 
+
+\newtheoremstyle{mydefinition}
+  {\topsep}   % ABOVESPACE
+  {\topsep}   % BELOWSPACE
+  {\normalfont}  % BODYFONT
+  {0pt}       % INDENT (empty value is the same as 0pt)
+  {\bfseries} % HEADFONT
+  {.}         % HEADPUNCT
+  {5pt plus 1pt minus 1pt} % HEADSPACE
+  {\thmnumber{#2}. \thmname{#1}\thmnote{ (#3)}}   % CUSTOM-HEAD-SPEC
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\theoremstyle{myplain}
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{fact}{Fact}[section]
+\newtheorem{lemma}[proposition]{Lemma}
+\newtheorem{observation}[proposition]{Observation}
+\newtheorem{question}[proposition]{Question}
+
+\newtheorem{theorem}[proposition]{Theorem}
+\newtheorem{conjecture}[proposition]{Conjecture}
+\newtheorem{corollary}[proposition]{Corollary}
+
+\theoremstyle{myplainnameless}
+\newtheorem{nameless}[proposition]{}
+
+\theoremstyle{mydefinition}
+\newtheorem{examplex}[proposition]{Example}
+\newenvironment{example}
+  {\pushQED{\qed}\renewcommand{\qedsymbol}{\examplesymbol}\examplex}
+  {\popQED\endexamplex}
+
+\newtheorem*{examplexx}{Example}
+\newenvironment{example*}
+  {\pushQED{\qed}\renewcommand{\qedsymbol}{\examplesymbol}\examplexx}
+  {\popQED\endexamplexx}
+
+\newtheorem{definition}[proposition]{Definition}
+\newtheorem{remark}[proposition]{Remark}
+
+\makeatletter
+\newcommand{\xRightarrow}[2][]{\ext@arrow 0359\Rightarrowfill@{#1}{#2}}
+\makeatother
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\Et}{\mathop{\text{\rm \'Et}}}
+
+\DeclareFontFamily{OT1}{pzc}{}
+\DeclareFontShape{OT1}{pzc}{m}{it}{<-> s * [1.1] pzcmi7t}{}
+\DeclareMathAlphabet{\mathpzc}{OT1}{pzc}{m}{it}
+
+\newcommand{\separator}{\vspace{1em}\hrule\vspace{1em}}
+
+\usepackage{pifont}
+\newcommand{\categ}[1]{\text{\bf #1}}
+\newcommand{\vcateg}{\mathcal}
+\newcommand{\bone}{{\boldsymbol 1}}
+\newcommand{\bDelta}{{\boldsymbol\Delta}}
+\newcommand{\bsquare}{\textrm{\ding{114}}}
+\newcommand{\bR}{{\mathbf{R}}}
+
+% \usepackage{ulem}
+\newcommand{\uuline}[1]{\underline{\underline{#1}}}
+
+\renewcommand{\mathcal}{\mathpzc}
+
+\makeatletter
+\def\iddots{\mathinner{\mkern1mu\raise\p@
+\vbox{\kern7\p@\hbox{.}}\mkern2mu
+\raise4\p@\hbox{.}\mkern2mu\raise7\p@\hbox{.}\mkern1mu}}
+\makeatother
+
+
+\newcommand{\ssincl}{\reflectbox{\rotatebox[origin=c]{45}{$\subseteq$}}}
+
+\newcommand{\vsupseteq}{\reflectbox{\rotatebox[origin=c]{-90}{$\supseteq$}}}
+\newcommand{\vin}{\reflectbox{\rotatebox[origin=c]{90}{$\in$}}}
+
+\newcommand{\Ga}{\mathbb{G}_\mathrm{a}}
+\newcommand{\Gm}{\mathbb{G}_\mathrm{m}}
+
+% \usepackage[a-1b]{pdfx}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,linkcolor=mylinkcolor,urlcolor=myurlcolor,citecolor=mycitecolor,pdfencoding=unicode}
+
+\renewcommand{\O}{\mathcal{O}}
+
+\usepackage[russian,spanish,francais,dutch,english]{babel}
+
+\usepackage{tikz-cd}
+\usetikzlibrary{babel}
+\usetikzlibrary{arrows}
+\usetikzlibrary{calc}

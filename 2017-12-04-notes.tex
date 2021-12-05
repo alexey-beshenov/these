@@ -1,0 +1,682 @@
+\documentclass{article}
+
+\usepackage{fullpage}
+
+\input{definitions.tex}
+
+% Not numbered
+\theoremstyle{plain}
+\newtheorem*{drawback*}{Drawback}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem*{conjecture*}{Conjecture}
+\newtheorem*{proposition*}{Proposition}
+\newtheorem*{question*}{Question}
+\newtheorem*{mygoal*}{My goal}
+
+\usepackage[numbers]{natbib}
+
+\date{Leiden Mathematical Institute, December 4, 2017}
+\author{Alexey Beshenov (cadadr@gmail.com)}
+\title{Zeta-values of arithmetic schemes at negative integers and Weil-étale cohomology}
+
+\begin{document}
+
+{\normalfont\sffamily\bfseries \maketitle}
+
+\setcounter{section}{-1}
+\section{Motivation}
+
+Let us consider an \term{arithmetic scheme} $X$:
+
+\[ \begin{tikzcd}
+    X \ar{d}{\begin{array}{l}\text{separated}\\\text{of finite type}\end{array}} \\
+    \Spec \ZZ
+\end{tikzcd} \]
+
+We may associate to it the corresponding \term{zeta function}, which is defined
+by the Euler product
+$$\zeta (X, s) \dfn \prod_{x\in X_0} \frac{1}{1 - N (x)^{-s}},$$
+where $X_0$ denotes the set of closed points of $X$, and $N (x)$ is the
+cardinality of the residue field of $x$. For instance, if $X = \Spec \ZZ$,
+we recover the usual Riemann zeta function $\zeta (s)$; more generally, if
+$X = \Spec \O_F$ is the spectrum of a number ring, we obtain the Dedekind zeta
+function $\zeta_F (s)$. The above product converges for $\Re s > \dim X$, and
+from now on I will also make the following assumption.
+
+\begin{conjecture*}
+  $\zeta (X,s)$ has a meromorphic continuation to the whole complex plane, which
+  we also denote by $\zeta (X,s)$.
+\end{conjecture*}
+
+For each integer $n\in \ZZ$, one might ask about the following two quantities:
+
+\begin{enumerate}
+\item[1)]
+  $d_n \dfn \ord_{s = n} \zeta (X,s) \dfn \text{the vanishing order at }s=n$;
+
+\item[2)] the corresponding \term{special value}, i.e. the leading term of the
+  Taylor expansion at $s = n$:
+  $$\zeta^* (X,n) \dfn \lim_{s\to n} (s-n)^{-d_n} \, \zeta (X,s).$$
+\end{enumerate}
+
+Cohomological interpretation of special values may be traced to 1839 when
+Dicichlet published the \term{class number formula}. The Dedekind zeta function
+$\zeta_F (s)$ has a zero of order $d_0 = r_1 + r_2 - 1$ at $s = 0$, where $r_1$
+and $2\,r_2$ is the number of real and complex places of $F$, and the
+corresponding special value is
+$$\zeta_F^* (0) = -\frac{h_F}{\#\mu_F}\,R_F,$$
+where $h_F$ is the class number, $\mu_F = (\O_F^\times)_\text{\it tors}$ is the
+group of roots of unity in $F$, and $R_F$ is the regulator. The above formula
+may be written as
+\[
+  \zeta^* (\Spec \O_F, 0) =
+  -\frac{\# H^1 (\Spec \O_F, \mathbb{G}_m)}{\# H^0 (\Spec \O_F, \mathbb{G}_m)_\text{\it tors}}\,R_F =
+  -\frac{\# H^0 (\Spec \O_F, \ZZ^c (0))}{\# H^{-1} (\Spec \O_F, \ZZ^c (0))_\text{\it tors}}\,R_F,
+\]
+where $\ZZ^c (0) \isom \mathbb{G}_m [1]$ (see below).
+
+\pagebreak
+
+In this sense, the first results about finite generation of certain motivic
+cohomology groups were obtained in the XIX century:
+
+\begin{itemize}
+\item finiteness of the class group is finiteness of
+  $\# H^0 (\Spec \O_F, \ZZ^c (0))$;
+
+\item Dirichlet's unit theorem says that $H^{-1} (\Spec \O_F, \ZZ^c (0))$ is a
+  group of finite rank $r_1 + r_2 - 1$.
+\end{itemize}
+
+Here I won't get into the details about the classical conjectures of
+Lichtenbaum, Be\u{\i}linson, and others; instead I refer to the survey
+\cite{Kahn-2005}. More recently, Lichtenbaum envisioned the existence of certain
+cohomology theory, named \term{Weil-étale cohomology}, that (conjecturally)
+encodes the information about vanishing orders and special values of
+$\zeta (X,s)$. Here is a very brief history of the subject.
+
+\begin{itemize}
+\item Lichtenbaum first studied Weil-étale cohomology for varieties over finite
+  fields in \cite{Lichtenbaum-05}. Further results were obtained by Thomas
+  Geisser in \cite{Geisser-04-finite}.
+
+\item In \cite{Lichtenbaum-09-number-rings} Lichtenbaum considered the case of
+  number rings $X = \Spec \O_F$ and $n = 0$.
+
+\item Baptiste Morin constructed in \cite{Morin-14} Weil-étale cohomology for
+  the case of regular, proper $X$ and $n = 0$.
+
+\item Matthias Flach and Baptiste Morin generalized this in
+  \cite{Flach-Morin-16} to all $n \in \ZZ$, again for regular, proper $X$.
+\end{itemize}
+
+I am investigating the following situation.
+
+\begin{mygoal*}
+  Construct and study Weil-étale cohomology for an arbitrary arithmetic scheme
+  $X$ and $n < 0$.
+\end{mygoal*}
+
+So from now on, $X$ will denote any arithmetic scheme and $n$ will denote a
+\emph{strictly negative} integer. Removing the assumptions on $X$ in theory
+should make everything harder, but at the same time, restricting the attention
+to the case of $n < 0$ simplifies many things. I am following the ideas of Flach
+and Morin, and in particular, when $X$ is regular and proper, the constructions
+and conjectures that I am going to describe coincide with theirs. Not out of
+immodesty, but due to the lack of time, I will focus on my case and outline the
+involved tools and definitions.
+
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+
+\section{Motivic cohomology}
+
+There are several constructions of motivic cohomology. The one that is suitable
+for arithmetic schemes originates from the seminal paper of Spencer Bloch on
+higher Chow groups \cite{Bloch-1986}. Bloch's ideas have been further developed
+by Marc Levine and other mathematicians, and the corresponding techniques have
+been also applied to arithmetic schemes (see Geisser's survey
+\cite{Geisser-survey}).
+
+Geisser in \cite{Geisser-10} introduced \term{dualizing cycle complexes}, which
+is a certain variation of Bloch's cycle complexes:
+$$(X,n) \rightsquigarrow \ZZ^c (n) \text{, a complex of sheaves on }X_\text{\it ét}.$$
+For those familiar with motivic cohomology, if $X$ is an equidimensional scheme
+of dimension $d$, then
+$$\ZZ^c (n) = \ZZ (d-n) [2d],$$
+where the right hand side is the sheaf defined from Bloch's cycle complex.
+The same relation would hold with the motivic complex of Voevodsky, if we work
+with smooth schemes over a field. This is not the case of our interest, however.
+
+Another important thing to keep in mind is that the (hyper)cohomology of
+$\ZZ^c (n)$ behaves very much like \term{Borel--Moore homology} in the
+topological setting. Namely, if $X$ is a locally compact topological space,
+$U \subset X$ is its open subspace, and $Z \dfn X\setminus U$ is the
+corresponding closed complement, in such a case I will say that we have an
+\term{open-closed decomposition}
+$$U \hookrightarrow X \leftarrow Z$$
+This gives a distinguished triangle in the derived category of abelian groups
+$$R\Gamma_{BM} (Z, \ZZ) \to R\Gamma_{BM} (X, \ZZ) \to R\Gamma_{BM} (U, \ZZ) \to \cdots [1]$$
+simply because by definition (well, not the original one of Borel and Moore, but
+the one of Verdier),
+$$R\Gamma_{BM} (X,\ZZ) \dfn R\Gamma (X, p^! \underline{\ZZ}) \isom \RHom (R\Gamma_c (X,\ZZ), \ZZ),$$
+where $p\colon X\to \ast$ is the projection to a point. So the above
+distinguished triangle is nothing more than the Verdier dual of the
+distinguished triangle for cohomology with compact support
+$$R\Gamma_c (U,\ZZ) \to R\Gamma_c (X,\ZZ) \to R\Gamma_c (Z,\ZZ) \to \cdots [1]$$
+
+Similarly, for Geisser's complexes $\ZZ^c (n)$, an open-closed decomposition of
+schemes gives a distinguished triangle
+\[
+  R\Gamma (Z_\text{\it ét}, \ZZ^c (n)) \to
+  R\Gamma (X_\text{\it ét}, \ZZ^c (n)) \to
+  R\Gamma (U_\text{\it ét}, \ZZ^c (n)) \to \cdots [1]
+\]
+The intuition behind this is that initially, $\ZZ^c (n)$ has an ad hoc
+definition as a cycle complex, but then it is possible to identify it as
+a dualizing complex in certain arithmetic contexts. This is what Geisser does in
+\cite{Geisser-10}.
+
+In general, not much is known about the cohomology of $\ZZ^c (n)$, and to
+proceed, we need to make the following assumption.
+
+\vspace{1em}
+
+\noindent\textbf{Conjecture $\mathbf{L}^c (X_\text{\it ét}, n).$}
+\emph{The (hyper)cohomology groups $H^i (X_\text{\it ét}, \ZZ^c (n))$ are
+  finitely generated.}
+
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+
+\section{Weil-étale complexes}
+
+I don't have enough time to enter in all the gory details of the construction of
+Weil-étale complexes (for this, I refer to the appendix), so let me state what
+kind of object it is.
+
+\vspace{1em}
+
+\noindent\textbf{Output of the construction}.
+{\it Assume that the conjecture $\textbf{L}^c (X_\text{\it ét}, n)$ holds.
+
+\begin{enumerate}
+\item[1)] There exists a perfect object in the derived category of abelian
+  groups
+  $$R\Gamma_\text{\it W,c} (X, \ZZ (n)),$$
+  which we call \term{Weil-étale cohomology with compact support}. That is, the
+  corresponding cohomology groups
+  $$H^i_\text{\it W,c} (X, \ZZ (n)) \dfn H^i (R\Gamma_\text{\it W,c} (X, \ZZ (n)))$$
+  are finitely generated and vanish for almost all $i$.
+
+\item[2)] After tensoring with $\RR$, this complex splits (non-canonically) as
+  \[
+    R\Gamma_\text{\it W,c} (X,\ZZ(n)) \otimes \RR \isom
+    \RHom (R\Gamma (X_\text{\it ét}, \ZZ^c (n)), \RR) [-1]
+    \oplus
+    R\Gamma_c (G_\RR, X (\CC), (2\pi i)^n\,\RR) [-1].
+  \]
+\end{enumerate}}
+
+\vspace{1em}
+
+I already briefly explained what is $R\Gamma (X_\text{\it ét}, \ZZ^c (n))$.
+As for the complex $R\Gamma_c (G_\RR, X (\CC), (2\pi i)^n\,\RR)$, it stays for
+the \term{$G_\RR$-equivariant cohomology with compact support} of the space of
+complex points $X (\CC)$, where $G_\RR \dfn \Gal (\CC/\RR)$. Namely, $G_\RR$
+acts by conjugation both on $X (\CC)$ and on the coefficients $(2\pi i)^n\,\RR$,
+which means that the complex $R\Gamma_c (X (\CC), (2\pi i)^n\,\RR)$ carries a
+natural $G_\RR$-action, and we can consider the cohomology of $G_\RR$ acting on
+that complex (this is a particular case of equivariant sheaf cohomology, as
+introduced by Grothendieck in the Tohoku paper). In terms of cohomology groups,
+there is a spectral sequence
+$$E_2^{pq} = H^p (G_\RR, H^q_c (X (\CC), (2\pi i)^n\,\RR)) \Longrightarrow H^{p+q}_c (G_\RR, X (\CC), (2\pi i)^n\,\RR).$$
+In this particular case, however, we deal simply with the fixed points of the
+$G_\RR$-action on $H_c^i (X (\CC), (2\pi i)^n\,\RR)$:
+$$H_c^i (G_\RR, X (\CC), (2\pi i)^n\,\RR) \isom H_c^i (X (\CC), (2\pi i)^n\,\RR)^{G_\RR}$$
+---this is because for any $\ZZ/2\ZZ$-module $A$, the cohomology groups
+$H^p (G_\RR, A)$ are $2$-torsion for $p > 0$, and we deal with $\RR$-vector
+spaces. However, for instance for integral coefficients $(2\pi i)^n\,\ZZ$,
+the above spectral sequence does need to degenerate, and the groups
+$H_c^i (G_\RR, X (\CC), (2\pi i)^n\,\ZZ)$ are more complicated.
+
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+
+\section{Regulator}
+
+Now to extract the special values of zeta functions, we also need some kind of a
+regulator (generalizing the regulator of a number field). Normally in this
+setting, it should be a morphism
+\[ Reg\colon
+  \begin{array}{c}
+    \text{motivic cohomology} \\
+    \text{(higher Chow groups)}
+  \end{array}\text{of }X
+  \longrightarrow
+  \text{Deligne (co)homology of }X(\CC). \]
+
+We use the construction of Matt Kerr, James Lewis, and Stefan Müller-Stach from
+\cite{Kerr-Lewis-Muller-Stach-2006}. I won't recall the details on Deligne
+(co)homology here, because it turns out that at the end of the day, thanks to
+our assumption $n < 0$, things simplify tremendously, and we obtain a morphism
+\[ Reg\colon R\Gamma(X_\text{\it ét},\ZZ^c (n)) \to
+  R\Gamma_\text{\it BM} (G_\RR,X(\CC),(2\pi i)^n\,\RR)[1]. \]
+Unfortunately, the construction of Kerr, Lewis, and Müller-Stach works under
+a rather severe restriction.
+
+\begin{drawback*}
+  We need to assume that $X_\CC$ is smooth and quasi-projective.
+\end{drawback*}
+
+However, since in our particular case of $n < 0$, the regulator has a simpler
+target ($G_\RR$-equivariant Borel–Moore homology of $X(\CC)$), one might wonder
+if there is a simpler definition, requiring less from $X$.
+
+\begin{question*}
+  Is it possible to define a regulator in our setting under less restrictive
+  assumptions on $X$?
+\end{question*}
+
+The regulator is supposed to satisfy the following condition.
+
+\vspace{1em}
+
+\noindent\textbf{Conjecture $\mathbf{B}(X, n)$.}
+\emph{The $\RR$-dual to the regulator map
+  $$Reg^\vee\colon R\Gamma_c (G_\RR, X(\CC), (2\pi i)^n\,\RR)[-1] \to
+  \RHom(R\Gamma(X_\text{\it ét}, \ZZ^c (n)), \RR)$$
+  is a quasi-isomorphism of complexes.}
+
+\pagebreak
+
+Now let's consider the morphism
+\[ R\Gamma_\text{\it W,c} (X, \ZZ(n)) \otimes \RR
+  \xrightarrow{\smile\theta}
+  R\Gamma_\text{\it W,c} (X, \ZZ(n)) \otimes \RR [1] \]
+defined by
+
+\[ \begin{tikzcd}
+    R\Gamma_\text{\it W,c} (X, \ZZ (n)) \otimes \RR \ar{d}{\isom} \\
+    \RHom (R\Gamma (X_\text{\it ét}, \ZZ^c (n)), \RR) [-1] ~\oplus~ R\Gamma_c (G_\RR, X (\CC), (2\pi i)^n\,\RR) [-1] \ar[twoheadrightarrow]{d} \\
+    R\Gamma_c (G_\RR, X (\CC), (2\pi i)^n\,\RR) [-1] \ar{d}{Reg^\vee}\\
+    \RHom (R\Gamma (X_\text{\it ét}, \ZZ^c (n)), \RR) \ar[rightarrowtail]{d} \\
+    \RHom (R\Gamma (X_\text{\it ét}, \ZZ^c (n)), \RR) ~\oplus~ R\Gamma_c (G_\RR, X (\CC), (2\pi i)^n\,\RR) \ar{d}{\isom} \\
+    R\Gamma_\text{\it W,c} (X, \ZZ (n)) \otimes \RR [1]
+  \end{tikzcd} \]
+
+\begin{proposition*}
+  Assume that the conjectures $\mathbf{L}^c (X_\text{\it ét},n)$ and
+  $\mathbf{B} (X,n)$ hold. Then the above morphism $\smile\theta$ turns
+  $H_\text{\it W,c}^\bullet (X, \ZZ(n)) \otimes \RR$ into an acyclic complex of
+  finite dimensional vector spaces
+  \[ \cdots \to H_\text{\it W,c}^i (X, \ZZ(n)) \otimes \RR \xrightarrow{\smile\theta}
+    H_\text{\it W,c}^{i+1} (X, \ZZ(n)) \otimes \RR \xrightarrow{\smile\theta}
+    H_\text{\it W,c}^{i+2} (X, \ZZ(n)) \otimes \RR \to \cdots \]
+\end{proposition*}
+
+\noindent (this is actually clear from the above definition, once we assume that
+$Reg^\vee$ is a quasi-isomorphism.)
+
+\vspace{1em}
+
+We now use determinants of complexes, defined by Finn Knudsen and David Mumford
+in \cite{Knudsen-Mumford-76}. In the generality we need, the determinant
+canonically associates to a perfect complex of $R$-modules a free $R$-module of
+rank $1$:
+$$C^\bullet \rightsquigarrow \det\nolimits_R C^\bullet.$$
+The determinant is functorial on the subcategory given by perfect complexes and
+\emph{isomorphisms} in $\categ{D} (R\categ{-Mod})$, it is compatible with
+distinguished triangles in a suitable sense, with base change, etc. Without
+getting into details, let me just say that the properties of the determinant
+imply that the long exact sequence from the last proposition induces a canonical
+isomorphism
+$$\lambda\colon \RR \xrightarrow{\isom} (\det\nolimits_\ZZ R\Gamma_\text{\it W,c} (X,\ZZ(n)) \otimes \RR,$$
+allowing us to treat $\det\nolimits_\ZZ R\Gamma_\text{\it W,c} (X,\ZZ(n))$ as
+a lattice in $\RR$.
+
+\pagebreak
+
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+
+\section{The main conjecture about special values}
+
+Armed with the morphism $\lambda$, we are ready to state our conjecture about
+vanishing orders and special values of the zeta function.
+
+\vspace{1em}
+
+\noindent\textbf{Conjecture $\mathbf{C} (X,n)$.} {\it For an arithmetic scheme $X$ and $n < 0$
+
+\begin{enumerate}
+\item[a)] assume that the conjecture $\mathbf{L}^c (X_\text{\it ét}, n)$ holds;
+
+\item[b)] assume that $X_\CC$ is smooth, quasi-projective, so that the regulator
+  morphism $Reg$ exists; assume that the conjecture $\mathbf{B}(X, n)$ holds;
+
+\item[c)] assume that $\zeta (X, s)$ has a meromorphic continuation near
+  $s = n$.
+\end{enumerate}
+
+Then
+
+\begin{enumerate}
+\item[1)] the special value $\zeta^* (X, n)$ is given up to sign by
+  $$\lambda (\zeta^* (X, n)^{-1}) \cdot \ZZ = \det\nolimits_\ZZ R\Gamma_\text{\it W,c} (X, \ZZ(n)).$$
+
+\item[2)] the vanishing order of $\zeta (X, n)$ at $s = n$ is given by the
+  weighted alternating sum of ranks of the corresponding Weil-étale cohomology
+  groups:
+  $$\ord_{s=n} \zeta (X,s) = \sum_{i\in\ZZ} (-1)^i \cdot i\cdot \rk_\ZZ H^i_\text{\it W,c} (X, \ZZ(n)).$$
+\end{enumerate}}
+
+\vspace{1em}
+
+Of course, one can define any kind of complexes and formulate any conjectures
+about them. The conjecture $\mathbf{C} (X,n)$ is plausible because when $X$ is
+regular and proper, then it is equivalent to the conjectures stated by Flach and
+Morin in \cite{Flach-Morin-16}, and they showed in particular that for smooth
+schemes their special value conjecture is compatible with the
+\term{Tamagawa number conjecture} of Bloch, Kato, Fontaine, and Perrin-Riou
+(see \cite{Fontaine-Perrin-Riou}).
+
+Even for some easy examples, it is not trivial at all to calculate Weil-étale
+cohomology and verify $\mathbf{C} (X,n)$ directly: among other things, that
+would require calculation of motivic cohomology. Let us see a couple of examples
+for the vanishing orders, as it is much easier to count ranks of groups.
+It is easy to check that under the assumptions a) and b) made in the conjecture,
+we have
+
+\[ \sum_{i\in\ZZ} (-1)^i \cdot i\cdot \rk_\ZZ H^i_\text{\it W,c} (X, \ZZ(n)) =
+  \sum_{i\in\ZZ} (-1)^i \, \dim_\RR H^i_c (G_\RR, X (\CC), (2\pi i)^n\,\RR). \]
+Namely, we may use the splitting
+\[
+  R\Gamma_\text{\it W,c} (X,\ZZ(n)) \otimes \RR \isom
+  \RHom (R\Gamma (X_\text{\it ét}, \ZZ^c (n)), \RR) [-1]
+  \oplus
+  R\Gamma_c (G_\RR, X (\CC), (2\pi i)^n\,\RR) [-1] \]
+and the conjectural quasi-isomorphism
+\[ Reg^\vee\colon R\Gamma_c (G_\RR, X(\CC), (2\pi i)^n\,\RR) [-1]
+  \xrightarrow{\isom}
+  \RHom(R\Gamma(X_\text{\it ét}, \ZZ^c (n)), \RR). \]
+This all means that the conjecture actually says that
+$$\ord_{s=n} \zeta (X,s) = \chi (R\Gamma_c (G_\RR, X(\CC), (2\pi i)^n\,\RR))$$
+is the usual Euler characteristic of a very specific and computable complex.
+
+\begin{enumerate}
+\item[1)] For the case of a number ring $X = \Spec \O_F$, the space $X(\CC)$
+  consists of $r_1 + 2\,r_2$ points, corresponding to the real places of $F$ and
+  complex places coming in conjugate pairs:
+
+  \[ \begin{tikzpicture}
+      \matrix(m)[matrix of math nodes, row sep=1em, column sep=1em, text height=1ex, text depth=0.2ex]{
+        ~ & ~ & ~ & ~ & ~ & \bullet & \bullet & \cdots & \bullet \\
+        \bullet & \bullet & \cdots & \bullet \\
+        ~ & ~ & ~ & ~ & ~ & \bullet & \bullet & \cdots & \bullet \\};
+
+      \draw[->] (m-2-1) edge[loop above,min distance=10mm] (m-2-1);
+      \draw[->] (m-2-2) edge[loop above,min distance=10mm] (m-2-2);
+      \draw[->] (m-2-4) edge[loop above,min distance=10mm] (m-2-4);
+
+      \draw[->] (m-1-6) edge[bend left] (m-3-6);
+      \draw[->] (m-1-7) edge[bend left] (m-3-7);
+      \draw[->] (m-1-9) edge[bend left] (m-3-9);
+
+      \draw[->] (m-3-6) edge[bend left] (m-1-6);
+      \draw[->] (m-3-7) edge[bend left] (m-1-7);
+      \draw[->] (m-3-9) edge[bend left] (m-1-9);
+
+      \draw ($(m-3-1)!.5!(m-3-4)$) node[yshift=-2em,anchor=base] {$r_1$ points};
+      \draw ($(m-3-6)!.5!(m-3-9)$) node[yshift=-2em,anchor=base] {$2\,r_2$ points};
+    \end{tikzpicture} \]
+
+  The complex $R\Gamma_c (X(\CC), (2\pi i)^n\,\RR)$ in this case has just a
+  single $\RR$-vector space in degree $0$, namely
+  $$V \dfn ((2\pi i)^n\,\RR)^{\oplus r_1} \oplus ((2\pi i)^n\,\RR \oplus (2\pi i)^n\,\RR)^{\oplus r_2},$$
+  where $G_\RR$ acts on $((2\pi i)^n\,\RR)^{\oplus r_1}$ by complex conjugation,
+  while on $((2\pi i)^n\,\RR \oplus (2\pi i)^n\,\RR)^{\oplus r_2}$ the action is
+  given by $(z_1,z_2) \mapsto (\overline{z_2}, \overline{z_1})$ on each summand
+  $(2\pi i)^n\,\RR \oplus (2\pi i)^n\,\RR$. We see that
+  \[ \chi (R\Gamma_c (G_\RR, X (\CC), (2\pi i)^n\,\RR)) =
+    \dim_\RR V^{G_\RR} = \begin{cases}
+      r_2, & n \text{ odd},\\
+      r_1 + r_2, & n \text{ even},
+    \end{cases} \]
+  and this agrees with vanishing orders of the Dedekind zeta function
+  $\zeta (\Spec \O_F, s)$ at strictly negative integers.
+
+\item[2)] If $X$ is a variety over $\FF_q$, then
+  $$\zeta (X,s) = Z (X, q^{-s}) = \exp \left(\sum_{k\ge 1} \frac{\# X (\FF_{q^k})}{k}\,q^{-ks}\right)$$
+  is Weil's zeta function, which has no zeros or poles for $s < 0$. This is not
+  quite obvious, but it may be seen from the Weil conjectures that if $s$ is a
+  pole or zero, then it should satisfy
+  $$\Re s = i/2, \quad 0 \le i \le 2\,\dim X$$
+  (see e.g. \cite[p. 26--27]{Katz-Motives}). This agrees with the fact that
+  trivially,
+  $$\chi (R\Gamma_c (G_\RR, X (\CC), (2\pi i)^n\,\RR)) = 0.$$
+\end{enumerate}
+
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+
+\section{Stability properties}
+
+So we stated the conjecture $\mathbf{C} (X,n)$, and it is equivalent to the
+conjectures of Flach and Morin for $X$ regular, proper. This is not a big deal,
+because from the very beginning, the construction of
+$R\Gamma_\text{\it W,c} (X,\ZZ(n))$ follows theirs, with the difference that in
+the case $n < 0$ certain things actually become simpler. Now I will explain how
+new results may be obtained.
+
+\vspace{1em}
+
+The following properties are clear from the definition of the zeta function of
+an arithmetic scheme:
+
+\begin{enumerate}
+\item[1)] If $U \hookrightarrow X \leftarrow Z$ is an open-closed decomposition,
+  then
+  $$\zeta (X, s) = \zeta (U, s) \cdot \zeta (Z, s).$$
+
+\item[2)] For $r \ge 0$, for the affine space $\AA^r_X \dfn \AA_\ZZ^r \times X$
+  $$\zeta (\AA^r_X, s) = \zeta (X, s - r).$$
+\end{enumerate}
+
+This suggests the following result.
+
+\begin{theorem*}
+  ~
+  \begin{enumerate}
+  \item[1)] If $U \hookrightarrow X \leftarrow Z$ is an open-closed
+    decomposition of an arithmetic scheme, then if two out of three conjectures
+    $\mathbf{C} (U, n)$, $\mathbf{C} (X, n)$, $\mathbf{C} (Z, n)$ hold, then the
+    other one holds as well.
+
+  \item[2)] The conjecture $\mathbf{C} (\AA^r_X, n)$ is equivalent to
+    $\mathbf{C} (X, n-r)$.
+  \end{enumerate}
+\end{theorem*}
+
+Again, it will be easier to explain this for vanishing orders. As I mentioned,
+the conjecture actually says that
+$$\ord_{s=n} \zeta (X,s) = \chi (R\Gamma_c (G_\RR, X(\CC), (2\pi i)^n\,\RR)).$$
+In 1), we have the following distinguished triangle for $G_\RR$-equivariant
+cohomology with compact support:
+\[ R\Gamma_c (G_\RR, U(\CC), (2\pi i)^n\,\RR) \to
+  R\Gamma_c (G_\RR, X(\CC), (2\pi i)^n\,\RR) \to
+  R\Gamma_c (G_\RR, Z(\CC), (2\pi i)^n\,\RR) \to \cdots [1] \]
+and therefore
+\[ \chi (R\Gamma_c (G_\RR, X(\CC), (2\pi i)^n\,\RR)) =
+  \chi (R\Gamma_c (G_\RR, U(\CC), (2\pi i)^n\,\RR)) +
+  \chi (R\Gamma_c (G_\RR, Z(\CC), (2\pi i)^n\,\RR)). \]
+In 2), we need to check that
+
+\[ \tag{*} \chi (R\Gamma_c (G_\RR, \CC^r \times X(\CC), (2\pi i)^n\,\RR)) =
+  \chi (R\Gamma_c (G_\RR, X(\CC), (2\pi i)^{n-r}\,\RR)), \]
+
+\noindent and in fact, we have a $G_\RR$-equivariant quasi-isomorphism of
+complexes
+\[ R\Gamma_c (\CC^r \times X(\CC), (2\pi i)^n\,\RR) \quiso
+  R\Gamma_c (X(\CC), (2\pi i)^{n-r}\,\RR) [-2r], \]
+where the shift by $-2r$ does not affect the Euler characteristic.
+
+\vspace{1em}
+
+As for the special values part of the conjecture, in 1) one needs to use the
+``Borel--Moore'' triangle
+\[ R\Gamma (Z_\text{\it ét}, \ZZ^c (n)) \to
+  R\Gamma (X_\text{\it ét}, \ZZ^c (n)) \to
+  R\Gamma (U_\text{\it ét}, \ZZ^c (n)) \to \cdots [1] \]
+which in turn gives
+\[ \RHom(R\Gamma(U_\text{\it ét}, \ZZ^c (n)), \RR) \to
+  \RHom(R\Gamma(X_\text{\it ét}, \ZZ^c (n)), \RR) \to
+  \RHom(R\Gamma(Z_\text{\it ét}, \ZZ^c (n)), \RR) \to \cdots [1] \]
+This may be combined with the above triangle for
+$R\Gamma_c (G_\RR, (-)(\CC), (2\pi i)^n\,\RR)$ and the splittings
+\[ R\Gamma_\text{\it W,c} (-,\ZZ(n)) \otimes \RR \isom
+  \RHom (R\Gamma ((-)_\text{\it ét}, \ZZ^c (n)), \RR) [-1]
+  \oplus
+  R\Gamma_c (G_\RR, (-) (\CC), (2\pi i)^n\,\RR) [-1] \]
+(those are not canonical, but may be chosen in a way compatible with the
+triangles).
+
+In 2), the key idea is that if $p\colon \AA^r_X \to X$ is the canonical
+projection, then there is a quasi-isomorphism of complexes of sheaves on
+$X_\text{\it ét}$
+$$R p_* \ZZ^c (n) \quiso \ZZ^c (n - r) [2r],$$
+so that
+\[ R\Gamma (\AA^r_{X,\text{\it ét}}, \ZZ^c (n)) \quiso
+  R\Gamma (X_\text{\it ét}, \ZZ^c (n - r)) [2r]. \]
+This corresponds to the formula (*) (the shifts differ by a sign because (*) is
+written for cohomology with compact support, while the above formula is morally
+for the dual ``Borel--Moore homology'').
+
+\begin{center}
+  \noindent *\quad *\quad *
+\end{center}
+
+All this means that with the established machinery, we can take as a starting
+point certain schemes for which the conjecture is true (e.g. schemes for which
+the Tamagawa number conjecture is known), and then, using operations like
+open-closed decompositions and affine bundles, construct new schemes, possibly
+singular, for which the conjecture holds as well.
+
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+
+\appendix
+\section{Definition of Weil-étale complexes}
+
+Here I outline the present construction of Weil-étale complexes for the case
+$n < 0$. Following \cite{Flach-Morin-16}, we consider the complex of torsion
+sheaves on $X_\text{\it ét}$
+\[ \ZZ (n) \dfn \text{``}\QQ/\ZZ\text{''} (n) [-1] \dfn
+  \bigoplus_p \dirlim_r  j_{p!} \mu_{p^r}^{\otimes n} [-1]. \]
+Here $j_p\colon X [1/p] \to X$ is the canonical open immersion, by $\mu_{p^r}$
+we denote the sheaf of roots of unity on $X [1/p]_\text{\it ét}$, and its twist
+by $n < 0$ is defined by
+$$\mu_{p^r}^{\otimes n} \dfn \iHom_{X[1/p]} (\mu_{p^r}^{\otimes (-n)}, \ZZ/p^r).$$
+
+Then the definition of Weil-étale cohomology is summarized by the following
+diagram in the derived category of abelian groups:
+
+\[ \begin{tikzcd}[column sep=small, font=\small]
+    & & R\Gamma_\text{\it W,c} (X, \ZZ (n))\ar{d} \\
+    \RHom (R\Gamma (X_\text{\it ét}, \ZZ^c (n)), \QQ [-2]) \ar{r}{\alpha_{X,n}}\ar{d} & R\Gamma_c (X_\text{\it ét}, \ZZ (n)) \ar{r}\ar{d}{u_\infty^*} & R\Gamma_\text{\it fg} (X, \ZZ (n)) \ar{r}\ar[dashed]{d}{i_\infty^*} & \RHom (R\Gamma (X_\text{\it ét}, \ZZ^c (n)), \QQ [-1])\ar{d} \\
+    0\ar{r} & R\Gamma_c (G_\RR, X (\CC), (2\pi i)^n\,\ZZ) \ar{r}{\idid} & R\Gamma_c (G_\RR, X (\CC), (2\pi i)^n\,\ZZ)\ar{d}\ar{r} & 0 [1] \\
+    & & R\Gamma_\text{\it W,c} (X, \ZZ (n)) [1] \\
+  \end{tikzcd} \]
+
+Here is how this diagram is built.
+
+\begin{enumerate}
+\item[1)] Using a duality theorem from \cite{Geisser-10}, we define a morphism
+  in the derived category of abelian groups
+  \[ \alpha_{X,n}\colon \RHom (R\Gamma (X_\text{\it ét}, \ZZ^c (n)), \QQ [-2]) \to
+    R\Gamma_c (X_\text{\it ét}, \ZZ (n)). \]
+
+\item[2)] We pick a cone of $\alpha_{X,n}$ and call it
+  $R\Gamma_\text{\it fg} (X, \ZZ (n))$.
+
+\item[3)] Then we define a canonical morphism of complexes
+  \[ u_\infty^*\colon R\Gamma_c (X_\text{\it ét}, \ZZ (n)) \to
+    R\Gamma_c (G_\RR, X (\CC), (2\pi i)^n\,\ZZ) \]
+  (it is a kind of comparison morphism between étale and singular cohomology),
+  and check that
+  $$u_\infty^*\circ \alpha_{X,n} = 0$$
+  in the derived category. This implies that there is a morphism
+  \emph{in the derived category}
+  \[ i_\infty^*\colon R\Gamma_\text{\it fg} (X, \ZZ (n)) \to
+    R\Gamma_c (G_\RR, X (\CC), (2\pi i)^n\,\ZZ) \]
+  (see the diagram).
+
+\item[4)] We pick a mapping fiber of $i_\infty^*$ and call it
+  $R\Gamma_{\text W,c} (X,\ZZ (n))$.
+\end{enumerate}
+
+In step 2), it is possible to represent $R\Gamma_\text{\it fg} (X, \ZZ (n))$ by
+a canonical complex. In step 3), in fact there is a unique $i_\infty^*$ sitting
+in the commutative diagram, but the outlined argument gives it only
+\emph{as a morphism in the derived category}, not a genuine morphism of
+complexes. Therefore, $R\Gamma_{\text W,c} (X,\ZZ (n))$ is defined only up to
+a non-canonical isomorphism. This is bad not only for aesthetical reasons, but
+causes technical problems in practice. This is quite unsatisfactory, but works
+for our purposes, because $\det\nolimits_\ZZ R\Gamma_\text{\it W,c} (X,\ZZ(n))$
+is canonically defined.
+
+\begin{question*}
+  Is there a canonical way to define $R\Gamma_\text{\it W,c} (X,\ZZ(n))$?
+\end{question*}
+
+As all the problems come from the non-functoriality of cones, working instead
+with stable $\infty$-categories (see \cite{Lurie-DAG-1}) might be helpful here.
+
+\vspace{1em}
+
+Here are some properties of the complexes and morphisms in the diagram from the
+previous page:
+
+\begin{enumerate}
+\item[a)] The groups $H_c^i (X_\text{\it ét}, \ZZ (n))$ are $\QQ/\ZZ$-dual to
+  finitely generated abelian groups. In particular, we have
+  $R\Gamma_c (X_\text{\it ét}, \ZZ (n)) \otimes \RR \quiso 0$.
+
+\item[b)]
+  $H_\text{\it fg}^i (X, \ZZ (n)) \dfn H^i (R\Gamma_\text{\it fg} (X, \ZZ (n)))$
+  are finitely generated abelian groups (hence the notation ``\emph{fg}'').
+
+  Moreover, $H_\text{\it fg}^i (X, \ZZ (n)) = 0$ for $i \ll 0$ and it is a
+  finite $2$-torsion group for $i \gg 0$. The $2$-torsion comes from the real
+  points $X (\RR)$.
+
+\item[c)] The morphism $i_\infty^*$ is torsion in the derived category;
+  in particular, $i_\infty^* \otimes \RR = 0$.
+
+\item[d)] $R\Gamma_c (X (\CC), (2\pi i)^n\,\ZZ)$ is a perfect complex. As for
+  the equivariant cohomology $R\Gamma_c (G_\RR, X (\CC), (2\pi i)^n\,\ZZ)$,
+  then, unless $X (\RR) = \emptyset$, the groups
+  $H_c^i (G_\RR, X (\CC), (2\pi i)^n\,\ZZ)$ have finite $2$-torsion in
+  arbitrarily high degrees, coming from the cohomology of
+  $G_\RR \isom \ZZ/2\ZZ$. It has the same nature as the $2$-torsion in
+  $H_\text{\it fg}^i (X, \ZZ (n))$, and in fact $H^i (i_\infty^*)$ is an
+  isomorphism for $i \gg 0$. As a result, the complex
+  $R\Gamma_\text{\it W,c} (X, \ZZ (n))$ is bounded.
+\end{enumerate}
+
+Once we tensor the diagram on the previous page with $\RR$, thanks to a) and c),
+we obtain
+
+\[ \begin{tikzcd}[column sep=small, font=\small]
+    & & R\Gamma_\text{\it W,c} (X, \ZZ (n))\otimes \RR\ar{d} \\
+    \RHom (R\Gamma (X_\text{\it ét}, \ZZ^c (n)), \RR [-2]) \ar{r} & 0 \ar{r} & R\Gamma_\text{\it fg} (X, \ZZ (n))\otimes \RR \ar{r}{\isom}\ar{d}{0} & \RHom (R\Gamma (X_\text{\it ét}, \ZZ^c (n)), \RR [-1]) \\
+    & & R\Gamma_c (G_\RR, X (\CC), (2\pi i)^n\,\RR)\ar{d} \\
+    & & R\Gamma_\text{\it W,c} (X, \ZZ (n))\otimes \RR [1] \\
+  \end{tikzcd} \]
+
+\noindent this explains the splitting
+\[ R\Gamma_\text{\it W,c} (X,\ZZ(n)) \otimes \RR \isom
+  \RHom (R\Gamma (X_\text{\it ét}, \ZZ^c (n)), \RR) [-1]
+  \oplus
+  R\Gamma_c (G_\RR, X (\CC), (2\pi i)^n\,\RR) [-1]. \]
+
+\pagebreak
+
+\bibliography{these}
+\bibliographystyle{amsalpha-cust}
+
+\end{document}

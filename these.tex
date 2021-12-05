@@ -3,13 +3,6 @@
 \input{definitions.tex}
 
 \def\lastversion{}
-\newif\iftodos
-% \todostrue
-\todosfalse
-
-\newif\ifdutch
-% \todostrue
-\dutchfalse
 
 \usepackage{fancyhdr}
 
@@ -33,12 +26,12 @@
 
 \begin{document}
 
-\ifdutch
+\ifdefined\dutch
 \include{title-dutch}
 \fi
 \include{title-french}
 
-\ifdutch
+\ifdefined\dutch
 \else
 \include{abstract-fr}
 \include{abstract-en}
@@ -64,13 +57,13 @@
 
 \include{acknowledgments}
 
-\ifdutch
+\ifdefined\dutch
 \include{abstract-en}
 \include{abstract-fr}
 \include{abstract-nl}
 \fi
 
-\ifdutch
+\ifdefined\dutch
 \include{vitae}
 \fi
 

@@ -140,6 +140,13 @@ system, together with the required LaTeX packages and fonts, running `make`
 should be enough.
 
 
+## Copyleft
+
+This work is available under the
+[Creative Commons Attribution-ShareAlike 4.0 license](https://creativecommons.org/licenses/by-sa/4.0/)
+(CC BY-SA 4.0).
+
+
 ## Contact
 
 Alexey Beshenov (cadadr@gmail.com)

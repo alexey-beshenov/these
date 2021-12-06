@@ -142,4 +142,4 @@ should be enough.
 
 ## Contact
 
-Alexey Beshenov <cadadr@gmail.com>
+Alexey Beshenov (cadadr@gmail.com)

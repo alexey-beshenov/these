@@ -138,3 +138,8 @@ Here is a very short list of misprints that I've noticed:
 Assuming `pdflatex`, `xelatex`, `bibtex`, `mpost` etc. are present in the
 system, together with the required LaTeX packages and fonts, running `make`
 should be enough.
+
+
+## Contact
+
+Alexey Beshenov <cadadr@gmail.com>

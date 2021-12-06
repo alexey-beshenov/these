@@ -8,7 +8,7 @@ PhD thesis by Alexey Beshenov.
 
 * Funded by the ALGANT DOC Program.
 
-* Defended in Leiden on December 10, 2018
+* Defended in Leiden on December 10, 2018.
 
 * Copy at Leiden University digital archive:
   https://hdl.handle.net/1887/68224

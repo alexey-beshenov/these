@@ -1,10 +1,12 @@
 # LaTeX source for “Zeta-values of arithmetic schemes at negative integers and Weil-étale cohomology”
 
-PhD thesis by Alexey Beshenov,
-advised by
-Baptiste Morin (Université de Bordeaux) and
-Bas Edixhoven (Universiteit Leiden).
+PhD thesis by Alexey Beshenov.
 
+* Advised by
+  Baptiste Morin (Université de Bordeaux) and
+  Bas Edixhoven (Universiteit Leiden).
+
+* Funded by the ALGANT DOC Program.
 
 * Defended in Leiden on December 10, 2018
 
